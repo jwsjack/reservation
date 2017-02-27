@@ -56,3 +56,4 @@ Uncheck the option "Use command line client".
 Close the panel.
 Try the checkout...
 ... and then it worked. I think it was a default parameter in the configuration out there
+# Need to figure out how to use bashrc
