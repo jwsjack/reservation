@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Booking system</string>
+    <string name="developper">Developed by Eugeniu Cebanu</string>
+
+
+    !-- AuthenticatorActivity -->
+    <string name="label_email_address">Email Address</string>
+    <string name="label_password">Password</string>
+    <string name="label_sign_in">Sign In</string>
+    <string name="message_signing_in">Signing in…</string>
+    <string name="requestNewAccount">Request new account</string>
+</resources>

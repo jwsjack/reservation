@@ -1,0 +1,58 @@
+VCS: 
+
+https://subversion.iro.umontreal.ca/ift1155/IFT1155_H17_cebanueu
+
+cebanueu:HooK7die
+
+
+TELNET (COMMAND PROMT)
+
+http://stackoverflow.com/questions/23149900/how-to-launch-telnet-console-in-android-studio-device-emulator
+
+On Windows 10
+
+1. In Ask me anything type Cmd
+2. Then Right mouse button on Command Prompt and Run as Administrator
+3. Execute this command dism /online /Enable-Feature /FeatureName:TelnetClient you should get following:
+
+....... The operation completed successfully
+
+4. Then type in following cd C:\Users\jack\android-sdks\platform-tools>
+5. Then type in telnet localhost 5554 You should get this:
+
+
+
+
+CONNECTION THROW TERMINAL AS
+
+
+1. GO to « android-sdks/platformtools »
+
+cd C:\Users\jack\android-sdks\platform-tools>
+
+
+2. Remote connect to device: 
+
+adb  –s  emulator-5554 shell
+
+
+3. Connect with telnet
+
+telnet localhost 5554
+
+
+PROBLEMS WITH SVN (ON CHECKOUT SVN): 
+
+o resolve this I:
+
+http://stackoverflow.com/questions/27899789/intellij-14-cant-checkout-subversion
+
+Open the settings here File/Settings/Version Control/Subversion
+Check the option Use command line client.
+Close the panel.
+Have a new warning from IntelliJ about the use of subversion with command line.
+Reopen the settings here File/Settings/Version Control/Subversion
+Uncheck the option "Use command line client".
+Close the panel.
+Try the checkout...
+... and then it worked. I think it was a default parameter in the configuration out there

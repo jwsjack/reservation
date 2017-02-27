@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Système de réservation de locaux</string>
+    <string name="developper">Développé par Eugeniu Cebanu</string>
+    <string name="requestNewAccount">Demander un nouveau compte</string>
+    <string name="label_email_address">"Adresse e-mail "</string>
+    <string name="label_password">"Mot de passe "</string>
+    <string name="label_sign_in">"Se connecter "</string>
+    <string name="message_signing_in">Connectez-vous…</string>
+</resources>
