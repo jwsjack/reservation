@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+    <item>
+        <id>1</id>
+        <name>Eugeniu Cebanu</name>
+        <login>e_cebanu</login>
+        <password>qwe123</password>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Liliana Cebanu</name>
+        <login>l_cebanu</login>
+        <password>qwe123</password>
+    </item>
+    <item>
+        <id>3</id>
+        <name>Greg Monaco</name>
+        <login>g_monaco</login>
+        <password>qwe123</password>
+    </item>
+    <item>
+        <id>4</id>
+        <name>Michael Locksberry</name>
+        <login>m_locksberry</login>
+        <password>qwe123</password>
+    </item>
+    <item>
+        <id>5</id>
+        <name>Liuda Vasilachi</name>
+        <login>l_vasilachi</login>
+        <password>qwe123</password>
+    </item>
+</menu>

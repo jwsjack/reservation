@@ -1,18 +1,16 @@
 package com.tp1.e_cebanu.tp1.models;
 
-/*
-* Java# version 1.8.0
-*
-* @name       TP_1
-* @package    TP #1 / IFT 1155 A - Programmation mobile à plateforme libre
-* @author     EUGENIU CEBANU / matricule: 20025851
-* @author     jwsjack3@gmail.com
-* @version    1
-* @date       2017-02-21
-* @description Class Local - les données d'un local/salle
-*/
-
-import static android.R.attr.type;
+/**
+ * Java# version 1.8.0
+ *
+ * @class Local
+ * @package    TP #1 / IFT 1155 A - Programmation mobile à plateforme libre
+ * @author     EUGENIU CEBANU / matricule: 20025851
+ * @author     jwsjack3@gmail.com
+ * @version    1
+ * @date       2017-02-20
+ * @description Modele - gestion des données d'un local/salle
+ */
 
 public class Local {
 
