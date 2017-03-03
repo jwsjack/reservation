@@ -1,33 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<menu>
-    <item>
+<user>
+    <item ItemName="Eugeniu Cebanu">
         <id>1</id>
         <name>Eugeniu Cebanu</name>
         <login>e_cebanu</login>
         <password>qwe123</password>
     </item>
-    <item>
+    <item ItemName="Liliana Cebanu">
         <id>2</id>
         <name>Liliana Cebanu</name>
         <login>l_cebanu</login>
         <password>qwe123</password>
     </item>
-    <item>
+    <item ItemName="Greg Monaco">
         <id>3</id>
         <name>Greg Monaco</name>
         <login>g_monaco</login>
         <password>qwe123</password>
     </item>
-    <item>
+    <item ItemName="Michael Locksberry">
         <id>4</id>
         <name>Michael Locksberry</name>
         <login>m_locksberry</login>
         <password>qwe123</password>
     </item>
-    <item>
+    <item ItemName="Liuda Vasilachi">
         <id>5</id>
         <name>Liuda Vasilachi</name>
         <login>l_vasilachi</login>
         <password>qwe123</password>
     </item>
-</menu>
+</user>

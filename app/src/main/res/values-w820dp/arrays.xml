@@ -23,9 +23,9 @@
     <!--</string-array>-->
 
 
-    <attr name="myProperty" format="enum">
-        <enum name="None" value="0"/>
-        <enum name="Salle de réunion" value="1"/>
-        <enum name="Salle de cours" value="2"/>
+    <attr name="typesSalles" format="enum">
+        <enum name="none" value="0"/>
+        <enum name="sale_reunion" value="1"/>
+        <enum name="sale_cours" value="2"/>
     </attr>
 </resources>

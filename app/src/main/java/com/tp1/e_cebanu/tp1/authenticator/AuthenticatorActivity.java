@@ -8,16 +8,34 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tp1.e_cebanu.tp1.R;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.XMLParser;
 import com.tp1.e_cebanu.tp1.util.TextWatcherAdapter;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import static android.R.id.list;
 import static com.tp1.e_cebanu.tp1.util.UIUtils.showProgress;
 
 import static android.view.KeyEvent.ACTION_DOWN;
@@ -40,6 +58,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
 
     private String email;
     private String password;
+    private String xmlRows;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +69,9 @@ public class AuthenticatorActivity extends AppCompatActivity {
         } else {
             setContentView(R.layout.authenticator_activity);
         }
+
+
+
         /*Bundle extras = getIntent().getExtras();
         if (extras == null) {
             return;
@@ -108,7 +130,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateUIWithValidation();
+        //updateUIWithValidation();
     }
 
     @Override
@@ -129,7 +151,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
     }
 
     /**
-     * Tariter onClick événement sur le bouton Soumettre. Envoie le nom d'utilisateur / mot de passe à
+     * Traiter onClick événement sur le bouton Soumettre. Envoie le nom d'utilisateur / mot de passe à
      * la système pour l'authentification.
      *
      * @param view
