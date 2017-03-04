@@ -27,16 +27,16 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@string/label_email_address"
+                android:text="@string/label_login"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/text" />
 
             <AutoCompleteTextView
-                android:id="@+id/et_email"
+                android:id="@+id/et_login"
                 style="@style/SignInEditText"
                 android:completionThreshold="1"
                 android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:nextFocusDown="@+id/et_password" />
 
             <TextView

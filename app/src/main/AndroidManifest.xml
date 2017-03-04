@@ -2,24 +2,33 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.tp1.e_cebanu.tp1">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/logo"
+        android:label="@string/app_name"
         android:logo="@drawable/logo"
         android:supportsRtl="true"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Bootstrap.Dark">
-
-
-        <activity android:name=".MainActivity">
+        android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".BootstrapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".authenticator.AuthenticatorActivity"></activity>
-        <activity android:name=".activities.BasicActivity"></activity>
+        <activity
+            android:name=".authenticator.AuthenticatorActivity"
+            android:label="@string/activity_title_authenticator" />
+        <activity android:name=".activities.BasicActivity" />
+        <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.ExampleMenuActivity" />
+        <activity
+            android:name=".activities.ProfileActivity"
+            android:label="@string/activity_title_profile" />
+        <activity
+            android:name=".activities.GuideActivity"
+            android:label="@string/activity_title_quide" />
     </application>
-
 </manifest>

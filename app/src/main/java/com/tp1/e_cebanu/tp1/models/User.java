@@ -14,21 +14,35 @@ package com.tp1.e_cebanu.tp1.models;
 
 public class User {
     private String nom, login, password;
-    private int role;
+    private int id, role;
 
     // Constructeur
-    public User(String nom, String login, String password, int role) {
+    public User(int id, String nom, String login, String password, int role) {
+        this.id = id;
         this.nom = nom;
         this.login = login;
         this.password = password;
         this.role = role;
     }
     // Constructeur pour obtenir un objet qui se compare (equals)
+    public User(String nom, String login, String password, int role) {
+        this(0,nom, login, password, role);
+    }
+
     public User(String login){
         this.login = login;
     }
 
     //Getters/setters
+
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNom() {
         return nom;

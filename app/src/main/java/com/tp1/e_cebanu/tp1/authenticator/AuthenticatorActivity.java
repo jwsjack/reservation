@@ -1,6 +1,7 @@
 package com.tp1.e_cebanu.tp1.authenticator;
 
-import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +9,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -22,21 +21,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tp1.e_cebanu.tp1.R;
-import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.XMLParser;
+import com.tp1.e_cebanu.tp1.activities.MainActivity;
+import com.tp1.e_cebanu.tp1.models.AppService;
+import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.util.TextWatcherAdapter;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static android.R.id.list;
-import static com.tp1.e_cebanu.tp1.util.UIUtils.showProgress;
 
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
@@ -50,15 +38,18 @@ import static com.tp1.e_cebanu.tp1.util.UIUtils.isTablet;
 
 public class AuthenticatorActivity extends AppCompatActivity {
 
-    protected AutoCompleteTextView emailText;
+    protected AutoCompleteTextView loginText;
     protected EditText passwordText;
     protected CheckBox ckRequestNewAccount;
     protected Button signInButton;
     private final TextWatcher watcher = validationTextWatcher();
 
-    private String email;
+    private String login;
     private String password;
-    private String xmlRows;
+    public static final String MON_CLE_LOGIN = "loginAutentification";
+    public static final String CLE_ACCES = "12345";
+
+    private AppService appService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,7 +73,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
         Toast.makeText(this, value1,
                 Toast.LENGTH_LONG).show();*/
 
-        emailText = (AutoCompleteTextView) findViewById(R.id.et_email);
+        loginText = (AutoCompleteTextView) findViewById(R.id.et_login);
         passwordText = (EditText) findViewById(R.id.et_password);
         ckRequestNewAccount = (CheckBox) findViewById(R.id.requestNewAccount);
         signInButton = (Button) findViewById(R.id.b_signin);
@@ -122,15 +113,16 @@ public class AuthenticatorActivity extends AppCompatActivity {
             }
         });
 
-        emailText.addTextChangedListener(watcher);
+        loginText.addTextChangedListener(watcher);
         passwordText.addTextChangedListener(watcher);
+        updateUIWithValidation();
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //updateUIWithValidation();
+        updateUIWithValidation();
     }
 
     @Override
@@ -158,20 +150,47 @@ public class AuthenticatorActivity extends AppCompatActivity {
      */
     public void handleLogin(final View view) {
 
-        email = emailText.getText().toString();
+        login = loginText.getText().toString();
         password = passwordText.getText().toString();
 
-        //showProgress();
+        if (login != null && password != null ) {
+            User liu = appService.authenticate(login,password);
+            if (liu.getId() != 0) {
 
-        /*Toast.makeText(this, "SALUT!!!!",
-                Toast.LENGTH_LONG).show();*/
+                // sauvegarde les valeurs dans  SharedPreferences
+                SharedPreferences.Editor editor = this.getSharedPreferences(MON_CLE_LOGIN, MODE_PRIVATE).edit();
+                editor.putString("login", login.trim());
+                editor.putString("pass", password.trim());
+                editor.commit();
+
+                //passe à la page d'accueil
+                Toast.makeText(this, getResources().getString(R.string.messageWelcome),
+                        Toast.LENGTH_LONG).show();
+
+                // ici on transmettre les valeurs supplémentaires pour l'activite Main
+                Intent i = new Intent(this, MainActivity.class);
+                i.putExtra("Value1", "This value 1 for MainActivity");
+                i.putExtra("Value2", "This value 1 for MainActivity");
+                i.putExtra("Value3", "This value 1 for MainActivity");
+                startActivity(i);
+
+            } else {
+                String mess = getResources().getString(R.string.messageWrongAuthentification);
+                Toast.makeText(this, mess,
+                        Toast.LENGTH_LONG).show();
+            }
+        } else {
+            String mess = getResources().getString(R.string.messageValidationAuthentification);
+            Toast.makeText(this, mess,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
      * Vérifier si les champs email et password sont remplis
      */
     private void updateUIWithValidation() {
-        final boolean populated = populated(emailText) && populated(passwordText);
+        final boolean populated = populated(loginText) && populated(passwordText);
         signInButton.setEnabled(populated);
     }
 

@@ -47,7 +47,7 @@ public class UIUtils {
     public static boolean verifierAuthentification(Context context) {
         //récupérer les données de SharedPreferences
         SharedPreferences prefsAut = context.getSharedPreferences(MON_CLE_LOGIN, MODE_PRIVATE);
-        String restoredNom = prefsAut.getString("nom", null);
+        String restoredNom = prefsAut.getString("login", null);
         String restoredPass = prefsAut.getString("pass", null);
         if (restoredNom != null && restoredPass != null && restoredPass.toString().trim().equals(CLE_ACCES)) {
             return true; // l'utilisateur est autorisée

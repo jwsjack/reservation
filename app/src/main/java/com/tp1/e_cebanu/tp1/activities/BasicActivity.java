@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by e_cebanu on 3/3/2017.
+ * ----------------  DELETE THIS AFTER APP IS DONE ----------------------
  */
 
 public class BasicActivity extends AppCompatActivity {
@@ -28,6 +28,8 @@ public class BasicActivity extends AppCompatActivity {
         setContentView(R.layout.listview);
         ArrayList menuItems = new ArrayList();
         XMLParser parser = new XMLParser(getBaseContext());
+
+        //ArrayList<User> users = (ArrayList)ObjectRepositoryDAO.findAll();
 
         try {
             xmlRows = parser.getXmlFromResources("users");

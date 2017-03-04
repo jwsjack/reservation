@@ -7,4 +7,11 @@
     <string name="label_password">"Mot de passe "</string>
     <string name="label_sign_in">"Se connecter "</string>
     <string name="message_signing_in">Connectez-vous…</string>
+    <string name="messageValidationAuthentification">Veuillez saisir le login et mot de passe.</string>
+    <string name="messageWrongAuthentification">Votre login / mot de passe était incorrect, veuillez réessayer.</string>
+    <string name="label_login">Identifiant</string>
+    <string name="refresh_action">"Rafraîchir "</string>
+    <string name="logout_action">Se déconnecte</string>
+    <string name="messageWelcome">Bienvenue dans le nouveau système de réservation!</string>
+    <string name="activity_title_authenticator">Authentification</string>
 </resources>
