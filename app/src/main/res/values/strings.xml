@@ -34,8 +34,6 @@
         <item>Settings</item>
     </string-array>
 
-    <string name="privacy_policy">Privacy Policy</string>
-
     <string name="action_logout">Logout</string>
     <string name="activity_title_home">Home</string>
     <string name="activity_title_authenticator">Authentication</string>

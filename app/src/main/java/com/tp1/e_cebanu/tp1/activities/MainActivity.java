@@ -1,6 +1,8 @@
 package com.tp1.e_cebanu.tp1.activities;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
@@ -8,11 +10,14 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -143,6 +148,20 @@ public class MainActivity extends AppCompatActivity {
 
         // showing dot next to notifications label
         navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
+
+        //Personnaliser l'élément de menu sélectionné
+//        for(int i = 0; i < navigationView.getMenu().size(); i++){
+//            MenuItem menuItem = navigationView.getMenu().getItem(i);
+//            if(menuItem.isChecked()) {
+//                SpannableString s = new SpannableString(menuItem.getTitle());
+//                s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getBaseContext(), R.color.colorWhite)), 0, s.length(), 0);
+//                menuItem.setTitle(s);
+//            } else {
+//                SpannableString s = new SpannableString(menuItem.getTitle());
+//                s.setSpan(new ForegroundColorSpan(ContextCompat.getColor(getBaseContext(), R.color.text_shadow)), 0, s.length(), 0);
+//                menuItem.setTitle(s);
+//            }
+//        }
     }
     /***
      * Returns respected fragment that user
@@ -234,7 +253,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectNavMenu() {
-        navigationView.getMenu().getItem(navItemIndex).setChecked(true);
+        MenuItem menuItem = navigationView.getMenu().getItem(navItemIndex);
+        menuItem.setChecked(true);
     }
 
     private void setUpNavigationView() {

@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.tp1.e_cebanu.tp1.activities.MainActivity">
-
-    <android.support.design.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -31,9 +28,10 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <!--list separator color in NavigationMenu-->
-            <View android:layout_width="match_parent"
+            <View
+                android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?android:attr/listDivider"/>
+                android:background="?android:attr/listDivider" />
         </FrameLayout>
 
         <android.support.design.widget.FloatingActionButton
@@ -45,5 +43,4 @@
             app:backgroundTint="@color/colorPrimary"
             app:srcCompat="@drawable/ic_action_profile" />
 
-    </android.support.design.widget.CoordinatorLayout>
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
