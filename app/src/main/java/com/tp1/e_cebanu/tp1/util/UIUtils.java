@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
+
 import static android.content.Context.MODE_PRIVATE;
 
 /*
@@ -25,6 +27,7 @@ public class UIUtils {
     private SharedPreferences prefs;
     public static final String MON_CLE_LOGIN = "loginAutentification";
     public static final String CLE_ACCES = "12345";
+    public static final String FILE_STORAGE_FOLDER = "raw";
 
     /**
      * Aide à déterminer si l'application s'exécute dans un contexte Tablet.
@@ -65,5 +68,15 @@ public class UIUtils {
 
     public static Dialog createdDialog(int id) {
         throw new RuntimeException("Stub!");
+    }
+
+    /*--SERVICES--*/
+
+    /**
+     * Fournit une nouvelle instance de UserXmlImpl
+     * @return
+     */
+    public static UserXmlImpl getUsersService() {
+        return new UserXmlImpl();
     }
 }

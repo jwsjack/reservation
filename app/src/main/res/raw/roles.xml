@@ -1,0 +1,10 @@
+<role>
+    <item>
+        <id>1</id>
+        <name>superadmin</name>
+    </item>
+    <item>
+        <id>2</id>
+        <name>user</name>
+    </item>
+</role>

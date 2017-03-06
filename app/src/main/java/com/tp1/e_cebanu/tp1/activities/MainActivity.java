@@ -18,6 +18,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
 import com.tp1.e_cebanu.tp1.fragments.SettingsFragment;
 
 import com.tp1.e_cebanu.tp1.R;
@@ -36,7 +38,11 @@ import com.tp1.e_cebanu.tp1.fragments.LocalsFragment;
 import com.tp1.e_cebanu.tp1.fragments.ReasonsFragment;
 import com.tp1.e_cebanu.tp1.fragments.ReservationsFragment;
 import com.tp1.e_cebanu.tp1.fragments.RolesFragment;
+import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.other.CircleTransform;
+import com.tp1.e_cebanu.tp1.util.UIUtils;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -119,6 +125,14 @@ public class MainActivity extends AppCompatActivity {
             navItemIndex = 0;
             CURRENT_TAG = TAG_HOME;
             loadHomeFragment();
+        }
+
+
+        //VICTOR: get all users
+        List<User> users = UIUtils.getUsersService().findAll();
+        for (User user:users) {
+            System.out.println("USER: " + user.toString());
+            Log.i("USER: ", user.toString());
         }
     }
 

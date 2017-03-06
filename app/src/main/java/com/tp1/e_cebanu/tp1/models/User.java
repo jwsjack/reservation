@@ -1,5 +1,14 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+
 /**
  * Java# version 1.8.0
  *
@@ -15,6 +24,7 @@ package com.tp1.e_cebanu.tp1.models;
 public class User {
     private String nom, login, password;
     private int id, role;
+    public static final String FILENAME = "users";
 
     // Constructeur
     public User(int id, String nom, String login, String password, int role) {
@@ -24,6 +34,8 @@ public class User {
         this.password = password;
         this.role = role;
     }
+
+
     // Constructeur pour obtenir un objet qui se compare (equals)
     public User(String nom, String login, String password, int role) {
         this(0,nom, login, password, role);
@@ -33,8 +45,10 @@ public class User {
         this.login = login;
     }
 
-    //Getters/setters
+    public User(){
+    }
 
+    //Getters/setters
 
     public int getId() {
         return id;
@@ -103,5 +117,59 @@ public class User {
     @Override
     public int hashCode() {
         return login.hashCode();
+    }
+
+    /**
+     * From XML node to user object
+     * @param node
+     * @return
+     */
+    public User xmlToUserMapper(Node node) {
+        User user = new User();
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            Element eElement = (Element) node;
+            user.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
+            user.setNom(eElement.getElementsByTagName("name").item(0).getTextContent());
+            user.setLogin(eElement.getElementsByTagName("login").item(0).getTextContent());
+            user.setPassword(eElement.getElementsByTagName("password").item(0).getTextContent());
+            user.setRole(Integer.parseInt(eElement.getElementsByTagName("role").item(0).getTextContent()));
+        }
+        return user;
+    }
+
+    /**
+     * From User object to XML raw
+     * @param user
+     * @return
+     * @throws ParserConfigurationException
+     */
+    public Node userToXmlMapper(User user) throws ParserConfigurationException {
+        Node node = null;
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = null;
+        doc.createDocumentFragment();
+
+        Element item = doc.createElement("item");
+        Element id = doc.createElement("id");
+        Element name = doc.createElement("name");
+        Element login = doc.createElement("login");
+        Element password = doc.createElement("password");
+        Element role = doc.createElement("role");
+        item.setAttribute("ItemName", user.getNom());
+        id.setTextContent(String.valueOf(user.getId()));
+        name.setTextContent(user.getNom());
+        login.setTextContent(user.getLogin());
+        password.setTextContent(user.getPassword());
+        role.setTextContent(String.valueOf(user.getRole()));
+        item.appendChild(id);
+        item.appendChild(name);
+        item.appendChild(login);
+        item.appendChild(password);
+        item.appendChild(role);
+
+        doc.getDocumentElement().normalize();
+        NodeList list = doc.getElementsByTagName("item");
+        return list.item(0);
     }
 }

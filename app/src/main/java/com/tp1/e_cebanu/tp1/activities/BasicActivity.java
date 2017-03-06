@@ -6,12 +6,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.tp1.e_cebanu.tp1.R;
-import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.XMLParser;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
+import com.tp1.e_cebanu.tp1.models.User;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * ----------------  DELETE THIS AFTER APP IS DONE ----------------------
@@ -26,20 +25,10 @@ public class BasicActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // get data from xml
         setContentView(R.layout.listview);
-        ArrayList menuItems = new ArrayList();
-        XMLParser parser = new XMLParser(getBaseContext());
 
-        //ArrayList<User> users = (ArrayList)ObjectRepositoryDAO.findAll();
+        UserXmlImpl usersDao = new UserXmlImpl();
+        List<User> users = usersDao.findAll();
 
-        try {
-            xmlRows = parser.getXmlFromResources("users");
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String[] xmlData = xmlRows.split("\n");
         final ListView listview = (ListView) findViewById(R.id.list);
 //        String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
 //                "Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
@@ -47,9 +36,9 @@ public class BasicActivity extends AppCompatActivity {
 //                "OS/2", "Ubuntu", "Windows7", "Max OS X", "Linux", "OS/2",
 //                "Android", "iPhone", "WindowsMobile" };
 
-        final ArrayList<String> items = new ArrayList<String>();
-        for (int i = 0; i < xmlData.length; ++i) {
-            items.add(xmlData[i]);
+        final ArrayList<User> items = new ArrayList<>();
+        for (User user:users) {
+            items.add(user);
         }
         final ArrayAdapter adapter = new ArrayAdapter(this,
                 android.R.layout.simple_list_item_1, items);

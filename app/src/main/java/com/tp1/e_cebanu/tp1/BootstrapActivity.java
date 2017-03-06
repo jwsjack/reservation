@@ -29,7 +29,7 @@ public class BootstrapActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //main activity on launch system
 
-        if (verifierAuthentification(this)) {
+        if (!verifierAuthentification(this)) {
             // on passe par l'authentification
             Intent i = new Intent(this, AuthenticatorActivity.class);
             i.putExtra("Value1", "This value one for ActivityTwo ");

@@ -1,7 +1,17 @@
 package com.tp1.e_cebanu.tp1.dao.implementations.dao_xml;
+import com.tp1.e_cebanu.tp1.dao.interfaces.UserDao;
+import com.tp1.e_cebanu.tp1.models.User;
 
-import com.tp1.e_cebanu.tp1.dao.interfaces.ObjectRepositoryDAO;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 /**
  * Java# version 1.8.0
@@ -14,44 +24,56 @@ import java.util.List;
  * @date       2017-02-20
  * @description Mise en œuvre de lecture / écriture XML
  */
-public class UserXmlImpl implements ObjectRepositoryDAO{
+public class UserXmlImpl implements UserDao {
+
+    public XMLParser xmlParser = null;
+    public UserXmlImpl() {
+        xmlParser = new XMLParser();
+        xmlParser.setFileName(User.FILENAME);
+//        xmlParser.setContext();
+
+    }
     @Override
-    public void create(Object o) {
+    public void create(User user) throws IOException, ParserConfigurationException, TransformerException {
+        Document nodeList = xmlParser.getNodeListFromResources();
+        Node userNode = user.userToXmlMapper(user);
+        nodeList.adoptNode(userNode);
+        xmlParser.saveDocument(nodeList);
+    }
+
+    @Override
+    public void update(User user) {
 
     }
 
     @Override
-    public void save(Object o) {
+    public void delete(User user) {
 
     }
 
     @Override
-    public void delete(Object o) {
-
-    }
-
-    @Override
-    public Object find(int id) {
+    public User find(User user) {
         return null;
     }
 
     @Override
-    public List<Object> findAll() {
-        return null;
-    }
-
-    @Override
-    public List<Object> findBy(String[] $criteria) {
-        return null;
-    }
-
-    @Override
-    public Object findOneBy(String[] $criteria) {
-        return null;
-    }
-
-    @Override
-    public Object findByName(String $name) {
-        return null;
+    public List<User> findAll() {
+        List<User> users = new ArrayList<>();
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node nNode = nodeList.item(temp);
+                if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+                    User user = new User();
+                    users.add(user.xmlToUserMapper(nNode));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
+        return users;
     }
 }
