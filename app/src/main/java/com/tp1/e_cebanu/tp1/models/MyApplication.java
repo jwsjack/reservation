@@ -2,20 +2,46 @@ package com.tp1.e_cebanu.tp1.models;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.res.Resources;
 
-/**
- * Created by e_cebanu on 3/6/2017.
- */
+/*
+* Java# version 1.8
+*
+* @name       TP_1
+* @package    TP #1 / IFT 1155 A - Programmation mobile à plateforme libre
+* @author     EUGENIU CEBANU / matricule: 20025851
+* @author     jwsjack3@gmail.com
+* @version    1
+* @date       2017-02-20
+* @description Classe des fonctions globales et visibles dans toutes les parties
+*/
+
 
 public class MyApplication extends Application {
     private static Context context;
+    private static Resources resources;
 
     public void onCreate() {
         super.onCreate();
         MyApplication.context = getApplicationContext();
+        MyApplication.resources = getApplicationContext().getResources();
     }
 
+    /**
+     * Service pour prendre le context
+     * @return
+     */
     public static Context getAppContext() {
         return MyApplication.context;
     }
+
+    /**
+     * Service pour prendre les resources
+     * @return
+     */
+    public static Resources getAppResources() {
+        return MyApplication.resources;
+    }
+
+
 }

@@ -16,6 +16,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -264,7 +265,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setToolbarTitle() {
-        getSupportActionBar().setTitle(activityTitles[navItemIndex]);
+        getSupportActionBar().setTitle(UIUtils.fromHtml("<font color='#FFFFFF'>"+activityTitles[navItemIndex]+"</font><br/><font size='15' color='"+UIUtils.getColor(R.color.colorSuccess)+"'>JACK</font>"));
     }
 
     private void selectNavMenu() {
