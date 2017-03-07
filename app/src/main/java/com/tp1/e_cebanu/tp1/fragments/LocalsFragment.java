@@ -4,11 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import com.tp1.e_cebanu.tp1.R;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +33,11 @@ public class LocalsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    //list view
+    private View v = null;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -65,7 +76,22 @@ public class LocalsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_locals, container, false);
+        //return inflater.inflate(R.layout.fragment_locals, container, false);
+        //ListView my_list;
+        ArrayList<String> itemname =new ArrayList<String>();
+        itemname.add("item 1");
+        itemname.add("item 2");
+        itemname.add("item 3");
+
+
+        v = inflater.inflate(R.layout.fragment_locals, container, true);
+        ListView my_list = (ListView) v.findViewById(R.id.list);
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, itemname);
+
+        my_list.setAdapter(adapter);
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

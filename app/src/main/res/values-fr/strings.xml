@@ -14,4 +14,7 @@
     <string name="logout_action">Se déconnecte</string>
     <string name="messageWelcome">Bienvenue dans le nouveau système de réservation!</string>
     <string name="activity_title_authenticator">Authentification</string>
+    <string name="active">Connecté</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
 </resources>

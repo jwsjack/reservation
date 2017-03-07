@@ -1,6 +1,11 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import android.content.SharedPreferences;
+
+import com.tp1.e_cebanu.tp1.authenticator.AuthenticatorActivity;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Java# version 1.8.0
@@ -24,6 +29,12 @@ public class AppService {
 
     /*-- USERS --*/
 
+    /**
+     * Exécute l'authentification
+     * @param login
+     * @param password
+     * @return
+     */
     public static User authenticate(String login, String password) {
         //retrieve l'utilisateur dans BD par son login et mot de passe
         // Victor: implement here search function for user login password in XML - UserXmlImpl
@@ -32,6 +43,22 @@ public class AppService {
             return AppService.getUserObject().findByLoginPassword(login, password);
         } else {
             return new User(); // utilisateur vide
+        }
+    }
+
+    /**
+     * Fournir un utilisateur connecté
+     * @return
+     */
+    public static User getLiu() {
+        SharedPreferences prefsAut = MyApplication.getAppContext().getSharedPreferences(AuthenticatorActivity.MON_CLE_LOGIN, MODE_PRIVATE);
+        String restoredNom = prefsAut.getString("login", null);
+        String restoredPass = prefsAut.getString("pass", null);
+        String restoredLiu = prefsAut.getString("liu", null);
+        if (!restoredLiu.isEmpty()) {
+            return User.fromJSON(restoredLiu);
+        } else  {
+            return AppService.getUserObject(); //instance vide User
         }
     }
 

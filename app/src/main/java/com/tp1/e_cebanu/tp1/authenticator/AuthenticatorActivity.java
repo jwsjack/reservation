@@ -162,6 +162,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
                 SharedPreferences.Editor editor = this.getSharedPreferences(MON_CLE_LOGIN, MODE_PRIVATE).edit();
                 editor.putString("login", login.trim());
                 editor.putString("pass", password.trim());
+                editor.putString("liu",liu.toJSON());
                 editor.commit();
 
                 //passe à la page d'accueil

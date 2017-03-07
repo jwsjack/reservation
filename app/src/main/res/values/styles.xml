@@ -101,13 +101,34 @@
         <item name="android:background">@drawable/list_item_selector</item>
     </style>
 
-    <style name="BootstrapButton">
-        <item name="android:background">@drawable/button_background_states</item>
+    <style name="BootstrapButtonInfo">
+        <item name="android:background">@drawable/button_info_background_states</item>
         <item name="android:layout_marginLeft">10dp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:layout_marginBottom">5dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="BootstrapButtonSuccess">
+        <item name="android:background">@drawable/button_success_background_states</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="BootstrapButtonDanger">
+        <item name="android:background">@drawable/button_danger_background_states</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item>
     </style>
 
     <style name="TimerChronometer">

@@ -265,7 +265,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setToolbarTitle() {
-        getSupportActionBar().setTitle(UIUtils.fromHtml("<font color='#FFFFFF'>"+activityTitles[navItemIndex]+"</font><br/><font size='15' color='"+UIUtils.getColor(R.color.colorSuccess)+"'>JACK</font>"));
+        getSupportActionBar().setTitle(UIUtils.fromHtml("<big><b><font color='#FFFFFF'>"+activityTitles[navItemIndex]+"</font></b></big>"));
+        getSupportActionBar().setSubtitle(UIUtils.fromHtml("<small><font color='"+UIUtils.getColor(R.color.colorSuccess)+"'>" + getResources().getString(R.string.active).toLowerCase() + "</font>: "  + AppService.getLiu().getLogin() + "</small>"));
     }
 
     private void selectNavMenu() {

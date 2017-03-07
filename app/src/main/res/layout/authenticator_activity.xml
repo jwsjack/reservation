@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/button_background_states"
+                android:background="@drawable/button_info_background_states"
                 android:gravity="center"
                 android:onClick="handleLogin"
                 android:padding="10dp"
