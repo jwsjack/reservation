@@ -9,9 +9,11 @@ import com.tp1.e_cebanu.tp1.util.UIUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -185,6 +187,7 @@ public class XMLParser {
         Document doc = null;
         try {
             doc = dBuilder.parse(fXmlFile);
+            fXmlFile.close();
         } catch (SAXException e) {
             System.out.println(e.getMessage());
 //            Log.e("Error: ", e.getMessage());
@@ -219,12 +222,21 @@ public class XMLParser {
 
     public void saveDocument(Document doc) throws IOException, TransformerException {
         DOMSource source = new DOMSource(doc);
-        FileWriter writer = new FileWriter(fileName);
-        StreamResult result = new StreamResult(writer);
+
+
+        FileOutputStream _stream = getContext().openFileOutput(fileName + ".xml", getContext().MODE_APPEND);
+
+        Integer xmlID = this.getStringResourceByName(fileName, UIUtils.FILE_STORAGE_FOLDER);
+//        String path = res.getResourceName(xmlID);
+//        System.out.print("PATH:::: " + path);
+//        FileWriter writer = new FileWriter(path);
+        StreamResult result = new StreamResult(_stream);
 
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         transformer.transform(source, result);
+//        writer.notifyAll();
+//        writer.flush();
     }
 
 }

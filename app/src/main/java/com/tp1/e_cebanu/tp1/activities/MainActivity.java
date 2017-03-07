@@ -131,6 +131,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //VICTOR: get all users
+        User userTest = new User();
+        userTest.setId(833);
+        userTest.setNom("IVAN");
+        userTest.setLogin("ivan");
+        userTest.setPassword("ivan");
+        userTest.setRole(1);
+
+        AppService.getUsersService().create(userTest);
         List<User> users = AppService.getUsersService().findAll();
         for (User user:users) {
             System.out.println("USER: " + user.toString());

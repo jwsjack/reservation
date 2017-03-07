@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -197,7 +198,7 @@ public class User {
         Node node = null;
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = null;
+        Document doc = dBuilder.newDocument();
         doc.createDocumentFragment();
 
         Element item = doc.createElement("item");
@@ -218,8 +219,9 @@ public class User {
         item.appendChild(password);
         item.appendChild(role);
 
-        doc.getDocumentElement().normalize();
+//        doc.getDocumentElement().normalize();
+        System.out.print(doc.getElementsByTagName("item"));
         NodeList list = doc.getElementsByTagName("item");
-        return list.item(0);
+        return (Node)list.item(0);
     }
 }
