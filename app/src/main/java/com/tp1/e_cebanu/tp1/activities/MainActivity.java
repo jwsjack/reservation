@@ -38,6 +38,7 @@ import com.tp1.e_cebanu.tp1.fragments.LocalsFragment;
 import com.tp1.e_cebanu.tp1.fragments.ReasonsFragment;
 import com.tp1.e_cebanu.tp1.fragments.ReservationsFragment;
 import com.tp1.e_cebanu.tp1.fragments.RolesFragment;
+import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.other.CircleTransform;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         //VICTOR: get all users
-        List<User> users = UIUtils.getUsersService().findAll();
+        List<User> users = AppService.getUsersService().findAll();
         for (User user:users) {
             System.out.println("USER: " + user.toString());
             Log.i("USER: ", user.toString());

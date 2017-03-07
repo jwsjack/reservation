@@ -22,6 +22,10 @@ public class Role {
         this.id = id;
     }
 
+    public Role() {
+        //constructeur vide
+    }
+
     //Getters/setters
     public int getId() {
         return id;

@@ -24,6 +24,10 @@ public class Local {
         this.capacite = capacite;
     }
 
+    public Local() {
+        //constructeur vide
+    }
+
     // Setters/getters
 
 

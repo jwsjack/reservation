@@ -1,5 +1,7 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
+
 /**
  * Java# version 1.8.0
  *
@@ -18,12 +20,86 @@ public class AppService {
     public AppService() {
     }
 
+    /*------------------------- SERVICES -------------------------*/
 
-    /*-- Users --*/
+    /*-- USERS --*/
+
     public static User authenticate(String login, String password) {
         //retrieve l'utilisateur dans BD par son login et mot de passe
         // Victor: implement here search function for user login password in XML - UserXmlImpl
-        return new User(1,"Eugeniu Cebanu","e_cebanu","qwe123",1);
+
+        if (!login.isEmpty() && !password.isEmpty()) {
+            return AppService.getUserObject().findByLoginPassword(login, password);
+        } else {
+            return new User(); // utilisateur vide
+        }
+    }
+
+    /**
+     * Fournit une nouvelle instance de UserXmlImpl
+     * @return
+     */
+    public static UserXmlImpl getUsersService() {
+        return new UserXmlImpl();
+    }
+
+    /**
+     * Fournit une nouvelle instance de User
+     * @return
+     */
+    public static User getUserObject() {
+        return new User();
+    }
+
+    /*-- REASONS --*/
+
+
+
+    /**
+     * Fournit une nouvelle instance de Reason
+     * @return
+     */
+    public static Reason getReasonObject() {
+        return new Reason();
+    }
+
+
+    /*-- LOCALS --*/
+
+
+
+    /**
+     * Fournit une nouvelle instance de Local
+     * @return
+     */
+    public static Local getLocalObject() {
+        return new Local();
+    }
+
+    /*-- RESERVATIONS --*/
+
+
+
+
+    /**
+     * Fournit une nouvelle instance de Reservation
+     * @return
+     */
+    public static Reservation getReservationObject() {
+        return new Reservation();
+    }
+
+
+
+    /*-- ROLES --*/
+
+
+    /**
+     * Fournit une nouvelle instance de Role
+     * @return
+     */
+    public static Role getRoleObject() {
+        return new Role();
     }
 
 }

@@ -17,6 +17,7 @@ public class Reservation {
     protected String autreRraison, cours;
 
 
-
-
+    public Reservation() {
+         //constructeur vide
+    }
 }

@@ -119,6 +119,13 @@ public class User {
         return login.hashCode();
     }
 
+    // public functions
+    public User findByLoginPassword(String login, String password) {
+        // Victor: implement here function to find user by login and password
+        return new User(1,"Eugeniu Cebanu","e_cebanu","qwe123",1);
+    }
+
+
     /**
      * From XML node to user object
      * @param node

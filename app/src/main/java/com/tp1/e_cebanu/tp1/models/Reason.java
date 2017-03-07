@@ -21,6 +21,11 @@ public class Reason {
         this.name = name;
     }
 
+    public Reason() {
+        //constructeur vide
+    }
+
+
     //Getters/setters
     public int getId() {
         return id;
