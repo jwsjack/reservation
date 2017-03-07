@@ -22,5 +22,7 @@ public interface UserDao {
 
     public User find(User user);
 
+    public User findByLogin(String login);
+
     public List<User> findAll() throws IOException, ParserConfigurationException;
 }

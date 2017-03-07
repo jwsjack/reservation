@@ -34,11 +34,20 @@ public class UserXmlImpl implements UserDao {
 
     }
     @Override
-    public void create(User user) throws IOException, ParserConfigurationException, TransformerException {
-        Document nodeList = xmlParser.getNodeListFromResources();
-        Node userNode = user.userToXmlMapper(user);
-        nodeList.adoptNode(userNode);
-        xmlParser.saveDocument(nodeList);
+    public void create(User user) {
+        Document nodeList = null;
+        try {
+            nodeList = xmlParser.getNodeListFromResources();
+            Node userNode = user.userToXmlMapper(user);
+            nodeList.adoptNode(userNode);
+            xmlParser.saveDocument(nodeList);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -54,6 +63,18 @@ public class UserXmlImpl implements UserDao {
     @Override
     public User find(User user) {
         return null;
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        User user = new User();
+        List<User> users = findAll();
+        for (User item: users) {
+            if (item.getLogin().equals(login)) {
+                user = item;
+            }
+        }
+        return user;
     }
 
     @Override
