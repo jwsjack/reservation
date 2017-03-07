@@ -78,6 +78,19 @@ public class UserXmlImpl implements UserDao {
     }
 
     @Override
+    public User findByLoginPassword(String login, String password) {
+        User user = new User();
+        List<User> users = findAll();
+        for (User item: users) {
+            if (item.getLogin().equals(login) && item.getPassword().equals(password) ) {
+                user = item;
+            }
+        }
+        return user;
+    }
+
+
+    @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
         try {

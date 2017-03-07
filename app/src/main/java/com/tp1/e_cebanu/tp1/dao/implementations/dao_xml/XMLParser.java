@@ -9,11 +9,11 @@ import com.tp1.e_cebanu.tp1.util.UIUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -221,22 +221,46 @@ public class XMLParser {
     }
 
     public void saveDocument(Document doc) throws IOException, TransformerException {
-        DOMSource source = new DOMSource(doc);
+//        DOMSource source = new DOMSource(doc);
+//
+//
+//        FileOutputStream _stream = getContext().openFileOutput(fileName + ".xml", getContext().MODE_APPEND);
+//
+//        Integer xmlID = this.getStringResourceByName(fileName, UIUtils.FILE_STORAGE_FOLDER);
+////        String path = res.getResourceName(xmlID);
+////        System.out.print("PATH:::: " + path);
+////        FileWriter writer = new FileWriter(path);
+//        StreamResult result = new StreamResult(_stream);
+//
+//        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+//        Transformer transformer = transformerFactory.newTransformer();
+//        transformer.transform(source, result);
+////        writer.notifyAll();
+////        writer.flush();
 
 
-        FileOutputStream _stream = getContext().openFileOutput(fileName + ".xml", getContext().MODE_APPEND);
 
-        Integer xmlID = this.getStringResourceByName(fileName, UIUtils.FILE_STORAGE_FOLDER);
-//        String path = res.getResourceName(xmlID);
-//        System.out.print("PATH:::: " + path);
-//        FileWriter writer = new FileWriter(path);
-        StreamResult result = new StreamResult(_stream);
 
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
-        transformer.transform(source, result);
-//        writer.notifyAll();
-//        writer.flush();
+        try {
+            DOMSource source = new DOMSource(doc);
+            FileOutputStream fOut = getContext().openFileOutput(fileName+".xml", getContext().MODE_PRIVATE);
+            StreamResult result = new StreamResult(fOut);
+            OutputStreamWriter osw = new OutputStreamWriter(fOut);
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            transformer.transform(source, result);
+//            String fileContent = "<item>JACK</item>"; //build file content
+//            osw.write(fileContent );
+//            osw.flush();
+//            osw.close();
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+
+
+
     }
 
 }

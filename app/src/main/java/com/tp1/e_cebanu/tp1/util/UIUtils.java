@@ -54,7 +54,7 @@ public class UIUtils {
         SharedPreferences prefsAut = context.getSharedPreferences(MON_CLE_LOGIN, MODE_PRIVATE);
         String restoredNom = prefsAut.getString("login", null);
         String restoredPass = prefsAut.getString("pass", null);
-        if (restoredNom != null && restoredPass != null && restoredPass.toString().trim().equals(CLE_ACCES)) {
+        if (restoredNom != null && restoredPass != null) {
             return true; // l'utilisateur est autorisée
         }
         return false;

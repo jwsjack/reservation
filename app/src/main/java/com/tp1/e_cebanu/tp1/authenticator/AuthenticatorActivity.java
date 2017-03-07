@@ -154,8 +154,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
         password = passwordText.getText().toString();
 
         if (login != null && password != null ) {
-            //User liu = appService.authenticate(login,password);
-            User liu = new User(1,"Eugeniu Cebanu","e_cebanu","qwe123",1);
+            User liu = appService.authenticate(login,password);
             if (liu.getId() != 0) {
 
                 // sauvegarde les valeurs dans  SharedPreferences

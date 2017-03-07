@@ -40,7 +40,7 @@ public class AppService {
         // Victor: implement here search function for user login password in XML - UserXmlImpl
 
         if (!login.isEmpty() && !password.isEmpty()) {
-            return AppService.getUserObject().findByLoginPassword(login, password);
+            return AppService.getUsersService().findByLoginPassword(login, password);
         } else {
             return new User(); // utilisateur vide
         }

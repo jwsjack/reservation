@@ -5,7 +5,6 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -122,12 +121,6 @@ public class User {
     @Override
     public int hashCode() {
         return login.hashCode();
-    }
-
-    // public functions
-    public User findByLoginPassword(String login, String password) {
-        // Victor: implement here function to find user by login and password
-        return new User(1, "Eugeniu Cebanu", "e_cebanu", "qwe123", 1);
     }
 
     /**
