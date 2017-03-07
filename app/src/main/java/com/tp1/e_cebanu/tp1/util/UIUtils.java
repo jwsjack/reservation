@@ -4,6 +4,11 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.support.v4.content.ContextCompat;
+import android.text.Html;
+import android.text.Spanned;
+
+import com.tp1.e_cebanu.tp1.models.MyApplication;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -40,10 +45,9 @@ public class UIUtils {
     }
 
     /**
-     * @desc Verifier si l'utilisateur est authentifié deja ou non
-     *
      * @param context
      * @return boolean
+     * @desc Verifier si l'utilisateur est authentifié deja ou non
      */
     public static boolean verifierAuthentification(Context context) {
         //récupérer les données de SharedPreferences
@@ -68,4 +72,27 @@ public class UIUtils {
         throw new RuntimeException("Stub!");
     }
 
+
+    @SuppressWarnings("deprecation")
+    public static Spanned fromHtml(String html) {
+        Spanned result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = Html.fromHtml(html, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            result = Html.fromHtml(html);
+        }
+        return result;
     }
+
+    @SuppressWarnings("deprecation")
+    public static  int getColor(int colorId) {
+        Integer result;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            result = ContextCompat.getColor(MyApplication.getAppContext(), colorId);
+        } else {
+            result = MyApplication.getAppResources().getColor(colorId);
+        }
+        return result;
+    }
+
+}
