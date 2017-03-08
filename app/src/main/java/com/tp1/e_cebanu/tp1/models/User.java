@@ -188,11 +188,9 @@ public class User {
      * @throws ParserConfigurationException
      */
     public Node userToXmlMapper(User user) throws ParserConfigurationException {
-        Node node = null;
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.newDocument();
-        doc.createDocumentFragment();
 
         Element item = doc.createElement("item");
         Element id = doc.createElement("id");
@@ -211,10 +209,6 @@ public class User {
         item.appendChild(login);
         item.appendChild(password);
         item.appendChild(role);
-
-//        doc.getDocumentElement().normalize();
-        System.out.print(doc.getElementsByTagName("item"));
-        NodeList list = doc.getElementsByTagName("item");
-        return (Node)list.item(0);
+        return item;
     }
 }

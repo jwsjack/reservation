@@ -1,8 +1,10 @@
 package com.tp1.e_cebanu.tp1.dao.implementations.dao_xml;
 import com.tp1.e_cebanu.tp1.dao.interfaces.UserDao;
+import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.User;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
@@ -38,8 +42,57 @@ public class UserXmlImpl implements UserDao {
         Document nodeList = null;
         try {
             nodeList = xmlParser.getNodeListFromResources();
-            Node userNode = user.userToXmlMapper(user);
-            nodeList.adoptNode(userNode);
+//            Node userNode = (Node)user.userToXmlMapper(user);
+
+            Element item = nodeList.createElement("item");
+            Element id = nodeList.createElement("id");
+            Element name = nodeList.createElement("name");
+            Element login = nodeList.createElement("login");
+            Element password = nodeList.createElement("password");
+            Element role = nodeList.createElement("role");
+            item.setAttribute("ItemName", user.getNom());
+            id.setTextContent(String.valueOf(user.getId()));
+            name.setTextContent(user.getNom());
+            login.setTextContent(user.getLogin());
+            password.setTextContent(user.getPassword());
+            role.setTextContent(String.valueOf(user.getRole()));
+            item.appendChild(id);
+            item.appendChild(name);
+            item.appendChild(login);
+            item.appendChild(password);
+            item.appendChild(role);
+
+            nodeList.adoptNode((Node)item);
+
+
+System.out.print(nodeList);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//            nodeList.adoptNode(userNode);
+//            List<User> users = AppService.getUsersService().findAll();
+//            users.add(user);
+//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+//            Document doc = dBuilder.newDocument();
+//            doc.createElement("user");
+//            for (User userItem: users) {
+//                Node userNode = (Node)userItem.userToXmlMapper(userItem);
+//
+//                doc.adoptNode(userNode);
+//            }
             xmlParser.saveDocument(nodeList);
         } catch (IOException e) {
             e.printStackTrace();

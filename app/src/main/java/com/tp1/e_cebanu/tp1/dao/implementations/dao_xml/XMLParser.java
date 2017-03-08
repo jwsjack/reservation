@@ -9,6 +9,7 @@ import com.tp1.e_cebanu.tp1.util.UIUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -177,17 +178,12 @@ public class XMLParser {
      * @throws ParserConfigurationException
      */
     public Document getNodeListFromResources() throws IOException, ParserConfigurationException {
-        Integer xmlID = this.getStringResourceByName(fileName, UIUtils.FILE_STORAGE_FOLDER);
-
-        //String UrlPath  = "android.resource://" + context.getPackageName() + "/" + R.raw.users;
-        //File fXmlFile = new File(Uri.parse(UrlPath));
-        InputStream fXmlFile = res.openRawResource(xmlID);
+        File fXmlFile = new File(getContext().getFilesDir() + "/" + fileName + ".xml");
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = null;
         try {
             doc = dBuilder.parse(fXmlFile);
-            fXmlFile.close();
         } catch (SAXException e) {
             System.out.println(e.getMessage());
 //            Log.e("Error: ", e.getMessage());
@@ -198,7 +194,7 @@ public class XMLParser {
 
         }
 
-        doc.getDocumentElement().normalize();
+//        doc.getDocumentElement().normalize();
         return doc;
     }
 
