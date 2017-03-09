@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class User {
     private String nom, login, password;
     private int id, role;
-    public static final String FILENAME = "users";
+    public static final String FILENAME = "users.xml";
 
     // Constructeur
     public User(int id, String nom, String login, String password, int role) {

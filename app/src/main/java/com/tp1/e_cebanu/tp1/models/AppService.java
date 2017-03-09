@@ -3,6 +3,7 @@ package com.tp1.e_cebanu.tp1.models;
 import android.content.SharedPreferences;
 
 import com.tp1.e_cebanu.tp1.authenticator.AuthenticatorActivity;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.LocalXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -61,6 +62,15 @@ public class AppService {
             return AppService.getUserObject(); //instance vide User
         }
     }
+
+    /**
+     * Fournit une nouvelle instance de LocalXmlImpl
+     * @return
+     */
+    public static LocalXmlImpl getLocalsService() {
+        return new LocalXmlImpl();
+    }
+
 
     /**
      * Fournit une nouvelle instance de UserXmlImpl

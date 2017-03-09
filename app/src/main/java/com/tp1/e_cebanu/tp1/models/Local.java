@@ -1,5 +1,8 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 /**
  * Java# version 1.8.0
  *
@@ -15,8 +18,9 @@ package com.tp1.e_cebanu.tp1.models;
 public class Local {
 
     // Variables
-    private int nombre, type, capacite;
+    private int id, nombre, type, capacite;
 
+    public static final String FILENAME = "locations.xml";
     // Constructeur
     public Local(int nombre, int type, int capacite) {
         this.nombre = nombre;
@@ -29,6 +33,14 @@ public class Local {
     }
 
     // Setters/getters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
     public int getNombre() {
@@ -71,5 +83,17 @@ public class Local {
 
     public boolean equals(Local autre) {
         return this.nombre == autre.nombre;
+    }
+
+    public Local xmlToLocalMapper(Node node) {
+        Local local = new Local();
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            Element eElement = (Element) node;
+            local.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
+            local.setNombre(Integer.parseInt(eElement.getElementsByTagName("nombre").item(0).getTextContent()));
+            local.setType(Integer.parseInt(eElement.getElementsByTagName("type").item(0).getTextContent()));
+            local.setCapacite(Integer.parseInt(eElement.getElementsByTagName("capacite").item(0).getTextContent()));
+        }
+        return local;
     }
 }

@@ -178,7 +178,7 @@ public class XMLParser {
      * @throws ParserConfigurationException
      */
     public Document getNodeListFromResources() throws IOException, ParserConfigurationException {
-        File fXmlFile = new File(getContext().getFilesDir() + "/" + fileName + ".xml");
+        File fXmlFile = new File(getContext().getFilesDir() + "/" + fileName);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = null;
@@ -239,7 +239,7 @@ public class XMLParser {
 
         try {
             DOMSource source = new DOMSource(doc);
-            FileOutputStream fOut = getContext().openFileOutput(fileName+".xml", getContext().MODE_PRIVATE);
+            FileOutputStream fOut = getContext().openFileOutput(fileName, getContext().MODE_PRIVATE);
             StreamResult result = new StreamResult(fOut);
             OutputStreamWriter osw = new OutputStreamWriter(fOut);
             TransformerFactory transformerFactory = TransformerFactory.newInstance();

@@ -39,17 +39,16 @@ public class UserXmlImpl implements UserDao {
     }
     @Override
     public void create(User user) {
-        Document nodeList = null;
+        Document doc = null;
         try {
-            nodeList = xmlParser.getNodeListFromResources();
-//            Node userNode = (Node)user.userToXmlMapper(user);
+            doc = xmlParser.getNodeListFromResources();
 
-            Element item = nodeList.createElement("item");
-            Element id = nodeList.createElement("id");
-            Element name = nodeList.createElement("name");
-            Element login = nodeList.createElement("login");
-            Element password = nodeList.createElement("password");
-            Element role = nodeList.createElement("role");
+            Element item = doc.createElement("item");
+            Element id = doc.createElement("id");
+            Element name = doc.createElement("name");
+            Element login = doc.createElement("login");
+            Element password = doc.createElement("password");
+            Element role = doc.createElement("role");
             item.setAttribute("ItemName", user.getNom());
             id.setTextContent(String.valueOf(user.getId()));
             name.setTextContent(user.getNom());
@@ -62,38 +61,7 @@ public class UserXmlImpl implements UserDao {
             item.appendChild(password);
             item.appendChild(role);
 
-            nodeList.adoptNode((Node)item);
-
-
-System.out.print(nodeList);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//            nodeList.adoptNode(userNode);
-//            List<User> users = AppService.getUsersService().findAll();
-//            users.add(user);
-//            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-//            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-//            Document doc = dBuilder.newDocument();
-//            doc.createElement("user");
-//            for (User userItem: users) {
-//                Node userNode = (Node)userItem.userToXmlMapper(userItem);
-//
-//                doc.adoptNode(userNode);
-//            }
-            xmlParser.saveDocument(nodeList);
+            xmlParser.saveDocument(doc);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
