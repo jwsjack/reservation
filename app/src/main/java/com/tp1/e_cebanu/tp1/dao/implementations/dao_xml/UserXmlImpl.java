@@ -43,6 +43,8 @@ public class UserXmlImpl implements UserDao {
         try {
             doc = xmlParser.getNodeListFromResources();
 
+            Node parent = doc.getFirstChild();
+
             Element item = doc.createElement("item");
             Element id = doc.createElement("id");
             Element name = doc.createElement("name");
@@ -60,6 +62,8 @@ public class UserXmlImpl implements UserDao {
             item.appendChild(login);
             item.appendChild(password);
             item.appendChild(role);
+
+            parent.appendChild((Node) item);
 
             xmlParser.saveDocument(doc);
         } catch (IOException e) {
