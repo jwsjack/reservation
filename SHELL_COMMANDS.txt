@@ -75,7 +75,7 @@ su
 
 4. go to data storage folder
 
-cd cd /data/data/com.tp1.e_cebanu.tp1
+cd cd /data/data/com.tp1.e_cebanu.tp1/files
 
 5. verify your list of files
 
@@ -93,4 +93,15 @@ ls -la
 8. open desired file
 
 cat users.xml
+
+
+
+# COPY DOCUMENTS /FILES
+
+Switch to platform-tools
+
+adb root
+
+adb push C:\\ANDROID_PROJECTS\\TP1_github\\reservation\\app\\src\\main\\res\\xml\. /data/data/com.tp1.e_cebanu.tp1/files/
+
 

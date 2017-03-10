@@ -17,15 +17,27 @@
             <LinearLayout
                 android:id="@+id/listButtons"
                 android:layout_width="match_parent"
+                android:orientation="vertical"
                 android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/add"
                     style="@style/BootstrapButtonPrimary"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/add" />
+
+                <TextView
+                    android:id="@+id/text_count_lines"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/etId"
+                    android:textSize="5dp"
+                    android:textAlignment="center"
+                    android:text="@string/lbCountLines"
+                    android:padding="5dp"/>
 
                 <!--<Button-->
                     <!--android:id="@+id/update"-->

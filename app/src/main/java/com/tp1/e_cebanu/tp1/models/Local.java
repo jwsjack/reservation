@@ -75,7 +75,7 @@ public class Local {
         if (this.type == 1) {
             return  MyApplication.getAppResources().getString(R.string.sale_reunion);
         }
-        return "Salle de cours";
+        return MyApplication.getAppResources().getString(R.string.classroom);
     }
 
     public String toString() {

@@ -12,6 +12,15 @@
         android:layout_height="wrap_content"
         android:paddingLeft="10dip">
         <TextView
+            android:id="@+id/txtId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FF7F3300"
+            android:textSize="12dip"
+            android:textStyle="italic"
+            android:visibility="invisible"
+            />
+        <TextView
             android:id="@+id/txtNombre"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

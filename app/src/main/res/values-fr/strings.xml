@@ -20,4 +20,7 @@
     <string name="sale_reunion">Salle de réunion</string>
     <string name="classroom">Salle de cours</string>
     <string name="localData">Info du locale</string>
+    <string name="lbCountLines">Nombre d\'items:</string>
+    <string name="local_prompt">Choisissez un lieu</string>
+    <string name="filling_message">La valeur est vide du champ:</string>
 </resources>

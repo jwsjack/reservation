@@ -7,7 +7,9 @@ import android.content.res.Configuration;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.text.Spanned;
+import android.widget.Toast;
 
+import com.tp1.e_cebanu.tp1.R;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -93,6 +95,34 @@ public class UIUtils {
             result = MyApplication.getAppResources().getColor(colorId);
         }
         return result;
+    }
+
+    /**
+     * Validation du valeur du champ String
+     * @param val
+     * @param nameField
+     * @return
+     */
+    public static boolean checkFieldValueString(String val, String nameField) {
+        if (val.equals(null) || val.equals("")) {
+            Toast.makeText(MyApplication.getAppContext(), MyApplication.getAppResources().getString(R.string.filling_message) + nameField, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Validation du valeur du champ Integer
+     * @param val
+     * @param nameField
+     * @return
+     */
+    public static boolean checkFieldValueInteger(int val, String nameField) {
+        if (val == 0) {
+            Toast.makeText(MyApplication.getAppContext(), MyApplication.getAppResources().getString(R.string.filling_message) + nameField, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 
 }

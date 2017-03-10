@@ -106,11 +106,32 @@ aussi la modifier ou l’annuler.\n
     <string name="classroom">Classroom</string>
 
 
+    <!--lists-->
+    <string name="lbCountLines">Number items:</string>
+
+    <!--Type sales-->
+    <string name="locations_prompt">Choose a location</string>
+    <string-array name="codes_locations_types">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="locations_types">
+        <item>@string/sale_reunion</item>
+        <item>@string/classroom</item>
+    </string-array>
+
+
+    <!--Messages-->
+    <string name="filling_message">The value is empty of the field : </string>
+
+
     <!-- remove when app is done -->
     <string name="spinner_1_color">Color:</string>
     <string name="spinner_1_color_prompt">Choose a color</string>
     <string name="spinner_1_planet"><b>Planet </b>Planet <i>Planet </i><u>Planet: </u></string>
     <string name="spinner_1_planet_prompt">Choose a planet</string>
+
+
 
 
 
