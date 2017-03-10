@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<reason>
+<reasons>
     <item>
         <id>1</id>
         <nombre>2165</nombre>
         <type>1</type>
         <capacite>30</capacite>
     </item>
-</reason>
+</reasons>

@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 public class User {
     private String nom, login, password;
     private int id, role;
-    public static final String FILENAME = "users";
+    public static final String FILENAME = "users.xml";
 
     // Constructeur
     public User(int id, String nom, String login, String password, int role) {
@@ -181,40 +181,31 @@ public class User {
     }
 
     /**
-     * From User object to XML raw
-     *
-     * @param user
+     * Map from user to xml Node using Document
+     * @param doc
      * @return
      * @throws ParserConfigurationException
      */
-    public Node userToXmlMapper(User user) throws ParserConfigurationException {
-        Node node = null;
-        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.newDocument();
-        doc.createDocumentFragment();
-
+    public Node userToXmlMapper(Document doc) throws ParserConfigurationException {
         Element item = doc.createElement("item");
         Element id = doc.createElement("id");
         Element name = doc.createElement("name");
         Element login = doc.createElement("login");
         Element password = doc.createElement("password");
         Element role = doc.createElement("role");
-        item.setAttribute("ItemName", user.getNom());
-        id.setTextContent(String.valueOf(user.getId()));
-        name.setTextContent(user.getNom());
-        login.setTextContent(user.getLogin());
-        password.setTextContent(user.getPassword());
-        role.setTextContent(String.valueOf(user.getRole()));
+        item.setAttribute("ItemName", getNom());
+        id.setTextContent(String.valueOf(getId()));
+        name.setTextContent(getNom());
+        login.setTextContent(getLogin());
+        password.setTextContent(getPassword());
+        role.setTextContent(String.valueOf(getRole()));
         item.appendChild(id);
         item.appendChild(name);
         item.appendChild(login);
         item.appendChild(password);
         item.appendChild(role);
-
-//        doc.getDocumentElement().normalize();
-        System.out.print(doc.getElementsByTagName("item"));
-        NodeList list = doc.getElementsByTagName("item");
-        return (Node)list.item(0);
+        return item;
     }
+
+
 }

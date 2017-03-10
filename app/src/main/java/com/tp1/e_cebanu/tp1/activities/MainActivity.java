@@ -32,8 +32,12 @@ import com.tp1.e_cebanu.tp1.fragments.ReasonsFragment;
 import com.tp1.e_cebanu.tp1.fragments.ReservationsFragment;
 import com.tp1.e_cebanu.tp1.fragments.RolesFragment;
 import com.tp1.e_cebanu.tp1.models.AppService;
+import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.other.CircleTransform;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
+
+import java.io.File;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -125,22 +129,6 @@ public class MainActivity extends AppCompatActivity {
             loadHomeFragment();
         }
 
-
-//        //VICTOR: get all users
-//        User userTest = new User();
-//        userTest.setId(833);
-//        userTest.setNom("IVAN");
-//        userTest.setLogin("ivan");
-//        userTest.setPassword("ivan");
-//        userTest.setRole(1);
-//
-//
-//        AppService.getUsersService().create(userTest);
-//        List<User> users = AppService.getUsersService().findAll();
-//        for (User user:users) {
-//            System.out.println("USER: " + user.toString());
-//            Log.i("USER: ", user.toString());
-//        }
     }
 
     /***
@@ -257,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                 // reasons
                 ReasonsFragment reasonsFragment = new ReasonsFragment();
                 return reasonsFragment;
+
             case 4:
                 // locals
                 LocalsFragment localsFragment = new LocalsFragment();

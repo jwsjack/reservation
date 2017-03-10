@@ -3,6 +3,9 @@ package com.tp1.e_cebanu.tp1.models;
 import android.content.SharedPreferences;
 
 import com.tp1.e_cebanu.tp1.authenticator.AuthenticatorActivity;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.LocalXmlImpl;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.ReasonXmlImpl;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.ReservationXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -63,11 +66,29 @@ public class AppService {
     }
 
     /**
+     * Fournit une nouvelle instance de LocalXmlImpl
+     * @return
+     */
+    public static LocalXmlImpl getLocalsService() {
+        return new LocalXmlImpl();
+    }
+
+
+    public static ReasonXmlImpl getReasonsService() {
+        return new ReasonXmlImpl();
+    }
+
+
+    /**
      * Fournit une nouvelle instance de UserXmlImpl
      * @return
      */
     public static UserXmlImpl getUsersService() {
         return new UserXmlImpl();
+    }
+
+    public static ReservationXmlImpl getReservationService() {
+        return new ReservationXmlImpl();
     }
 
     /**

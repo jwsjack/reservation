@@ -1,8 +1,10 @@
 package com.tp1.e_cebanu.tp1.dao.implementations.dao_xml;
 import com.tp1.e_cebanu.tp1.dao.interfaces.UserDao;
+import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.User;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -10,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
@@ -30,17 +34,17 @@ public class UserXmlImpl implements UserDao {
     public UserXmlImpl() {
         xmlParser = new XMLParser();
         xmlParser.setFileName(User.FILENAME);
-//        xmlParser.setContext();
-
     }
     @Override
     public void create(User user) {
-        Document nodeList = null;
+        Document doc = null;
         try {
-            nodeList = xmlParser.getNodeListFromResources();
-            Node userNode = user.userToXmlMapper(user);
-            nodeList.adoptNode(userNode);
-            xmlParser.saveDocument(nodeList);
+            doc = xmlParser.getNodeListFromResources();
+            Node parent = doc.getFirstChild();
+            Node child = user.userToXmlMapper(doc);
+            parent.appendChild((Node) child);
+
+            xmlParser.saveDocument(doc);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
@@ -57,7 +61,7 @@ public class UserXmlImpl implements UserDao {
 
     @Override
     public void delete(User user) {
-
+        findById(user.getId());
     }
 
     @Override
@@ -109,5 +113,17 @@ public class UserXmlImpl implements UserDao {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public User findById(int userId) {
+        User user = new User();
+        List<User> users = findAll();
+        for (User item: users) {
+            if (item.getId() == userId) {
+                user = item;
+            }
+        }
+        return user;
     }
 }

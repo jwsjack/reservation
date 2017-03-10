@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<location>
+<locations>
     <item>
         <id>1</id>
         <nombre>2165</nombre>
@@ -60,4 +60,4 @@
         <type>2</type>
         <capacite>25</capacite>
     </item>
-</location>
+</locations>
