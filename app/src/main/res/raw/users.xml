@@ -1,4 +1,4 @@
-<user>
+<users>
     <item ItemName="Eugeniu Cebanu">
         <id>1</id>
         <name>Eugeniu Cebanu</name>
@@ -34,4 +34,4 @@
         <password>qwe123</password>
         <role>2</role>
     </item>
-</user>
+</users>

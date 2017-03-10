@@ -1,4 +1,4 @@
-<role>
+<roles>
     <item>
         <id>1</id>
         <name>superadmin</name>
@@ -7,4 +7,4 @@
         <id>2</id>
         <name>user</name>
     </item>
-</role>
+</roles>

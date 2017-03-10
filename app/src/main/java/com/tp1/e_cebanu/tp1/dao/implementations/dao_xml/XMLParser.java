@@ -15,6 +15,7 @@ import org.xml.sax.SAXException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
@@ -100,17 +101,14 @@ public class XMLParser {
         Document doc = null;
 
         if (!fXmlFile.exists()) {
-            Document docFailOver = dBuilder.newDocument();
-            String[] parts = fileName.split(".");
-            String firstChild = parts[0];
-            Element element = docFailOver.createElement(firstChild);
-            doc.adoptNode((Node) element);
+            fXmlFile.createNewFile();
+            Document docFailOver = getDocumentFromRaw();
             try {
                 saveDocument(docFailOver);
-                fXmlFile = new File(getContext().getFilesDir() + "/" + fileName);
             } catch (TransformerException e) {
                 e.printStackTrace();
             }
+            fXmlFile = new File(getContext().getFilesDir() + "/" + fileName);
         }
         try {
             doc = dBuilder.parse(fXmlFile);
@@ -139,6 +137,22 @@ public class XMLParser {
         res = context.getResources();
         int resId = res.getIdentifier(aString, type, packageName);
         return resId;
+    }
+
+    private Document getDocumentFromRaw() throws ParserConfigurationException, FileNotFoundException {
+        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+        Document doc = null;
+
+        File file = getContext().getFileStreamPath(fileName);
+        try {
+            doc = dBuilder.parse(file);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return doc;
     }
 
     public void saveDocument(Document doc) throws IOException, TransformerException {
