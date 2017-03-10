@@ -38,22 +38,6 @@
                     android:textAlignment="center"
                     android:text="@string/lbCountLines"
                     android:padding="5dp"/>
-
-                <!--<Button-->
-                    <!--android:id="@+id/update"-->
-                    <!--style="@style/BootstrapButtonInfo"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="@string/update" />-->
-
-                <!--<Button-->
-                    <!--android:id="@+id/delete"-->
-                    <!--style="@style/BootstrapButtonDanger"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_weight="1"-->
-                    <!--android:text="@string/delete" />-->
             </LinearLayout>
 
             <ListView

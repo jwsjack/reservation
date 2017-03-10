@@ -6,6 +6,7 @@ import com.tp1.e_cebanu.tp1.authenticator.AuthenticatorActivity;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.LocalXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.ReasonXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.ReservationXmlImpl;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.RoleXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -78,11 +79,10 @@ public class AppService {
         return new ReasonXmlImpl();
     }
 
+    public static RoleXmlImpl getRolesService() {
+        return new RoleXmlImpl();
+    }
 
-    /**
-     * Fournit une nouvelle instance de UserXmlImpl
-     * @return
-     */
     public static UserXmlImpl getUsersService() {
         return new UserXmlImpl();
     }
@@ -90,6 +90,9 @@ public class AppService {
     public static ReservationXmlImpl getReservationService() {
         return new ReservationXmlImpl();
     }
+
+
+
 
     /**
      * Fournit une nouvelle instance de User
@@ -149,5 +152,7 @@ public class AppService {
     public static Role getRoleObject() {
         return new Role();
     }
+
+
 
 }

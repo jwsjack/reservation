@@ -105,6 +105,10 @@ aussi la modifier ou l’annuler.\n
     <string name="sale_reunion">Meeting room</string>
     <string name="classroom">Classroom</string>
 
+    <!--Roles-->
+    <string name="lbRole">Role title</string>
+    <string name="roleData">Info role</string>
+
 
     <!--lists-->
     <string name="lbCountLines">Number items:</string>

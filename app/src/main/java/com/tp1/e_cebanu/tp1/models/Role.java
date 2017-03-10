@@ -1,5 +1,8 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 /**
  * Java# version 1.8.0
  *
@@ -15,6 +18,8 @@ package com.tp1.e_cebanu.tp1.models;
 public class Role {
     private String name;
     private int id;
+
+    public static final String FILENAME = "roles.xml";
 
     // Constructeur
     public Role(int id, String title) {
@@ -35,11 +40,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getTitle() {
+    public String getName() {
         return name;
     }
 
-    public void setTitle(String title) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -68,5 +73,15 @@ public class Role {
         int result = name.hashCode();
         result = 31 * result + id;
         return result;
+    }
+
+    public Role xmlToRoleMapper(Node node) {
+        Role role = new Role();
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            Element eElement = (Element) node;
+            role.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
+            role.setName(String.valueOf(eElement.getElementsByTagName("name").item(0).getTextContent()));
+        }
+        return role;
     }
 }

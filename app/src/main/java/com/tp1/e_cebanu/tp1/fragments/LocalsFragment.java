@@ -62,13 +62,11 @@ public class LocalsFragment extends Fragment {
     //list view
     private View v = null;
     //lists
-    private String[] menuItems;
     private List<Local> locals;
     private int countLines = 0;
     // boutons
     private Button btAdd, btUpdate, btDelete;
     private Context context;
-    private Spinner spinnerType;
 
 
     MyCustomAdapter dataAdapter = null;
