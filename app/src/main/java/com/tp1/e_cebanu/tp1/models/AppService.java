@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 
 import com.tp1.e_cebanu.tp1.authenticator.AuthenticatorActivity;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.LocalXmlImpl;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.ReservationXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -78,6 +79,10 @@ public class AppService {
      */
     public static UserXmlImpl getUsersService() {
         return new UserXmlImpl();
+    }
+
+    public static ReservationXmlImpl getReservationService() {
+        return new ReservationXmlImpl();
     }
 
     /**

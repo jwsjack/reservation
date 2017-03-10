@@ -44,26 +44,27 @@ public class UserXmlImpl implements UserDao {
             doc = xmlParser.getNodeListFromResources();
 
             Node parent = doc.getFirstChild();
+            Node child = user.userToXmlMapper(doc);
 
-            Element item = doc.createElement("item");
-            Element id = doc.createElement("id");
-            Element name = doc.createElement("name");
-            Element login = doc.createElement("login");
-            Element password = doc.createElement("password");
-            Element role = doc.createElement("role");
-            item.setAttribute("ItemName", user.getNom());
-            id.setTextContent(String.valueOf(user.getId()));
-            name.setTextContent(user.getNom());
-            login.setTextContent(user.getLogin());
-            password.setTextContent(user.getPassword());
-            role.setTextContent(String.valueOf(user.getRole()));
-            item.appendChild(id);
-            item.appendChild(name);
-            item.appendChild(login);
-            item.appendChild(password);
-            item.appendChild(role);
+//            Element item = doc.createElement("item");
+//            Element id = doc.createElement("id");
+//            Element name = doc.createElement("name");
+//            Element login = doc.createElement("login");
+//            Element password = doc.createElement("password");
+//            Element role = doc.createElement("role");
+//            item.setAttribute("ItemName", user.getNom());
+//            id.setTextContent(String.valueOf(user.getId()));
+//            name.setTextContent(user.getNom());
+//            login.setTextContent(user.getLogin());
+//            password.setTextContent(user.getPassword());
+//            role.setTextContent(String.valueOf(user.getRole()));
+//            item.appendChild(id);
+//            item.appendChild(name);
+//            item.appendChild(login);
+//            item.appendChild(password);
+//            item.appendChild(role);
 
-            parent.appendChild((Node) item);
+            parent.appendChild((Node) child);
 
             xmlParser.saveDocument(doc);
         } catch (IOException e) {
