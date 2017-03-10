@@ -17,4 +17,7 @@
     <string name="active">Connecté</string>
     <string name="add">Add</string>
     <string name="update">Update</string>
+    <string name="sale_reunion">Salle de réunion</string>
+    <string name="classroom">Salle de cours</string>
+    <string name="localData">Info du locale</string>
 </resources>

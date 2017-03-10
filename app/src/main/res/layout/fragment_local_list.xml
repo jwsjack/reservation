@@ -21,27 +21,27 @@
 
                 <Button
                     android:id="@+id/add"
-                    style="@style/BootstrapButtonSuccess"
+                    style="@style/BootstrapButtonPrimary"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/add" />
 
-                <Button
-                    android:id="@+id/update"
-                    style="@style/BootstrapButtonInfo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/update" />
+                <!--<Button-->
+                    <!--android:id="@+id/update"-->
+                    <!--style="@style/BootstrapButtonInfo"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="@string/update" />-->
 
-                <Button
-                    android:id="@+id/delete"
-                    style="@style/BootstrapButtonDanger"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/delete" />
+                <!--<Button-->
+                    <!--android:id="@+id/delete"-->
+                    <!--style="@style/BootstrapButtonDanger"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:text="@string/delete" />-->
             </LinearLayout>
 
             <ListView
@@ -50,16 +50,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/listButtons"
-                android:visibility="gone" />
+                android:visibility="visible" />
+
+            <ImageView
+                style="@style/BackGroundImageView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="150dp"
+                android:src="@drawable/ic_action_list"
+                tools:ignore="ContentDescription" />
         </RelativeLayout>
-
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:alpha="0.3"
-            android:src="@drawable/ic_action_list" />
     </FrameLayout>
 
     <!-- Footer aligned to bottom -->

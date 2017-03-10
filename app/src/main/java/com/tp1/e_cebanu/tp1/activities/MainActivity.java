@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,12 +32,8 @@ import com.tp1.e_cebanu.tp1.fragments.ReasonsFragment;
 import com.tp1.e_cebanu.tp1.fragments.ReservationsFragment;
 import com.tp1.e_cebanu.tp1.fragments.RolesFragment;
 import com.tp1.e_cebanu.tp1.models.AppService;
-import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.other.CircleTransform;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
-
-import java.io.File;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,20 +45,21 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private FloatingActionButton fab;
 
-    // urls to load navigation header background image
-    // and profile image
+    // Urls pour charger l'en-tête de navigation
+    // et image de profil
     private static final String urlNavHeaderBg = "http://www.infocurse.com/wp-content/uploads/2015/06/Block-Calls-On-Your-Android-Lollipop-1.jpg";
     private static final String urlProfileImg = "https://i.mycdn.me/image?id=550056883481&t=52&plc=WEB&tkn=*3rdychwoo66exsEYQo7KB8wTzYA";
 
-    // index to identify current nav menu item
+    // l'index pour identifier l'élément de menu nav current
     public static int navItemIndex = 0;
 
-    // tags used to attach the fragments
+    // les tags utilisés pour définir les fragments
     private static final String TAG_HOME = "home";
     private static final String TAG_USERS = "users";
     private static final String TAG_RESERVATIONS = "reservations";
     private static final String TAG_REASONS = "reasons";
     private static final String TAG_LOCALS = "locals";
+    private static final String TAG_ROLES = "roles";
     private static final String TAG_PROFILE = "profile";
     private static final String TAG_GUIDE = "guide";
     private static final String TAG_SETTINGS = "settings";
@@ -83,7 +79,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        if (AppService.getLiu().getRole() == 1) {
+            // Liste menu complet
+            setContentView(R.layout.activity_main);
+        } else {
+            // Configurer la liste des menus pour l'utilisateur simple
+            setContentView(R.layout.activity_main_user);
+        }
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -124,21 +126,21 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        //VICTOR: get all users
-        User userTest = new User();
-        userTest.setId(833);
-        userTest.setNom("IVAN");
-        userTest.setLogin("ivan");
-        userTest.setPassword("ivan");
-        userTest.setRole(1);
-
-
-        AppService.getUsersService().create(userTest);
-        List<User> users = AppService.getUsersService().findAll();
-        for (User user:users) {
-            System.out.println("USER: " + user.toString());
-            Log.i("USER: ", user.toString());
-        }
+//        //VICTOR: get all users
+//        User userTest = new User();
+//        userTest.setId(833);
+//        userTest.setNom("IVAN");
+//        userTest.setLogin("ivan");
+//        userTest.setPassword("ivan");
+//        userTest.setRole(1);
+//
+//
+//        AppService.getUsersService().create(userTest);
+//        List<User> users = AppService.getUsersService().findAll();
+//        for (User user:users) {
+//            System.out.println("USER: " + user.toString());
+//            Log.i("USER: ", user.toString());
+//        }
     }
 
     /***
@@ -147,17 +149,17 @@ public class MainActivity extends AppCompatActivity {
      * name, website, notifications action view (dot)
      */
     private void loadNavHeader() {
-        // name, website
+        // nome, website
         txtName.setText("Eugeniu Cebanu");
         txtWebsite.setText("www.jackprof.com");
 
-        // loading header background image
+        // Chargement de l'en-tête image de fond
         Glide.with(this).load(urlNavHeaderBg)
                 .crossFade()
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgNavHeaderBg);
 
-        // Loading profile image
+        // Chargement de l'image du profil
         Glide.with(this).load(urlProfileImg)
                 .crossFade()
                 .thumbnail(0.5f)
@@ -165,8 +167,10 @@ public class MainActivity extends AppCompatActivity {
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgProfile);
 
-        // showing dot next to notifications label
-        navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
+        // Affichant le point à côté de l'étiquette des notifications
+        if (AppService.getLiu().getRole() == 1) {
+            navigationView.getMenu().getItem(3).setActionView(R.layout.menu_dot);
+        }
 
         //Personnaliser l'élément de menu sélectionné
 //        for(int i = 0; i < navigationView.getMenu().size(); i++){
@@ -253,12 +257,16 @@ public class MainActivity extends AppCompatActivity {
                 // reasons
                 ReasonsFragment reasonsFragment = new ReasonsFragment();
                 return reasonsFragment;
-
             case 4:
                 // locals
                 LocalsFragment localsFragment = new LocalsFragment();
                 return localsFragment;
             case 5:
+                // roles
+                RolesFragment rolesFragment = new RolesFragment();
+                return rolesFragment;
+
+            case 6:
                 // settings fragment
                 SettingsFragment settingsFragment = new SettingsFragment();
                 return settingsFragment;
@@ -308,24 +316,29 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 4;
                         CURRENT_TAG = TAG_LOCALS;
                         break;
-                    case R.id.nav_settings:
+                    case R.id.nav_roles:
                         navItemIndex = 5;
+                        CURRENT_TAG = TAG_ROLES;
+                        break;
+                    case R.id.nav_settings:
+                        navItemIndex = 6;
                         CURRENT_TAG = TAG_SETTINGS;
                         break;
                     //des activités
 
                     case R.id.nav_profile:
-                        // launch new intent instead of loading fragment
+                        // Lancer une Inetent au lieu de charger un fragment
                         startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_guide:
-                        // launch new intent instead of loading fragment
+                        // Lancer une Inetent au lieu de charger un fragment
                         startActivity(new Intent(MainActivity.this, GuideActivity.class));
                         drawer.closeDrawers();
                         return true;
                     case R.id.nav_logout:
-                        // launch new intent instead of loading fragment
+                        // Lancer une Inetent au lieu de charger un fragment
+
                         finishAffinity();
                         return true;
                     default:

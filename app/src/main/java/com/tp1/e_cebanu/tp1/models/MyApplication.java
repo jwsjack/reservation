@@ -21,11 +21,13 @@ import android.content.res.Resources;
 public class MyApplication extends Application {
     private static Context context;
     private static Resources resources;
+    private static Object systemService;
 
     public void onCreate() {
         super.onCreate();
         MyApplication.context = getApplicationContext();
         MyApplication.resources = getApplicationContext().getResources();
+        MyApplication.systemService = getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     /**
@@ -42,6 +44,10 @@ public class MyApplication extends Application {
      */
     public static Resources getAppResources() {
         return MyApplication.resources;
+    }
+
+    public static Object getSystemService() {
+        return MyApplication.systemService;
     }
 
 

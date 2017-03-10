@@ -7,6 +7,7 @@
     <string name="active">Active</string>
 
 
+
     <!-- Navigation menu -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -19,6 +20,7 @@
     <string name="nav_reservations">Reservations</string>
     <string name="nav_reasons">Reasons</string>
     <string name="nav_locals">Locals</string>
+    <string name="nav_roles">Roles</string>
     <string name="nav_profile">Profile</string>
     <string name="nav_settings">Settings</string>
     <string name="nav_guide">Guide</string>
@@ -32,6 +34,7 @@
         <item>Reservations</item>
         <item>Reasons</item>
         <item>Locals</item>
+        <item>Roles</item>
         <item>Settings</item>
     </string-array>
 
@@ -43,6 +46,7 @@
     <string name="activity_title_reservations">Manage reservations</string>
     <string name="activity_title_reasons">Manage reasons</string>
     <string name="activity_title_locals">Manage locals</string>
+    <string name="activity_title_roles">Manage roles</string>
     <string name="activity_title_profile">Profile settings</string>
     <string name="activity_title_quide">Guide</string>
     <string name="activity_title_settings">Settings</string>
@@ -58,6 +62,49 @@
     <string name="messageValidationAuthentification">You should set login and password.</string>
     <string name="messageWrongAuthentification">Your login/password combo was incorrect, please try again.</string>
 
+    <!--GUIDE-->
+    <string name="guide_instruction">L’utilisateur se connecte d’abord au système de réservation en fournissant son nom d’utilisateur et son mot de
+passe. Il a accès au système dès que son identité a été validée. En fonction de son statut, un utilisateur ordinaire
+peut effectuer des réservations ou gérer ses propres réservations. Un super utilisateur va pouvoir gérer les
+différentes composantes de l’application.\n\n
+        On peut réserver deux types de locaux, une salle de réunion ou une salle de cours  :
+salles de réunion salles de cours\n
+2165 2166 2211 2195 3213 2333 3181 3189 3248 3311
+\n\n
+La réservation peut-être :
+- unique, on réserve par exemple un local pour le lundi 13 février 2017 de 10h à 11h  ;\n
+- répétitive, on réserve par exemple un local pour tous les lundis de 10h à 11h du 9 janvier 2017 au 17 avril 2017.\n\n
+
+La consultation peut-être effectuée comme suit (voir aussi les différentes captures)  :\n
+- en choisissant un local, nous allons obtenir toutes les réservations effectuées pour le local en question sur une
+période d’une semaine ou d’un mois.\n
+- en choisissant un affichage du calendrier sur une semaine, nous allons obtenir toutes les réservations effectuées<br/>
+pour tous les locaux sur une semaine.\n
+- en choisissant un affichage du calendrier sur un mois, nous allons obtenir toutes les réservations effectuées
+pour tous les locaux pour un mois.\n
+- en choisissant une réservation quelconque, nous allons obtenir plus d’informations à son sujet. Nous pouvons
+aussi la modifier ou l’annuler.\n
+    </string>
+
+    <!-- les bouttons -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+
+    <!--Locals-->
+    <string name="lbLocal">Local numbre</string>
+    <string name="lbType">Type</string>
+    <string name="lbCapacity">Capacity</string>
+    <string name="action_save_local">Save local</string>
+    <string name="localData">Info local</string>
+    <string name="capacity">Capacity</string>
+    <string name="sale_reunion">Meeting room</string>
+    <string name="classroom">Classroom</string>
+
 
     <!-- remove when app is done -->
     <string name="spinner_1_color">Color:</string>
@@ -65,10 +112,6 @@
     <string name="spinner_1_planet"><b>Planet </b>Planet <i>Planet </i><u>Planet: </u></string>
     <string name="spinner_1_planet_prompt">Choose a planet</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="add">Add</string>
-    <string name="update">Update</string>
-    <string name="delete">Delete</string>
+
 
 </resources>

@@ -1,5 +1,7 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import com.tp1.e_cebanu.tp1.R;
+
 /**
  * Java# version 1.8.0
  *
@@ -59,7 +61,7 @@ public class Local {
 
     public String getTypeNom() {
         if (this.type == 1) {
-            return  "Salle de reunion";
+            return  MyApplication.getAppResources().getString(R.string.sale_reunion);
         }
         return "Salle de cours";
     }

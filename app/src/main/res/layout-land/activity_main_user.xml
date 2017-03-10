@@ -24,6 +24,6 @@
         app:itemIconTint="@drawable/list_item_selector"
         app:itemTextColor="@drawable/list_item_selector"
         app:itemBackground="@drawable/list_item_selector"
-        app:menu="@menu/activity_main_drawer_admin" />
+        app:menu="@menu/activity_main_drawer_user" />
 
 </android.support.v4.widget.DrawerLayout>
