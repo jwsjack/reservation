@@ -54,7 +54,7 @@ public class LocalXmlImpl implements LocalDao {
     }
 
     @Override
-    public List<Local> findAll() throws IOException, ParserConfigurationException {
+    public List<Local> findAll() {
         List<Local> locals = new ArrayList<>();
         try {
             Document doc = xmlParser.getNodeListFromResources();
@@ -72,5 +72,17 @@ public class LocalXmlImpl implements LocalDao {
             e.printStackTrace();
         }
         return locals;
+    }
+
+    @Override
+    public Local findById(int localId) {
+        Local local = new Local();
+        List<Local> locals = findAll();
+        for (Local item: locals) {
+            if (item.getId() == localId) {
+                local = item;
+            }
+        }
+        return local;
     }
 }

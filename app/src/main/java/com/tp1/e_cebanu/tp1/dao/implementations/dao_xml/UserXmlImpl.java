@@ -34,36 +34,14 @@ public class UserXmlImpl implements UserDao {
     public UserXmlImpl() {
         xmlParser = new XMLParser();
         xmlParser.setFileName(User.FILENAME);
-//        xmlParser.setContext();
-
     }
     @Override
     public void create(User user) {
         Document doc = null;
         try {
             doc = xmlParser.getNodeListFromResources();
-
             Node parent = doc.getFirstChild();
             Node child = user.userToXmlMapper(doc);
-
-//            Element item = doc.createElement("item");
-//            Element id = doc.createElement("id");
-//            Element name = doc.createElement("name");
-//            Element login = doc.createElement("login");
-//            Element password = doc.createElement("password");
-//            Element role = doc.createElement("role");
-//            item.setAttribute("ItemName", user.getNom());
-//            id.setTextContent(String.valueOf(user.getId()));
-//            name.setTextContent(user.getNom());
-//            login.setTextContent(user.getLogin());
-//            password.setTextContent(user.getPassword());
-//            role.setTextContent(String.valueOf(user.getRole()));
-//            item.appendChild(id);
-//            item.appendChild(name);
-//            item.appendChild(login);
-//            item.appendChild(password);
-//            item.appendChild(role);
-
             parent.appendChild((Node) child);
 
             xmlParser.saveDocument(doc);
@@ -83,7 +61,7 @@ public class UserXmlImpl implements UserDao {
 
     @Override
     public void delete(User user) {
-
+        findById(user.getId());
     }
 
     @Override
@@ -135,5 +113,17 @@ public class UserXmlImpl implements UserDao {
             e.printStackTrace();
         }
         return users;
+    }
+
+    @Override
+    public User findById(int userId) {
+        User user = new User();
+        List<User> users = findAll();
+        for (User item: users) {
+            if (item.getId() == userId) {
+                user = item;
+            }
+        }
+        return user;
     }
 }

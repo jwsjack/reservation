@@ -28,4 +28,6 @@ public interface UserDao {
 
 
     public List<User> findAll() throws IOException, ParserConfigurationException;
+
+    public User findById(int userId);
 }

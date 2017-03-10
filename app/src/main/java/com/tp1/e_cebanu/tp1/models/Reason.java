@@ -1,4 +1,8 @@
 package com.tp1.e_cebanu.tp1.models;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+
 /**
  * Java# version 1.8.0
  *
@@ -14,6 +18,8 @@ package com.tp1.e_cebanu.tp1.models;
 public class Reason {
     protected String name;
     protected int id;
+
+    public static final String FILENAME = "reasons.xml";
 
     // Constructeur
     public Reason(int id, String name) {
@@ -67,5 +73,15 @@ public class Reason {
         int result = name != null ? name.hashCode() : 0;
         result = 31 * result + id;
         return result;
+    }
+
+    public Reason xmlToLocalMapper(Node node) {
+        Reason reason = new Reason();
+        if (node.getNodeType() == Node.ELEMENT_NODE) {
+            Element eElement = (Element) node;
+            reason.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
+            reason.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
+        }
+        return reason;
     }
 }

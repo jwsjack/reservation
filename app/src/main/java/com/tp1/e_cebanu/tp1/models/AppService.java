@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 
 import com.tp1.e_cebanu.tp1.authenticator.AuthenticatorActivity;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.LocalXmlImpl;
+import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.ReasonXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.ReservationXmlImpl;
 import com.tp1.e_cebanu.tp1.dao.implementations.dao_xml.UserXmlImpl;
 
@@ -70,6 +71,11 @@ public class AppService {
      */
     public static LocalXmlImpl getLocalsService() {
         return new LocalXmlImpl();
+    }
+
+
+    public static ReasonXmlImpl getReasonsService() {
+        return new ReasonXmlImpl();
     }
 
 

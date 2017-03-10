@@ -1,7 +1,16 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import android.app.Application;
+
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.Date;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Java# version 1.8.0
@@ -16,14 +25,15 @@ import org.w3c.dom.Node;
  */
 
 public class Reservation {
-    protected int id, local, user, raison;
-    protected String autreRraison, cours;
+    private int id;
+    private User user;
+    private Local local;
+    private Reason reason;
+    private String additionalReason, course;
+    private Date date;
     public static final String FILENAME = "reservations.xml";
 
-
-    public Reservation() {
-        //constructeur vide
-    }
+    public Reservation() {}
 
     public int getId() {
         return id;
@@ -33,63 +43,110 @@ public class Reservation {
         this.id = id;
     }
 
-    public int getLocal() {
-        return local;
-    }
-
-    public void setLocal(int local) {
-        this.local = local;
-    }
-
-    public int getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(int user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
-    public int getRaison() {
-        return raison;
+    public Local getLocal() {
+        return local;
     }
 
-    public void setRaison(int raison) {
-        this.raison = raison;
+    public void setLocal(Local local) {
+        this.local = local;
     }
 
-    public String getAutreRraison() {
-        return autreRraison;
+    public Reason getReason() {
+        return reason;
     }
 
-    public void setAutreRraison(String autreRraison) {
-        this.autreRraison = autreRraison;
+    public void setReason(Reason reason) {
+        this.reason = reason;
     }
 
-    public String getCours() {
-        return cours;
+    public String getAdditionalReason() {
+        return additionalReason;
     }
 
-    public void setCours(String cours) {
-        this.cours = cours;
+    public void setAdditionalReason(String additionalReason) {
+        this.additionalReason = additionalReason;
     }
 
-    public static String getFILENAME() {
-        return FILENAME;
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
     }
 
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public Reservation xmlToReservationMapper(Node node) {
         Reservation reservation = new Reservation();
         if (node.getNodeType() == Node.ELEMENT_NODE) {
             Element eElement = (Element) node;
+            int userId = Integer.parseInt(eElement.getElementsByTagName("user").item(0).getTextContent());
+            int localId = Integer.parseInt(eElement.getElementsByTagName("local").item(0).getTextContent());
+            int reasonId = Integer.parseInt(eElement.getElementsByTagName("local").item(0).getTextContent());
+
+            User user = AppService.getUsersService().findById(userId);
+            Local local = AppService.getLocalsService().findById(localId);
+            Reason reason = AppService.getReasonsService().findById(reasonId);
+
+            DateFormat df = DateFormat.getDateInstance();
+            Date date = null;
+            try {
+                date = df.parse(eElement.getElementsByTagName("date").item(0).getTextContent());
+            } catch (ParseException e) {
+                date = new Date();
+            }
             reservation.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
-            reservation.setLocal(Integer.parseInt(eElement.getElementsByTagName("local").item(0).getTextContent()));
-            reservation.setUser(Integer.parseInt(eElement.getElementsByTagName("user").item(0).getTextContent()));
-            reservation.setRaison(Integer.parseInt(eElement.getElementsByTagName("raison").item(0).getTextContent()));
-            reservation.setAutreRraison(eElement.getElementsByTagName("autreRaison").item(0).getTextContent());
-            reservation.setCours(eElement.getElementsByTagName("cours").item(0).getTextContent());
+            reservation.setLocal(local);
+            reservation.setUser(user);
+            reservation.setReason(reason);
+            reservation.setAdditionalReason(eElement.getElementsByTagName("autreRaison").item(0).getTextContent());
+            reservation.setCourse(eElement.getElementsByTagName("cours").item(0).getTextContent());
+            reservation.setDate(date);
         }
         return reservation;
+    }
+
+    public Node reservationToXmlMapper(Document doc) throws ParserConfigurationException {
+        Element item = doc.createElement("item");
+        Element id = doc.createElement("id");
+        Element user = doc.createElement("user");
+        Element local = doc.createElement("local");
+        Element date = doc.createElement("date");
+        Element reason = doc.createElement("reason");
+        Element course = doc.createElement("course");
+        Element additionalReason = doc.createElement("additional");
+
+        id.setTextContent(String.valueOf(getId()));
+        user.setTextContent(String.valueOf(getUser().getId()));
+        local.setTextContent(String.valueOf(getLocal().getId()));
+        reason.setTextContent(String.valueOf(getReason().getId()));
+        course.setTextContent(getCourse());
+        additionalReason.setTextContent(getAdditionalReason());
+        date.setTextContent(getDate().toString());
+
+        item.appendChild(id);
+        item.appendChild(user);
+        item.appendChild(local);
+        item.appendChild(reason);
+        item.appendChild(course);
+        item.appendChild(additionalReason);
+        item.appendChild(date);
+        return item;
     }
 }

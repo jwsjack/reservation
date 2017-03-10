@@ -18,4 +18,6 @@ public interface LocalDao {
     public Local find(Local local);
     public Local findByNombre(int nombre);
     public List<Local> findAll()  throws IOException, ParserConfigurationException;
+
+    public Local findById(int localId);
 }
