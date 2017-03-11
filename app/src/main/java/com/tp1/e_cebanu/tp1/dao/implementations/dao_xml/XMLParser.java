@@ -30,6 +30,8 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
+
 
 /**
  * Java# version 1.8.0
@@ -90,6 +92,7 @@ public class XMLParser {
 
     /**
      * Retrieve le content d'un fichier et lui transforme dans un DOCUMENT element pour faciliter le lire
+     * Si le fichier est introuvable, on copier lui de la répertoire RAW
      * @return
      * @throws IOException
      * @throws ParserConfigurationException
@@ -130,12 +133,15 @@ public class XMLParser {
      * @return
      */
     private int getStringResourceByName(String aString, String type) {
+        //retirer la termination xml
+        String[] filenameParts = aString.split("\\.");
+        String fileNameWithoutExtention = filenameParts[0];
         if (type.isEmpty()) {
             type = "xml";
         }
         String packageName = context.getPackageName();
         res = context.getResources();
-        int resId = res.getIdentifier(aString, type, packageName);
+        int resId = res.getIdentifier(fileNameWithoutExtention, type, packageName);
         return resId;
     }
 
@@ -144,13 +150,20 @@ public class XMLParser {
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = null;
 
-        File file = getContext().getFileStreamPath(fileName);
+        //File file = getContext().getFileStreamPath(fileName);
+        // trouver le fichier par son nom dans le repertoire RAW
+        Integer xmlID = this.getStringResourceByName(fileName, UIUtils.FILE_STORAGE_FOLDER);
+        InputStream fXmlFile = res.openRawResource(xmlID);
+
         try {
-            doc = dBuilder.parse(file);
+            doc = dBuilder.parse(fXmlFile);
+            Log.i(UIUtils.TAG,"Parsing file  : " +fileName+ " successfully executed!");
         } catch (SAXException e) {
             e.printStackTrace();
+            Log.i(UIUtils.TAG,"Parsing file  : " +fileName+ " hasn't been executed!");
         } catch (IOException e) {
             e.printStackTrace();
+            Log.i(UIUtils.TAG,"Parsing file  : " +fileName+ " hasn't been executed!");
         }
         return doc;
     }

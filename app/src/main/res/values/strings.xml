@@ -1,18 +1,20 @@
 <resources>
+
+    <!--Basic-->
     <string name="app_name">Booking system</string>
     <string name="developper">Developed by Eugeniu Cebanu</string>
     <string name="refresh_action">Refresh</string>
     <string name="logout_action">Logout</string>
-    <string name="messageWelcome">Welcome to the new reservation system!</string>
+    <string name="messageWelcome">Welcome to the new reservation system for Android!</string>
     <string name="active">Active</string>
 
-
+    <!--MENU-->
 
     <!-- Navigation menu -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="openDrawer">open_drawer</string>
-    <string name="closeDrawer">close_drawer</string>
+    <string name="openDrawer">Open drawer</string>
+    <string name="closeDrawer">Close drawer</string>
     <string name="local_prompt">Choose a location</string>
 
     <!-- Navigation Drawer menu labels -->
@@ -52,6 +54,7 @@
     <string name="activity_title_quide">Guide</string>
     <string name="activity_title_settings">Settings</string>
 
+    <!--ACTIVITIES-->
 
     <!-- AuthenticatorActivity -->
     <string name="label_email_address">Email Address</string>
@@ -63,7 +66,7 @@
     <string name="messageValidationAuthentification">You should set login and password.</string>
     <string name="messageWrongAuthentification">Your login/password combo was incorrect, please try again.</string>
 
-    <!--GUIDE-->
+    <!--GuideActivity-->
     <string name="guide_instruction">L’utilisateur se connecte d’abord au système de réservation en fournissant son nom d’utilisateur et son mot de
 passe. Il a accès au système dès que son identité a été validée. En fonction de son statut, un utilisateur ordinaire
 peut effectuer des réservations ou gérer ses propres réservations. Un super utilisateur va pouvoir gérer les
@@ -87,19 +90,20 @@ pour tous les locaux pour un mois.\n
 aussi la modifier ou l’annuler.\n
     </string>
 
-    <!-- les bouttons -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="add">Add</string>
-    <string name="update">Update</string>
-    <string name="save">Save</string>
-    <string name="cancel">Cancel</string>
-    <string name="delete">Delete</string>
+    <!--ProfileActivity-->
 
+    <!--FRAGMENTS-->
+
+    <!--Users-->
+
+
+    <!--Reservations-->
 
     <!--Locals-->
-    <string name="lbLocal">Local numbre</string>
+    <string name="lbLocal">Local number</string>
     <string name="lbType">Type</string>
     <string name="lbCapacity">Capacity</string>
+    <string name="lbDescription">Description</string>
     <string name="action_save_local">Save local</string>
     <string name="localData">Info local</string>
     <string name="capacity">Capacity</string>
@@ -109,6 +113,11 @@ aussi la modifier ou l’annuler.\n
     <!--Roles-->
     <string name="lbRole">Role title</string>
     <string name="roleData">Info role</string>
+
+    <!--Reasons-->
+    <string name="lbReason">Reason title</string>
+    <string name="reasonData">Info reason</string>
+
 
 
     <!--lists-->
@@ -125,19 +134,16 @@ aussi la modifier ou l’annuler.\n
         <item>@string/classroom</item>
     </string-array>
 
+    <!--BOUTONS-->
+
+    <!-- les bouttons -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
 
     <!--Messages-->
     <string name="filling_message">The value is empty of the field : </string>
-
-
-    <!-- remove when app is done -->
-    <string name="spinner_1_color">Color:</string>
-    <string name="spinner_1_color_prompt">Choose a color</string>
-    <string name="spinner_1_planet"><b>Planet </b>Planet <i>Planet </i><u>Planet: </u></string>
-    <string name="spinner_1_planet_prompt">Choose a planet</string>
-
-
-
-
-
 </resources>

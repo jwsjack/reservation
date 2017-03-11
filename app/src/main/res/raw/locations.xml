@@ -5,59 +5,69 @@
         <nombre>2165</nombre>
         <type>1</type>
         <capacite>30</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>2</id>
         <nombre>2166</nombre>
         <type>1</type>
         <capacite>30</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>3</id>
         <nombre>2211</nombre>
         <type>1</type>
         <capacite>30</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>4</id>
         <nombre>2195</nombre>
         <type>1</type>
         <capacite>30</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>5</id>
         <nombre>3213</nombre>
         <type>1</type>
         <capacite>30</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>6</id>
         <nombre>2333</nombre>
         <type>2</type>
         <capacite>25</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>7</id>
         <nombre>3181</nombre>
         <type>2</type>
         <capacite>25</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>8</id>
         <nombre>3189</nombre>
         <type>2</type>
         <capacite>25</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>9</id>
         <nombre>3248</nombre>
         <type>2</type>
         <capacite>25</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
     <item>
         <id>10</id>
         <nombre>3311</nombre>
         <type>2</type>
         <capacite>25</capacite>
+        <description>Salle de réunion et de séminaires, projecteur multimédia 1024x768</description>
     </item>
 </locations>

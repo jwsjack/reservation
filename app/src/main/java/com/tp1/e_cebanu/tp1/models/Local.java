@@ -21,13 +21,15 @@ public class Local {
 
     // Variables
     private int id, nombre, type, capacite;
+    private String description;
 
     public static final String FILENAME = "locations.xml";
     // Constructeur
-    public Local(int nombre, int type, int capacite) {
+    public Local(int nombre, int type, int capacite, String description) {
         this.nombre = nombre;
         this.type = type;
         this.capacite = capacite;
+        this.description = description;
     }
 
     public Local() {
@@ -69,6 +71,14 @@ public class Local {
         this.capacite = capacite;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     // fonctions personnalisées
 
     public String getTypeNom() {
@@ -95,6 +105,7 @@ public class Local {
             local.setNombre(Integer.parseInt(eElement.getElementsByTagName("nombre").item(0).getTextContent()));
             local.setType(Integer.parseInt(eElement.getElementsByTagName("type").item(0).getTextContent()));
             local.setCapacite(Integer.parseInt(eElement.getElementsByTagName("capacite").item(0).getTextContent()));
+            local.setDescription(String.valueOf(eElement.getElementsByTagName("description").item(0).getTextContent()));
         }
         return local;
     }

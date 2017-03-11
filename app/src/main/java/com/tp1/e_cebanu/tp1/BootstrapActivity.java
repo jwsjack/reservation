@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Toast;
 
-import com.tp1.e_cebanu.tp1.activities.BasicActivity;
 import com.tp1.e_cebanu.tp1.activities.MainActivity;
 import com.tp1.e_cebanu.tp1.authenticator.AuthenticatorActivity;
 import static com.tp1.e_cebanu.tp1.util.UIUtils.verifierAuthentification;
@@ -34,11 +33,8 @@ public class BootstrapActivity extends AppCompatActivity {
             Intent i = new Intent(this, AuthenticatorActivity.class);
             i.putExtra("Value1", "This value one for ActivityTwo ");
             startActivity(i);
-
-//            Intent i = new Intent(this, BasicActivity.class);
-//            i.putExtra("Value1", "This value one for ActivityTwo ");
-//            startActivity(i);
         } else {
+            // on lance la page d'accueil
             Intent i = new Intent(this, MainActivity.class);
             i.putExtra("Value1", "This value one for MainActivity ");
             startActivity(i);

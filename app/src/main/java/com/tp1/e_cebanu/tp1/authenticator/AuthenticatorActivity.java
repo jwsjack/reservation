@@ -31,10 +31,17 @@ import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static com.tp1.e_cebanu.tp1.util.UIUtils.isTablet;
 
-
-/**
- * Created by jack on 26.02.2017.
- */
+/*
+* Java# version 1.8
+*
+* @name       TP_1
+* @package    TP #1 / IFT 1155 A - Programmation mobile à plateforme libre
+* @author     EUGENIU CEBANU / matricule: 20025851
+* @author     jwsjack3@gmail.com
+* @version    1
+* @date       2017-02-20
+* @description Contrôleur d'autentification - authentification par login et mot de passe
+*/
 
 public class AuthenticatorActivity extends AppCompatActivity {
 
@@ -49,30 +56,16 @@ public class AuthenticatorActivity extends AppCompatActivity {
     public static final String MON_CLE_LOGIN = "loginAutentification";
     public static final String CLE_ACCES = "12345";
 
-    private AppService appService;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //l'authentification
+        // pour different types de emulateur on charge les views different
         if (isTablet(this)) {
             setContentView(R.layout.authenticator_activity_tablet);
         } else {
             setContentView(R.layout.authenticator_activity);
         }
-
-
-
-        /*Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            return;
-        }
-        String value1 = extras.getString("Value1");
-
-
-        Toast.makeText(this, value1,
-                Toast.LENGTH_LONG).show();*/
-
+        //l'authentification
         loginText = (AutoCompleteTextView) findViewById(R.id.et_login);
         passwordText = (EditText) findViewById(R.id.et_password);
         ckRequestNewAccount = (CheckBox) findViewById(R.id.requestNewAccount);
@@ -154,14 +147,14 @@ public class AuthenticatorActivity extends AppCompatActivity {
         password = passwordText.getText().toString();
 
         if (login != null && password != null ) {
-            User liu = appService.authenticate(login,password);
+            User liu = AppService.authenticate(login,password);
             if (liu.getId() != 0) {
 
                 // sauvegarde les valeurs dans  SharedPreferences
                 SharedPreferences.Editor editor = this.getSharedPreferences(MON_CLE_LOGIN, MODE_PRIVATE).edit();
                 editor.putString("login", login.trim());
                 editor.putString("pass", password.trim());
-                editor.putString("liu",liu.toJSON());
+                editor.putString("liu",liu.toJSON()); // l'objet utilisateur authentifié
                 editor.commit();
 
                 //passe à la page d'accueil
@@ -169,10 +162,10 @@ public class AuthenticatorActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
 
                 // ici on transmettre les valeurs supplémentaires pour l'activite Main
+                // placer ici les valeurs si on veut passér les extras dans l'activité demande
                 Intent i = new Intent(this, MainActivity.class);
-                i.putExtra("Value1", "This value 1 for MainActivity");
-                i.putExtra("Value2", "This value 1 for MainActivity");
-                i.putExtra("Value3", "This value 1 for MainActivity");
+//                i.putExtra("Value1", "This value 1 for MainActivity");
+//                i.putExtra("Value2", "This value 1 for MainActivity");
                 startActivity(i);
 
             } else {

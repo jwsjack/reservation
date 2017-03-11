@@ -17,9 +17,16 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
 /**
- * Created by User on 08.03.2017.
+ * Java# version 1.8.0
+ *
+ * @class UserXmlImpl
+ * @package    TP #1 / IFT 1155 A - Programmation mobile à plateforme libre
+ * @author     EUGENIU CEBANU / matricule: 20025851
+ * @author     jwsjack3@gmail.com
+ * @version    1
+ * @date       2017-02-20
+ * @description Mise en œuvre de lecture / écriture XML pour RESERVATIONS
  */
-
 public class ReservationXmlImpl implements ReservationDao {
 
     public XMLParser xmlParser = null;

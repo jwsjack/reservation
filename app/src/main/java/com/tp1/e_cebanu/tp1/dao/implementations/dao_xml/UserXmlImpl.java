@@ -1,10 +1,8 @@
 package com.tp1.e_cebanu.tp1.dao.implementations.dao_xml;
 import com.tp1.e_cebanu.tp1.dao.interfaces.UserDao;
-import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.User;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -12,8 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 
@@ -26,7 +22,7 @@ import javax.xml.transform.TransformerException;
  * @author     jwsjack3@gmail.com
  * @version    1
  * @date       2017-02-20
- * @description Mise en œuvre de lecture / écriture XML
+ * @description Mise en œuvre de lecture / écriture XML pour USERS
  */
 public class UserXmlImpl implements UserDao {
 

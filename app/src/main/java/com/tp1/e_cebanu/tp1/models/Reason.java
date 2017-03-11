@@ -75,7 +75,7 @@ public class Reason {
         return result;
     }
 
-    public Reason xmlToLocalMapper(Node node) {
+    public Reason xmlToReasonMapper(Node node) {
         Reason reason = new Reason();
         if (node.getNodeType() == Node.ELEMENT_NODE) {
             Element eElement = (Element) node;

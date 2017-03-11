@@ -2,6 +2,7 @@ package com.tp1.e_cebanu.tp1.fragments;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static android.R.attr.country;
+import static android.R.attr.description;
 import static android.R.id.edit;
 import static com.tp1.e_cebanu.tp1.R.id.list;
 import static com.tp1.e_cebanu.tp1.R.id.txtCapacite;
@@ -67,9 +69,11 @@ public class LocalsFragment extends Fragment {
     // boutons
     private Button btAdd, btUpdate, btDelete;
     private Context context;
+    private LocalsFragment currentFragment;
 
 
     MyCustomAdapter dataAdapter = null;
+
 
 
     private OnFragmentInteractionListener mListener;
@@ -150,6 +154,8 @@ public class LocalsFragment extends Fragment {
                 txtId.setText(String.valueOf(local.getId()));
                 final EditText txtNombre = (EditText) dialogView.findViewById(R.id.etNombre);
                 txtNombre.setText(String.valueOf(local.getNombre()));
+                final EditText txtDescription = (EditText) dialogView.findViewById(R.id.etDescription);
+                txtDescription.setText(String.valueOf(local.getDescription()));
 
 //                final EditText txtType = (EditText) dialogView.findViewById(R.id.etType);
 //                txtType.setText(String.valueOf(local.getTypeNom()));
@@ -182,7 +188,7 @@ public class LocalsFragment extends Fragment {
                 dialogBuilder.create();
 
                 //buttons
-                dialogBuilder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                dialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
@@ -199,6 +205,7 @@ public class LocalsFragment extends Fragment {
                         String nombre = txtNombre.getText().toString();
                         int type = staticSpinner.getSelectedItemPosition() + 1;
                         String capacite = txtCapacite.getText().toString();
+                        String description = txtDescription.getText().toString();
                         //validation
                         Boolean valide = false;
                         valide = UIUtils.checkFieldValueString(nombre, "Number");
@@ -209,7 +216,10 @@ public class LocalsFragment extends Fragment {
                             valide = UIUtils.checkFieldValueString(capacite, "capacity");
                         }
                         if (valide) {
-                            update(id, nombre, type, capacite);
+                            valide = UIUtils.checkFieldValueString(description, "description");
+                        }
+                        if (valide) {
+                            update(id, nombre, type, capacite,description);
                             ad.dismiss();
                         }
                     }
@@ -274,6 +284,19 @@ public class LocalsFragment extends Fragment {
         mListener = null;
     }
 
+    public void refreshPage() {
+//        // Reload current fragment
+//        Fragment frg = null;
+//        frg = getFragmentManager().findFragmentByTag("Your_Fragment_TAG");
+//        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.detach(frg);
+//        ft.attach(frg);
+//        ft.commit();
+    }
+
+
+
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -322,22 +345,25 @@ public class LocalsFragment extends Fragment {
 
         final EditText txtCapacite = (EditText) dialogView.findViewById(R.id.etCapacity);
         txtCapacite.setText("");
+        final EditText txtDescription = (EditText) dialogView.findViewById(R.id.etDescription);
+        txtDescription.setText("");
         btUpdate = (Button) dialogView.findViewById(R.id.update);
+        btUpdate.setText(R.string.add);
         btDelete = (Button) dialogView.findViewById(R.id.delete);
         btDelete.setVisibility(View.GONE);
 
-        dialogBuilder.setView(dialogView);
-        dialogBuilder.create();
-        // pour fermer le dialog
-        final AlertDialog ad = dialogBuilder.show();
-
         //buttons
-        dialogBuilder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
+        dialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int id) {
                 dialog.cancel();
             }
         });
+
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.create();
+        // pour fermer le dialog
+        final AlertDialog ad = dialogBuilder.show();
 
         btUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -346,6 +372,7 @@ public class LocalsFragment extends Fragment {
                 String nombre = txtNombre.getText().toString();
                 int type = staticSpinner.getSelectedItemPosition() + 1;
                 String capacite = txtCapacite.getText().toString();
+                String description = txtDescription.getText().toString();
                 //validation
                 Boolean valide = false;
                 valide = UIUtils.checkFieldValueString(nombre, "Number");
@@ -356,14 +383,14 @@ public class LocalsFragment extends Fragment {
                     valide = UIUtils.checkFieldValueString(capacite, "capacity");
                 }
                 if (valide) {
-                    update(id, nombre, type, capacite);
+                    update(id, nombre, type, capacite, description);
                     ad.dismiss();
                 }
             }
         });
     }
 
-    public void update(String id, String nombre, int type, String capacite) {
+    public void update(String id, String nombre, int type, String capacite, String description) {
         //validation
         Boolean valide = false;
         valide = UIUtils.checkFieldValueString(nombre, "Number");
@@ -373,7 +400,9 @@ public class LocalsFragment extends Fragment {
         if (valide) {
             valide = UIUtils.checkFieldValueString(capacite, "capacity");
         }
-
+        if (valide) {
+            valide = UIUtils.checkFieldValueString(description, "description");
+        }
         if (valide) {
             if (id.equals(null) || id.equals("")) {
                 //création nouveau objet
@@ -383,6 +412,7 @@ public class LocalsFragment extends Fragment {
                 local.setNombre(Integer.parseInt(nombre));
                 local.setType(type);
                 local.setCapacite(Integer.parseInt(capacite));
+                local.setDescription(description);
 
             } else {
                 // Victor: TODO implement here update local by "id"
@@ -391,7 +421,7 @@ public class LocalsFragment extends Fragment {
                 local.setNombre(Integer.parseInt(nombre));
                 local.setType(type);
                 local.setCapacite(Integer.parseInt(capacite));
-
+                local.setDescription(description);
 
                 Toast.makeText(context, String.valueOf(type), Toast.LENGTH_SHORT).show();
             }

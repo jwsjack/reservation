@@ -40,9 +40,7 @@ public class AppService {
      * @return
      */
     public static User authenticate(String login, String password) {
-        //retrieve l'utilisateur dans BD par son login et mot de passe
-        // Victor: implement here search function for user login password in XML - UserXmlImpl
-
+        //retrieve l'utilisateur dans BD (xml fichiers dans local storage) par son login et mot de passe
         if (!login.isEmpty() && !password.isEmpty()) {
             return AppService.getUsersService().findByLoginPassword(login, password);
         } else {

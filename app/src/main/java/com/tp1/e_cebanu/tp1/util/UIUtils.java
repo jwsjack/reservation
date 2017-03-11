@@ -33,6 +33,7 @@ public class UIUtils {
     public static final String MON_CLE_LOGIN = "loginAutentification";
     public static final String CLE_ACCES = "12345";
     public static final String FILE_STORAGE_FOLDER = "raw";
+    public static final String TAG = "IFT1155:RESERVATION:";
 
     /**
      * Aide à déterminer si l'application s'exécute dans un contexte Tablet.
@@ -99,6 +100,7 @@ public class UIUtils {
 
     /**
      * Validation du valeur du champ String
+     * utiliser pour les forms avec d'inputs
      * @param val
      * @param nameField
      * @return
@@ -113,6 +115,7 @@ public class UIUtils {
 
     /**
      * Validation du valeur du champ Integer
+     * utiliser pour les forms avec d'inputs
      * @param val
      * @param nameField
      * @return

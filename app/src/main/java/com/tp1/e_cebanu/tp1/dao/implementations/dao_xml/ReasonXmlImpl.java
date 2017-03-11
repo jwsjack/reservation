@@ -1,7 +1,6 @@
 package com.tp1.e_cebanu.tp1.dao.implementations.dao_xml;
 
 import com.tp1.e_cebanu.tp1.dao.interfaces.ReasonDao;
-import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.Reason;
 
 import org.w3c.dom.Document;
@@ -15,7 +14,15 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 /**
- * Created by User on 09.03.2017.
+ * Java# version 1.8.0
+ *
+ * @class UserXmlImpl
+ * @package    TP #1 / IFT 1155 A - Programmation mobile à plateforme libre
+ * @author     EUGENIU CEBANU / matricule: 20025851
+ * @author     jwsjack3@gmail.com
+ * @version    1
+ * @date       2017-02-20
+ * @description Mise en œuvre de lecture / écriture XML pour REASONS
  */
 
 public class ReasonXmlImpl implements ReasonDao {
@@ -24,6 +31,21 @@ public class ReasonXmlImpl implements ReasonDao {
     public ReasonXmlImpl() {
         xmlParser = new XMLParser();
         xmlParser.setFileName(Reason.FILENAME);
+    }
+
+    @Override
+    public void create(Reason reason) {
+
+    }
+
+    @Override
+    public void update(Reason reason) {
+
+    }
+
+    @Override
+    public void delete(Reason reason) {
+
     }
 
     public Reason findById(int id) {
@@ -47,7 +69,7 @@ public class ReasonXmlImpl implements ReasonDao {
                 Node nNode = nodeList.item(temp);
                 if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                     Reason reason = new Reason();
-                    reasons.add(reason.xmlToLocalMapper(nNode));
+                    reasons.add(reason.xmlToReasonMapper(nNode));
                 }
             }
         } catch (IOException e) {
