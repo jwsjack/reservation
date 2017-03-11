@@ -47,7 +47,26 @@ public class ReasonXmlImpl implements ReasonDao {
 
     @Override
     public void delete(Reason reason) {
-
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == reason.getId()) {
+                        node.getParentNode().removeChild(node);
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     public Reason findById(int id) {
@@ -82,27 +101,4 @@ public class ReasonXmlImpl implements ReasonDao {
         return reasons;
     }
 
-    @Override
-    public void delete(Reason reason) {
-        try {
-            Document doc = xmlParser.getNodeListFromResources();
-            NodeList nodeList = doc.getElementsByTagName("item");
-            for (int temp = 0; temp < nodeList.getLength(); temp++) {
-                Node node = nodeList.item(temp);
-                if (node.getNodeType() == Node.ELEMENT_NODE) {
-                    Element element = (Element) node;
-                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == reason.getId()) {
-                        node.getParentNode().removeChild(node);
-                    }
-                }
-            }
-            xmlParser.saveDocument(doc);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (TransformerException e) {
-            e.printStackTrace();
-        }
-    }
 }
