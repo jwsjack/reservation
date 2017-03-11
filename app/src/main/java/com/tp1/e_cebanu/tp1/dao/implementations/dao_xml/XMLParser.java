@@ -98,12 +98,14 @@ public class XMLParser {
      * @throws ParserConfigurationException
      */
     public Document getNodeListFromResources() throws IOException, ParserConfigurationException {
-        File fXmlFile = new File(getContext().getFilesDir() + "/" + fileName);
+        String path = getContext().getFilesDir() + "/" + fileName;
+        File fXmlFile = new File(path);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = null;
 
         if (!fXmlFile.exists()) {
+//            fXmlFile.
             fXmlFile.createNewFile();
             Document docFailOver = getDocumentFromRaw();
             try {

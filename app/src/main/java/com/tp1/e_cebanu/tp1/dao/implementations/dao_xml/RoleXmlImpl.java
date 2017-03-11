@@ -4,6 +4,7 @@ import com.tp1.e_cebanu.tp1.dao.interfaces.RoleDao;
 import com.tp1.e_cebanu.tp1.models.Role;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 
 /**
  * Java# version 1.8.0
@@ -36,22 +38,41 @@ public class RoleXmlImpl implements RoleDao {
 
 
     @Override
-    public void create(Role local) {
+    public void create(Role role) {
 
     }
 
     @Override
-    public void update(Role local) {
+    public void update(Role role) {
 
     }
 
     @Override
-    public void delete(Role local) {
-
+    public void delete(Role role) {
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == role.getId()) {
+                        node.getParentNode().removeChild(node);
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public Role find(Role local) {
+    public Role find(Role role) {
         return null;
     }
 

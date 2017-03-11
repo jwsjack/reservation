@@ -52,12 +52,55 @@ public class UserXmlImpl implements UserDao {
 
     @Override
     public void update(User user) {
-
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            Node newUser = user.userToXmlMapper(doc);
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == user.getId()) {
+                        doc.replaceChild(node, newUser);
+//                        element.getElementsByTagName("name").item(0).setTextContent(user.getNom());
+//                        element.getElementsByTagName("login").item(0).setTextContent(user.getLogin());
+//                        element.getElementsByTagName("password").item(0).setTextContent(user.getPassword());
+//                        element.getElementsByTagName("role").item(0).setTextContent(String.valueOf(user.getRole()));
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void delete(User user) {
-        findById(user.getId());
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == user.getId()) {
+                        node.getParentNode().removeChild(node);
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
