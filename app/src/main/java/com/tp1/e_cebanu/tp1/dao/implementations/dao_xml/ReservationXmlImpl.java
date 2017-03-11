@@ -5,11 +5,13 @@ import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.Reservation;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -53,7 +55,26 @@ public class ReservationXmlImpl implements ReservationDao {
 
     @Override
     public void delete(Reservation reservation) {
-
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == reservation.getId()) {
+                        node.getParentNode().removeChild(node);
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -66,7 +87,7 @@ public class ReservationXmlImpl implements ReservationDao {
         List<Reservation> reservations = findAll();
         List<Reservation> results = new ArrayList<>();
         for (Reservation reservation: reservations) {
-            if (reservation.getDate().compareTo(date) == 0) {
+            if (((int) reservation.getDate().get(Calendar.YEAR)) == 2017) {
                 results.add(reservation);
             }
         }

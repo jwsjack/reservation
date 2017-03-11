@@ -1,9 +1,12 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
 import com.tp1.e_cebanu.tp1.R;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Java# version 1.8.0
@@ -97,5 +100,22 @@ public class Local {
             local.setCapacite(Integer.parseInt(eElement.getElementsByTagName("capacite").item(0).getTextContent()));
         }
         return local;
+    }
+
+    public Node localToXmlMapper(Document doc) throws ParserConfigurationException {
+        Element item = doc.createElement("item");
+        Element id = doc.createElement("id");
+        Element nombre = doc.createElement("nombre");
+        Element type = doc.createElement("type");
+        Element capacite = doc.createElement("capacite");
+        id.setTextContent(String.valueOf(getId()));
+        nombre.setTextContent(String.valueOf(getNombre()));
+        type.setTextContent(String.valueOf(getType()));
+        capacite.setTextContent(String.valueOf(getCapacite()));
+        item.appendChild(id);
+        item.appendChild(nombre);
+        item.appendChild(type);
+        item.appendChild(capacite);
+        return item;
     }
 }

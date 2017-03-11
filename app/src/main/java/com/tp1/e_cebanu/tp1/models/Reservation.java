@@ -8,6 +8,7 @@ import org.w3c.dom.Node;
 
 import java.text.DateFormat;
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,7 +31,7 @@ public class Reservation {
     private Local local;
     private Reason reason;
     private String additionalReason, course;
-    private Date date;
+    private Calendar date;
     public static final String FILENAME = "reservations.xml";
 
     public Reservation() {}
@@ -84,11 +85,11 @@ public class Reservation {
     }
 
 
-    public Date getDate() {
+    public Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(Calendar date) {
         this.date = date;
     }
 
@@ -106,18 +107,20 @@ public class Reservation {
 
             DateFormat df = DateFormat.getDateInstance();
             Date date = null;
+            Calendar calendar = Calendar.getInstance();
             try {
                 date = df.parse(eElement.getElementsByTagName("date").item(0).getTextContent());
             } catch (ParseException e) {
                 date = new Date();
             }
+            calendar.setTime(date);
             reservation.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
             reservation.setLocal(local);
             reservation.setUser(user);
             reservation.setReason(reason);
             reservation.setAdditionalReason(eElement.getElementsByTagName("autreRaison").item(0).getTextContent());
             reservation.setCourse(eElement.getElementsByTagName("cours").item(0).getTextContent());
-            reservation.setDate(date);
+            reservation.setDate(calendar);
         }
         return reservation;
     }

@@ -11,4 +11,5 @@ import java.util.List;
 public interface ReasonDao {
     public Reason findById(int id);
     public List<Reason> findAll();
+    public void delete(Reason reason);
 }
