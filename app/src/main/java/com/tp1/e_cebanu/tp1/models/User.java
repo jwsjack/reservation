@@ -120,7 +120,9 @@ public class User {
 
     @Override
     public int hashCode() {
-        return login.hashCode();
+        int result = login != null ? login.hashCode() : 0;
+        result = 31 * result + id;
+        return result;
     }
 
     /**
@@ -194,7 +196,12 @@ public class User {
         Element password = doc.createElement("password");
         Element role = doc.createElement("role");
         item.setAttribute("ItemName", getNom());
-        id.setTextContent(String.valueOf(getId()));
+        if (getId() == 0) {
+            //generate ID
+            id.setTextContent(String.valueOf(hashCode()));
+        } else {
+            id.setTextContent(String.valueOf(getId()));
+        }
         name.setTextContent(getNom());
         login.setTextContent(getLogin());
         password.setTextContent(getPassword());

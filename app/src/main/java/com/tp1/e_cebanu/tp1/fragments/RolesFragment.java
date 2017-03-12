@@ -256,8 +256,8 @@ public class RolesFragment extends Fragment {
 
     public void delete(int id) {
         if (id != 0){
-            if (id == 1) {
-                Toast.makeText(context, getResources().getString(R.string.roleAdminDeleteProhibited), Toast.LENGTH_LONG).show();
+            if (id >= 1 && id <= 2) {
+                Toast.makeText(context, getResources().getString(R.string.defaultDeleteProhibited), Toast.LENGTH_LONG).show();
                 refreshFragment(new RolesFragment(), getActivity(), "roles");
             } else {
                 getRolesService().delete(getRolesService().findById(id));

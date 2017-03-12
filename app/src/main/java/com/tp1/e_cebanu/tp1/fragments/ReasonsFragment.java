@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.tp1.e_cebanu.tp1.R;
 import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
 import com.tp1.e_cebanu.tp1.models.Reason;
-import com.tp1.e_cebanu.tp1.models.Role;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.List;
@@ -230,9 +228,14 @@ public class ReasonsFragment extends Fragment {
 
     public void delete(int id) {
         if (id != 0){
-            AppService.getReasonsService().delete(AppService.getReasonsService().findById(id));
-            Toast.makeText(context, getResources().getString(R.string.success_deleted), Toast.LENGTH_LONG).show();
-            refreshFragment(new ReasonsFragment(), getActivity(), "reasons");
+            if (id == 1 || id == 2) {
+                Toast.makeText(context, getResources().getString(R.string.defaultDeleteProhibited), Toast.LENGTH_LONG).show();
+                refreshFragment(new ReasonsFragment(), getActivity(), "reasons");
+            } else {
+                AppService.getReasonsService().delete(AppService.getReasonsService().findById(id));
+                Toast.makeText(context, getResources().getString(R.string.success_deleted), Toast.LENGTH_LONG).show();
+                refreshFragment(new ReasonsFragment(), getActivity(), "reasons");
+            }
         }
     }
 

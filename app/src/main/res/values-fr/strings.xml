@@ -45,6 +45,8 @@
     <string name="lbLocal">Nombre local</string>
     <string name="lbReason">Titre de la raison</string>
     <string name="lbRole">Titre du rôle</string>
+    <string name="role">Rôle</string>
+    <string name="login">L\'identifiant</string>
     <string name="lbType">Type</string>
     <string name="nav_guide">Guider</string>
     <string name="nav_home">Accueil</string>
@@ -67,5 +69,9 @@
     <string name="locations_prompt">Choisissez un lieu/local</string>
     <string name="success_deleted">Supprimé avec succès</string>
     <string name="roleAdminDeleteProhibited">La suppression du rôle par défaut est interdite</string>
+    <string name="defaultDeleteProhibited">La suppression des valeurs par défaut est interdite. Essayez d\'ajouter de nouvelles valeurs, puis de supprimer.</string>
     <string name="is_superadmin">Est superadmin</string>
+    <string name="lbName">Nom</string>
+    <string name="roles_prompt">Choisissez un rôle</string>
+    <string name="userData">Info d\'tilisateur</string>
 </resources>

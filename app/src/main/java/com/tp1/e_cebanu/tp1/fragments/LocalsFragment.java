@@ -413,9 +413,15 @@ public class LocalsFragment extends Fragment {
 
     public void delete(int id) {
         if (id != 0) {
-            getLocalsService().delete(getLocalsService().findById(id));
-            Toast.makeText(context, getResources().getString(R.string.success_deleted), Toast.LENGTH_LONG).show();
-            refreshFragment(new LocalsFragment(), getActivity(), "locals");
+            if (id >= 1 && id <= 10) {
+                // on bloque ici, jusqu'à la vérification ON DELETE CASCADE sera fait
+                Toast.makeText(context, getResources().getString(R.string.defaultDeleteProhibited), Toast.LENGTH_LONG).show();
+                refreshFragment(new LocalsFragment(), getActivity(), "locals");
+            } else {
+                getLocalsService().delete(getLocalsService().findById(id));
+                Toast.makeText(context, getResources().getString(R.string.success_deleted), Toast.LENGTH_LONG).show();
+                refreshFragment(new LocalsFragment(), getActivity(), "locals");
+            }
         }
 
     }

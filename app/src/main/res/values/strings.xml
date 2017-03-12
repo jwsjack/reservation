@@ -96,6 +96,9 @@ aussi la modifier ou l’annuler.\n
     <!--FRAGMENTS-->
 
     <!--Users-->
+    <string name="userData">Info user</string>
+    <string name="lbName">Name</string>
+    <string name="roles_prompt">Choose a role</string>
 
 
     <!--Reservations-->
@@ -113,6 +116,8 @@ aussi la modifier ou l’annuler.\n
 
     <!--Roles-->
     <string name="lbRole">Role title</string>
+    <string name="role">Role</string>
+    <string name="login">Login</string>
     <string name="roleData">Info role</string>
     <string name="roleAdminDeleteProhibited">Deleting of default role is prohibited</string>
     <string name="is_superadmin">Is superadmin</string>
@@ -120,6 +125,7 @@ aussi la modifier ou l’annuler.\n
     <!--Reasons-->
     <string name="lbReason">Reason title</string>
     <string name="reasonData">Info reason</string>
+    <string name="defaultDeleteProhibited">Deleting of default values is prohibited. Try to add new values and then delete!</string>
 
 
 
