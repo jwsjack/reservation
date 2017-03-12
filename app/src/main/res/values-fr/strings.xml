@@ -6,6 +6,7 @@
     <string name="label_email_address">"Adresse e-mail "</string>
     <string name="label_password">"Mot de passe "</string>
     <string name="label_sign_in">Se connecter</string>
+    <string name="label_exit">Exit</string>
     <string name="message_signing_in">Connectez-vous…</string>
     <string name="messageValidationAuthentification">Veuillez saisir le login et mot de passe.</string>
     <string name="messageWrongAuthentification">Votre login / mot de passe était incorrect, veuillez réessayer.</string>
@@ -65,4 +66,6 @@
     <string name="success_updated">Mise à jour réussie</string>
     <string name="locations_prompt">Choisissez un lieu/local</string>
     <string name="success_deleted">Supprimé avec succès</string>
+    <string name="roleAdminDeleteProhibited">La suppression du rôle par défaut est interdite</string>
+    <string name="is_superadmin">Est superadmin</string>
 </resources>

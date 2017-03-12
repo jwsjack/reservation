@@ -69,20 +69,45 @@
                 android:paddingTop="5dp"
                 android:id="@+id/requestNewAccount" />
 
-            <Button
-                android:id="@+id/b_signin"
-                style="@style/ShadowText"
+            <RelativeLayout
+                android:id="@+id/listButtons"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/button_info_background_states"
-                android:gravity="center"
-                android:onClick="handleLogin"
-                android:padding="10dp"
-                android:text="@string/label_sign_in"
-                android:textColor="@color/text"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/b_signin"
+                    style="@style/ShadowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_info_background_states"
+                    android:gravity="center"
+                    android:onClick="handleLogin"
+                    android:padding="10dp"
+                    android:text="@string/label_sign_in"
+                    android:textColor="@color/text"
+                    android:textSize="20sp"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/b_exit"
+                    style="@style/ShadowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_danger_background_states"
+                    android:gravity="center"
+                    android:onClick="exitApp"
+                    android:padding="10dp"
+                    android:text="@string/label_exit"
+                    android:textColor="@color/text"
+                    android:textSize="20sp"
+                    android:layout_alignParentRight="true"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

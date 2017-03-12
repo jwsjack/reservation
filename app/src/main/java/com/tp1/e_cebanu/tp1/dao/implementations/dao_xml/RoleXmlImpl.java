@@ -39,12 +39,46 @@ public class RoleXmlImpl implements RoleDao {
 
     @Override
     public void create(Role role) {
-
+        Document doc = null;
+        try {
+            doc = xmlParser.getNodeListFromResources();
+            Node parent = doc.getFirstChild();
+            Node child = role.roleToXmlMapper(doc);
+            parent.appendChild((Node) child);
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(Role role) {
-
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            Node newUser = role.roleToXmlMapper(doc);
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == role.getId()) {
+                        //Victor: TODO implement here. error can't replace node by element - different types
+                        doc.replaceChild(node, (Node) newUser);
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

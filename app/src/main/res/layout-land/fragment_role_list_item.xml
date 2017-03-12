@@ -7,10 +7,14 @@
 
 
     <LinearLayout android:id="@+id/Text"
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="10dip">
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"/>
         <TextView
             android:id="@+id/txtId"
             android:layout_width="wrap_content"

@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,6 +26,9 @@ import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.List;
 
+import static com.tp1.e_cebanu.tp1.models.AppService.getRolesService;
+import static com.tp1.e_cebanu.tp1.util.UIUtils.refreshFragment;
+
 public class RolesFragment extends Fragment {
     //list view
     private View v = null;
@@ -32,6 +37,7 @@ public class RolesFragment extends Fragment {
     private int countLines = 0;
     // boutons
     private Button btAdd, btUpdate, btDelete;
+    private CheckBox ckSuperadmin;
     private Context context;
 
     MyCustomAdapter dataAdapter = null;
@@ -64,7 +70,7 @@ public class RolesFragment extends Fragment {
         // retrieve list
         ListView listView = (ListView) v.findViewById(R.id.list);
         //donnée
-        roles = AppService.getRolesService().findAll();
+        roles = getRolesService().findAll();
 
         countLines = roles.size();
         TextView text_count_lines = (TextView) v.findViewById(R.id.text_count_lines);
@@ -92,13 +98,30 @@ public class RolesFragment extends Fragment {
                 dialogBuilder.setIcon(R.drawable.ic_action_list);
                 //dialog form
                 final View dialogView = inflater.inflate(R.layout.fragment_role, null);
+                // pour les utilisateurs qui ne correspond pas à une index dans le tableau d'images, sélectionnez dernière
+                //trouver l'icon
+                final ImageView imageView = (ImageView) dialogView.findViewById(R.id.img);
+                // pour les superadmin on va afficher l'icon
+                if (role.getSuperadmin() == 1) {
+                    imageView.setImageResource(R.drawable.superadmin);
+                } else {
+                    imageView.setImageResource(R.drawable.user1);
+                }
+
                 final EditText txtId = (EditText) dialogView.findViewById(R.id.etId);
                 txtId.setText(String.valueOf(role.getId()));
                 final EditText txtName = (EditText) dialogView.findViewById(R.id.etName);
                 txtName.setText(String.valueOf(role.getName()));
-
+                ckSuperadmin = (CheckBox) dialogView.findViewById(R.id.ckSuperadmin);
+                if (role.getSuperadmin() == 1) {
+                    ckSuperadmin.setChecked(true);
+                    if (role.getId() == 1) {
+                        ckSuperadmin.setEnabled(false);
+                    }
+                }
                 btUpdate = (Button) dialogView.findViewById(R.id.update);
                 btDelete = (Button) dialogView.findViewById(R.id.delete);
+
 
                 dialogBuilder.setView(dialogView);
                 dialogBuilder.create();
@@ -119,11 +142,12 @@ public class RolesFragment extends Fragment {
                     public void onClick(View v) {
                         String id = txtId.getText().toString();
                         String name = txtName.getText().toString();
+                        int superadmin = ckSuperadmin.isChecked() ? 1 : 0;
                         //validation
                         Boolean valide = false;
                         valide = UIUtils.checkFieldValueString(name, "Name");
                         if (valide) {
-                            update(Integer.parseInt(id), name);
+                            update(Integer.parseInt(id), name, superadmin);
                             ad.dismiss();
                         }
                     }
@@ -160,10 +184,13 @@ public class RolesFragment extends Fragment {
         dialogBuilder.setIcon(R.drawable.ic_action_list);
         //dialog form
         final View dialogView = inflater.inflate(R.layout.fragment_role, null);
+        final ImageView imageView = (ImageView) dialogView.findViewById(R.id.img);
+        imageView.setVisibility(View.GONE);
         final EditText txtId = (EditText) dialogView.findViewById(R.id.etId);
         txtId.setText("");
         final EditText txtName = (EditText) dialogView.findViewById(R.id.etName);
         txtName.setText("");
+        final CheckBox ckSuperadmin = (CheckBox) dialogView.findViewById(R.id.ckSuperadmin);
 
         btUpdate = (Button) dialogView.findViewById(R.id.update);
         btUpdate.setText(R.string.add);
@@ -189,18 +216,19 @@ public class RolesFragment extends Fragment {
             public void onClick(View v) {
                 String id = txtId.getText().toString();
                 String name = txtName.getText().toString();
+                int superadmin = ckSuperadmin.isChecked() ? 1 : 0;
                 //validation
                 Boolean valide = false;
                 valide = UIUtils.checkFieldValueString(name, "Name");
                 if (valide) {
-                    update(0, name);
+                    update(0, name, superadmin);
                     ad.dismiss();
                 }
             }
         });
     }
 
-    public void update(int id, String name) {
+    public void update(int id, String name, int superadmin) {
         //validation
         Boolean valide = false;
         valide = UIUtils.checkFieldValueString(name, "Name");
@@ -208,24 +236,35 @@ public class RolesFragment extends Fragment {
             if (id == 0) {
                 //création nouveau objet
                 Toast.makeText(context, String.valueOf(name), Toast.LENGTH_SHORT).show();
-                // Victor: TODO implement here add local by "id"
                 Role role = AppService.getRoleObject();
                 role.setName(name);
-
+                role.setSuperadmin(superadmin);
+                getRolesService().create(role);
+                Toast.makeText(context, getResources().getString(R.string.success_created), Toast.LENGTH_SHORT).show();
+                refreshFragment(new RolesFragment(), getActivity(), "roles");
             } else {
-                // Victor: TODO implement here update local by "id"
                 Role role = AppService.getRoleObject();
                 role.setId(id);
                 role.setName(name);
-
-                Toast.makeText(context, String.valueOf(name), Toast.LENGTH_SHORT).show();
+                role.setSuperadmin(superadmin);
+                getRolesService().update(role);
+                Toast.makeText(context, getResources().getString(R.string.success_updated), Toast.LENGTH_SHORT).show();
+                refreshFragment(new RolesFragment(), getActivity(), "roles");
             }
         }
     }
 
     public void delete(int id) {
-        // Victor: TODO implement here delete Role by "id"
-        Toast.makeText(context, "Delete role - " + String.valueOf(id), Toast.LENGTH_LONG).show();
+        if (id != 0){
+            if (id == 1) {
+                Toast.makeText(context, getResources().getString(R.string.roleAdminDeleteProhibited), Toast.LENGTH_LONG).show();
+                refreshFragment(new RolesFragment(), getActivity(), "roles");
+            } else {
+                getRolesService().delete(getRolesService().findById(id));
+                Toast.makeText(context, getResources().getString(R.string.success_deleted), Toast.LENGTH_LONG).show();
+                refreshFragment(new RolesFragment(), getActivity(), "roles");
+            }
+        }
 
     }
 
@@ -243,7 +282,12 @@ public class RolesFragment extends Fragment {
         public View getView(int position, View view, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) MyApplication.getSystemService();
             View rowView = inflater.inflate(R.layout.fragment_role_list_item, null);
-
+            //trouver l'icon
+            ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
+            // pour les superadmin on va afficher l'icon
+            if (rolesList.get(position).getSuperadmin() == 1) {
+                imageView.setImageResource(R.drawable.ic_superadmin);
+            }
             TextView txtId = (TextView) rowView.findViewById(R.id.txtId);
             txtId.setText(String.valueOf(rolesList.get(position).getId()));
             TextView txtName = (TextView) rowView.findViewById(R.id.txtName);

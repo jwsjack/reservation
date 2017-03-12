@@ -48,7 +48,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
     protected AutoCompleteTextView loginText;
     protected EditText passwordText;
     protected CheckBox ckRequestNewAccount;
-    protected Button signInButton;
+    protected Button signInButton, exitButton;
     private final TextWatcher watcher = validationTextWatcher();
 
     private String login;
@@ -70,6 +70,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
         passwordText = (EditText) findViewById(R.id.et_password);
         ckRequestNewAccount = (CheckBox) findViewById(R.id.requestNewAccount);
         signInButton = (Button) findViewById(R.id.b_signin);
+        exitButton = (Button) findViewById(R.id.b_exit);
 
         // écouteur d'événement sur bouton
         passwordText.setOnKeyListener(new View.OnKeyListener() {
@@ -97,6 +98,12 @@ public class AuthenticatorActivity extends AppCompatActivity {
             }
         });
 
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                exitApp();
+            }
+        });
+
         // écouteur d'événement sur bouton
         ckRequestNewAccount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -105,6 +112,8 @@ public class AuthenticatorActivity extends AppCompatActivity {
                 if (!isChecked) { buttonView.setTextColor(getResources().getColor(R.color.text)); }
             }
         });
+
+        // écouteur d'événement sur bouton
 
         loginText.addTextChangedListener(watcher);
         passwordText.addTextChangedListener(watcher);
@@ -134,6 +143,10 @@ public class AuthenticatorActivity extends AppCompatActivity {
                 updateUIWithValidation();
             }
         };
+    }
+
+    public void exitApp() {
+        finishAffinity();
     }
 
     /**

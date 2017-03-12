@@ -61,6 +61,7 @@
     <string name="label_login">Login</string>
     <string name="label_password">Password</string>
     <string name="label_sign_in">Sign In</string>
+    <string name="label_exit">Exit</string>
     <string name="message_signing_in">Signing in…</string>
     <string name="requestNewAccount">Request new account</string>
     <string name="messageValidationAuthentification">You should set login and password.</string>
@@ -113,6 +114,8 @@ aussi la modifier ou l’annuler.\n
     <!--Roles-->
     <string name="lbRole">Role title</string>
     <string name="roleData">Info role</string>
+    <string name="roleAdminDeleteProhibited">Deleting of default role is prohibited</string>
+    <string name="is_superadmin">Is superadmin</string>
 
     <!--Reasons-->
     <string name="lbReason">Reason title</string>
@@ -149,4 +152,5 @@ aussi la modifier ou l’annuler.\n
     <string name="success_created">Successfully created</string>
     <string name="success_updated">Successfully updated</string>
     <string name="success_deleted">Successfully deleted</string>
+
 </resources>
