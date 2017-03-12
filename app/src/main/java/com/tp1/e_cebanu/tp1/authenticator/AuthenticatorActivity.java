@@ -108,6 +108,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
 
         loginText.addTextChangedListener(watcher);
         passwordText.addTextChangedListener(watcher);
+        ckRequestNewAccount.setVisibility(View.INVISIBLE); // temporairement jusqu'à sera mis en œuvre
         updateUIWithValidation();
 
     }

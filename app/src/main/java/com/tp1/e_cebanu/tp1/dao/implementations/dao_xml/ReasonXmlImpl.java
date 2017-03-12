@@ -64,7 +64,8 @@ public class ReasonXmlImpl implements ReasonDao {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == reason.getId()) {
-                        doc.replaceChild(node, newUser);
+                        //Victor: TODO implement here. error can't replace node by element - different types
+                        doc.replaceChild(node, (Node) newUser);
                     }
                 }
             }

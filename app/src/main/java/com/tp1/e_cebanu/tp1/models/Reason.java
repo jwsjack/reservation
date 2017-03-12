@@ -4,9 +4,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import javax.xml.parsers.ParserConfigurationException;
 
-import static android.R.attr.password;
+import javax.xml.parsers.ParserConfigurationException;
 
 /**
  * Java# version 1.8.0
@@ -21,6 +20,7 @@ import static android.R.attr.password;
  */
 
 public class Reason {
+    private static final int SOME = 100 ;
     protected String name;
     protected int id;
 
@@ -106,7 +106,12 @@ public class Reason {
         Element item = doc.createElement("item");
         Element id = doc.createElement("id");
         Element name = doc.createElement("name");
-        id.setTextContent(String.valueOf(getId()));
+        if (getId() == 0) {
+            //generate ID
+            id.setTextContent(String.valueOf(hashCode()));
+        } else {
+            id.setTextContent(String.valueOf(getId()));
+        }
         name.setTextContent(getName());
         item.appendChild(id);
         item.appendChild(name);

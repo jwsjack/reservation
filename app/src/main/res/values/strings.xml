@@ -148,4 +148,5 @@ aussi la modifier ou l’annuler.\n
     <string name="filling_message">The value is empty of the field : </string>
     <string name="success_created">Successfully created</string>
     <string name="success_updated">Successfully updated</string>
+    <string name="success_deleted">Successfully deleted</string>
 </resources>

@@ -129,7 +129,7 @@ public class ReasonsFragment extends Fragment {
                         Boolean valide = false;
                         valide = UIUtils.checkFieldValueString(name, "Name");
                         if (valide) {
-                            update(Integer.parseInt(id), name);
+                            update(reason.getId(), name);
                             ad.dismiss();
                         }
                     }
@@ -193,7 +193,6 @@ public class ReasonsFragment extends Fragment {
         btUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = txtId.getText().toString();
                 String name = txtName.getText().toString();
                 //validation
                 Boolean valide = false;
@@ -232,7 +231,7 @@ public class ReasonsFragment extends Fragment {
     public void delete(int id) {
         if (id != 0){
             AppService.getReasonsService().delete(AppService.getReasonsService().findById(id));
-            Toast.makeText(context, "Delete reason - " + String.valueOf(id), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, getResources().getString(R.string.success_deleted), Toast.LENGTH_LONG).show();
             refreshFragment(new ReasonsFragment(), getActivity(), "reasons");
         }
     }

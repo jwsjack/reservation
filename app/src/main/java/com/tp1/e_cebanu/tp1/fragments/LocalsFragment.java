@@ -1,25 +1,18 @@
 package com.tp1.e_cebanu.tp1.fragments;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -31,16 +24,11 @@ import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import static android.R.attr.country;
-import static android.R.attr.description;
-import static android.R.id.edit;
-import static com.tp1.e_cebanu.tp1.R.id.list;
-import static com.tp1.e_cebanu.tp1.R.id.txtCapacite;
-import static com.tp1.e_cebanu.tp1.R.id.txtId;
-import static com.tp1.e_cebanu.tp1.R.string.localData;
+import static com.tp1.e_cebanu.tp1.models.AppService.getLocalsService;
+import static com.tp1.e_cebanu.tp1.util.UIUtils.refreshFragment;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -122,7 +110,7 @@ public class LocalsFragment extends Fragment {
         // retrieve list
         ListView listView = (ListView) v.findViewById(R.id.list);
         //donnée
-        locals = AppService.getLocalsService().findAll();
+        locals = getLocalsService().findAll();
 
         countLines = locals.size();
         TextView text_count_lines = (TextView) v.findViewById(R.id.text_count_lines);
@@ -157,8 +145,6 @@ public class LocalsFragment extends Fragment {
                 final EditText txtDescription = (EditText) dialogView.findViewById(R.id.etDescription);
                 txtDescription.setText(String.valueOf(local.getDescription()));
 
-//                final EditText txtType = (EditText) dialogView.findViewById(R.id.etType);
-//                txtType.setText(String.valueOf(local.getTypeNom()));
 
                 // Spinner pour la sélection du type de local
                 final Spinner staticSpinner = (Spinner) dialogView.findViewById(R.id.etType);
@@ -186,7 +172,6 @@ public class LocalsFragment extends Fragment {
 
                 dialogBuilder.setView(dialogView);
                 dialogBuilder.create();
-
                 //buttons
                 dialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     @Override
@@ -201,7 +186,6 @@ public class LocalsFragment extends Fragment {
                 btUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String id = txtId.getText().toString();
                         String nombre = txtNombre.getText().toString();
                         int type = staticSpinner.getSelectedItemPosition() + 1;
                         String capacite = txtCapacite.getText().toString();
@@ -219,7 +203,7 @@ public class LocalsFragment extends Fragment {
                             valide = UIUtils.checkFieldValueString(description, "description");
                         }
                         if (valide) {
-                            update(id, nombre, type, capacite,description);
+                            update(local.getId(), nombre, type, capacite,description);
                             ad.dismiss();
                         }
                     }
@@ -368,7 +352,6 @@ public class LocalsFragment extends Fragment {
         btUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String id = txtId.getText().toString();
                 String nombre = txtNombre.getText().toString();
                 int type = staticSpinner.getSelectedItemPosition() + 1;
                 String capacite = txtCapacite.getText().toString();
@@ -383,14 +366,14 @@ public class LocalsFragment extends Fragment {
                     valide = UIUtils.checkFieldValueString(capacite, "capacity");
                 }
                 if (valide) {
-                    update(id, nombre, type, capacite, description);
+                    update(0, nombre, type, capacite, description);
                     ad.dismiss();
                 }
             }
         });
     }
 
-    public void update(String id, String nombre, int type, String capacite, String description) {
+    public void update(int id, String nombre, int type, String capacite, String description) {
         //validation
         Boolean valide = false;
         valide = UIUtils.checkFieldValueString(nombre, "Number");
@@ -404,33 +387,36 @@ public class LocalsFragment extends Fragment {
             valide = UIUtils.checkFieldValueString(description, "description");
         }
         if (valide) {
-            if (id.equals(null) || id.equals("")) {
+            if (id == 0) {
                 //création nouveau objet
-                Toast.makeText(context, String.valueOf(type), Toast.LENGTH_SHORT).show();
-                // Victor: TODO implement here add local by "id"
                 Local local = AppService.getLocalObject();
                 local.setNombre(Integer.parseInt(nombre));
                 local.setType(type);
                 local.setCapacite(Integer.parseInt(capacite));
                 local.setDescription(description);
-
+                getLocalsService().create(local);
+                Toast.makeText(context, getResources().getString(R.string.success_created), Toast.LENGTH_SHORT).show();
+                refreshFragment(new LocalsFragment(), getActivity(), "locals");
             } else {
-                // Victor: TODO implement here update local by "id"
                 Local local = AppService.getLocalObject();
-                local.setId(Integer.parseInt(id));
+                local.setId(id);
                 local.setNombre(Integer.parseInt(nombre));
                 local.setType(type);
                 local.setCapacite(Integer.parseInt(capacite));
                 local.setDescription(description);
-
-                Toast.makeText(context, String.valueOf(type), Toast.LENGTH_SHORT).show();
+                getLocalsService().update(local);
+                Toast.makeText(context, getResources().getString(R.string.success_updated), Toast.LENGTH_SHORT).show();
+                refreshFragment(new LocalsFragment(), getActivity(), "locals");
             }
         }
     }
 
     public void delete(int id) {
-        // Victor: TODO implement here delete local by "id"
-        Toast.makeText(context, "Delete local - " + String.valueOf(id), Toast.LENGTH_LONG).show();
+        if (id != 0) {
+            getLocalsService().delete(getLocalsService().findById(id));
+            Toast.makeText(context, getResources().getString(R.string.success_deleted), Toast.LENGTH_LONG).show();
+            refreshFragment(new LocalsFragment(), getActivity(), "locals");
+        }
 
     }
 
@@ -444,10 +430,6 @@ public class LocalsFragment extends Fragment {
             super(context, R.layout.fragment_local_list, localsList);
             this.localsList = localsList;
         }
-//
-//        private class ViewHolder {
-//            TextView nombre, type, capacite;
-//        }
 
         @Override
         public View getView(int position, View view, ViewGroup parent) {

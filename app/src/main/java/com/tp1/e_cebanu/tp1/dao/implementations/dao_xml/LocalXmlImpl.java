@@ -45,7 +45,6 @@ public class LocalXmlImpl implements LocalDao {
             Node parent = doc.getFirstChild();
             Node child = local.localToXmlMapper(doc);
             parent.appendChild((Node) child);
-
             xmlParser.saveDocument(doc);
         } catch (IOException e) {
             e.printStackTrace();
@@ -67,6 +66,7 @@ public class LocalXmlImpl implements LocalDao {
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == local.getId()) {
+                        //Victor: TODO implement here. error can't replace node by element - different types
                         doc.replaceChild(node, newNode);
 //                        element.getElementsByTagName("name").item(0).setTextContent(user.getNom());
 //                        element.getElementsByTagName("login").item(0).setTextContent(user.getLogin());

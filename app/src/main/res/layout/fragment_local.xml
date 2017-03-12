@@ -1,144 +1,140 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="10dp">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <!--TextView
-        android:id="@+id/lbInputForm"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        style="@style/ActionFormTitle"
-        android:text="@string/localData">
-    </TextView-->
+        android:layout_height="match_parent"
+        android:padding="10dp">
 
-    <EditText
-        android:id="@+id/etId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:maxLines="2"
-        android:visibility="gone"
-        android:minLines="2">
-    </EditText>
+        <!--TextView
+            android:id="@+id/lbInputForm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            style="@style/ActionFormTitle"
+            android:text="@string/localData">
+        </TextView-->
 
-    <TextView
-        android:id="@+id/text_view_nombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/lbLocal"
-        android:padding="5dp"
-        android:textStyle="bold"
-        android:layout_alignParentStart="true"
-        android:layout_above="@+id/etType"
-        android:layout_alignParentTop="true" />
+        <EditText
+            android:id="@+id/etId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:minLines="2"
+            android:visibility="gone"></EditText>
 
-    <EditText
-        android:id="@+id/etNombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etId"
-        android:layout_toRightOf="@+id/text_view_nombre"
-        android:maxLines="2"
-        android:minLines="2">
-        <requestFocus />
-    </EditText>
+        <TextView
+            android:id="@+id/text_view_nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etType"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbLocal"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etId"
+            android:layout_toRightOf="@+id/text_view_nombre"
+            android:maxLines="2"
+            android:minLines="2">
+
+            <requestFocus />
+        </EditText>
 
 
-    <TextView
-        android:id="@+id/text_view_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/lbType"
-        android:padding="5dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/text_view_nombre"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/etNombre" />
+        <TextView
+            android:id="@+id/text_view_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/text_view_nombre"
+            android:layout_toStartOf="@+id/etNombre"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbType"
+            android:textStyle="bold" />
 
-    <Spinner
-        android:id="@+id/etType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etNombre"
-        android:entries="@array/locations_types"
-        android:padding="5dp"
-        android:prompt="@string/locations_prompt"
-        android:layout_toEndOf="@+id/text_view_nombre"/>
+        <Spinner
+            android:id="@+id/etType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etNombre"
+            android:layout_toEndOf="@+id/text_view_nombre"
+            android:entries="@array/locations_types"
+            android:padding="5dp"
+            android:prompt="@string/locations_prompt" />
 
-    <!--EditText
-        android:id="@+id/etType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etNombre"
-        android:hint="@string/lbType"
-        android:maxLines="2"
-        android:minLines="2"
-        android:layout_toEndOf="@+id/text_view_nombre" /-->
+        <TextView
+            android:id="@+id/text_view_capacite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etDescription"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/text_view_type"
+            android:layout_toStartOf="@+id/etType"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbCapacity"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/text_view_capacite"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/lbCapacity"
-        android:padding="5dp"
-        android:textStyle="bold"
-        android:layout_below="@+id/text_view_type"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/etType"
-        android:layout_above="@+id/etDescription" />
+        <EditText
+            android:id="@+id/etCapacity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/etType"
+            android:layout_below="@+id/etType"
+            android:hint="@string/lbCapacity"
+            android:maxLines="2"
+            android:minLines="2" />
 
-    <EditText
-        android:id="@+id/etCapacity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etType"
-        android:hint="@string/lbCapacity"
-        android:maxLines="2"
-        android:minLines="2"
-        android:layout_alignStart="@+id/etType" />
+        <TextView
+            android:id="@+id/text_view_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/update"
+            android:layout_alignEnd="@+id/update"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/text_view_capacite"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbDescription"
+            android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/text_view_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:text="@string/lbDescription"
-        android:padding="5dp"
-        android:textStyle="bold"
-        android:layout_alignParentStart="true"
-        android:layout_alignEnd="@+id/update"
-        android:layout_below="@+id/text_view_capacite"
-        android:layout_above="@+id/update" />
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/etType"
+            android:layout_below="@+id/etCapacity"
+            android:hint="@string/lbDescription"
+            android:minLines="3" />
 
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etCapacity"
-        android:hint="@string/lbDescription"
-        android:minLines="3"
-        android:layout_alignStart="@+id/etType" />
+        <Button
+            android:id="@+id/update"
+            style="@style/BootstrapButtonInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etDescription"
+            android:text="@string/update"
+            android:visibility="visible" />
 
-    <Button
-        android:id="@+id/update"
-        style="@style/BootstrapButtonInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etDescription"
-        android:text="@string/update"
-        android:visibility="visible" />
-    <Button
-        android:id="@+id/delete"
-        style="@style/BootstrapButtonDanger"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/delete"
-        android:visibility="visible"
-        android:layout_alignBaseline="@+id/update"
-        android:layout_alignBottom="@+id/update"
-        android:layout_alignParentEnd="true" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/delete"
+            style="@style/BootstrapButtonDanger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/update"
+            android:layout_alignBottom="@+id/update"
+            android:layout_alignParentEnd="true"
+            android:text="@string/delete"
+            android:visibility="visible" />
+    </RelativeLayout>
+</ScrollView>

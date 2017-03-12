@@ -96,6 +96,13 @@ public class Local {
         return str;
     }
 
+    @Override
+    public int hashCode() {
+        int result = String.valueOf(nombre) != null ? String.valueOf(nombre).hashCode() : 0;
+        result = 31 * result + id;
+        return result;
+    }
+
     public boolean equals(Local autre) {
         return this.nombre == autre.nombre;
     }
@@ -119,14 +126,22 @@ public class Local {
         Element nombre = doc.createElement("nombre");
         Element type = doc.createElement("type");
         Element capacite = doc.createElement("capacite");
-        id.setTextContent(String.valueOf(getId()));
+        Element description = doc.createElement("description");
+        if (getId() == 0) {
+            //generate ID
+            id.setTextContent(String.valueOf(hashCode()));
+        } else {
+            id.setTextContent(String.valueOf(getId()));
+        }
         nombre.setTextContent(String.valueOf(getNombre()));
         type.setTextContent(String.valueOf(getType()));
         capacite.setTextContent(String.valueOf(getCapacite()));
+        description.setTextContent(String.valueOf(getDescription()));
         item.appendChild(id);
         item.appendChild(nombre);
         item.appendChild(type);
         item.appendChild(capacite);
+        item.appendChild(description);
         return item;
     }
 }
