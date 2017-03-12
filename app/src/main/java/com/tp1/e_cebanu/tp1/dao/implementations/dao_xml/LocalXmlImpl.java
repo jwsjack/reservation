@@ -39,7 +39,21 @@ public class LocalXmlImpl implements LocalDao {
 
     @Override
     public void create(Local local) {
+        Document doc = null;
+        try {
+            doc = xmlParser.getNodeListFromResources();
+            Node parent = doc.getFirstChild();
+            Node child = local.localToXmlMapper(doc);
+            parent.appendChild((Node) child);
 
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

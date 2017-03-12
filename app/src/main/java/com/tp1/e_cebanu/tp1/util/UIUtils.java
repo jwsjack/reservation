@@ -1,17 +1,23 @@
 package com.tp1.e_cebanu.tp1.util;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.text.Html;
 import android.text.Spanned;
 import android.widget.Toast;
 
 import com.tp1.e_cebanu.tp1.R;
+import com.tp1.e_cebanu.tp1.fragments.ReasonsFragment;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
 
+import static android.R.attr.tag;
 import static android.content.Context.MODE_PRIVATE;
 
 /*
@@ -126,6 +132,20 @@ public class UIUtils {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Recharge la page avec fragment
+     * @param fragment
+     * @param activity
+     * @param tag
+     */
+    public static void refreshFragment(Fragment fragment, FragmentActivity activity, String tag) {
+        FragmentTransaction fragmentTransaction = activity.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                android.R.anim.fade_out);
+        fragmentTransaction.replace(R.id.frame, fragment, "reasons");
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
 }

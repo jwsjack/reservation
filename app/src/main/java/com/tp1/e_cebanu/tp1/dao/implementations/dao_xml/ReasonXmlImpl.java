@@ -37,12 +37,45 @@ public class ReasonXmlImpl implements ReasonDao {
 
     @Override
     public void create(Reason reason) {
-
+        Document doc = null;
+        try {
+            doc = xmlParser.getNodeListFromResources();
+            Node parent = doc.getFirstChild();
+            Node child = reason.reasonToXmlMapper(doc);
+            parent.appendChild((Node) child);
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void update(Reason reason) {
-
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            Node newUser = reason.reasonToXmlMapper(doc);
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == reason.getId()) {
+                        doc.replaceChild(node, newUser);
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

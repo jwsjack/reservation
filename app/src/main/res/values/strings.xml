@@ -146,4 +146,6 @@ aussi la modifier ou l’annuler.\n
 
     <!--Messages-->
     <string name="filling_message">The value is empty of the field : </string>
+    <string name="success_created">Successfully created</string>
+    <string name="success_updated">Successfully updated</string>
 </resources>

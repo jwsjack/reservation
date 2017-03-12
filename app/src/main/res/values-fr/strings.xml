@@ -61,4 +61,7 @@
     <string name="navigation_drawer_close">Fermer le drawer de navigation</string>
     <string name="navigation_drawer_open">Ouvrir le drawer de navigation</string>
     <string name="reasonData">Info raison</string>
+    <string name="success_created">Création réussie</string>
+    <string name="success_updated">Mise à jour réussie</string>
+    <string name="locations_prompt">Choisissez un lieu/local</string>
 </resources>

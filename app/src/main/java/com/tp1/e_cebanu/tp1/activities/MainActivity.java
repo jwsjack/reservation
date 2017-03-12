@@ -31,6 +31,7 @@ import com.tp1.e_cebanu.tp1.fragments.ReasonsFragment;
 import com.tp1.e_cebanu.tp1.fragments.ReservationsFragment;
 import com.tp1.e_cebanu.tp1.fragments.RolesFragment;
 import com.tp1.e_cebanu.tp1.models.AppService;
+import com.tp1.e_cebanu.tp1.models.MyApplication;
 import com.tp1.e_cebanu.tp1.other.CircleTransform;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 

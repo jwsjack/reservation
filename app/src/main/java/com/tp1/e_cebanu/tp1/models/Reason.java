@@ -1,7 +1,12 @@
 package com.tp1.e_cebanu.tp1.models;
 
+import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import static android.R.attr.password;
 
 /**
  * Java# version 1.8.0
@@ -75,6 +80,12 @@ public class Reason {
         return result;
     }
 
+    /**
+     * From XML node to Reason object
+     *
+     * @param node
+     * @return
+     */
     public Reason xmlToReasonMapper(Node node) {
         Reason reason = new Reason();
         if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -83,5 +94,22 @@ public class Reason {
             reason.setName(eElement.getElementsByTagName("name").item(0).getTextContent());
         }
         return reason;
+    }
+
+    /**
+     * Map from user to xml Node using Document
+     * @param doc
+     * @return
+     * @throws ParserConfigurationException
+     */
+    public Node reasonToXmlMapper(Document doc) throws ParserConfigurationException {
+        Element item = doc.createElement("item");
+        Element id = doc.createElement("id");
+        Element name = doc.createElement("name");
+        id.setTextContent(String.valueOf(getId()));
+        name.setTextContent(getName());
+        item.appendChild(id);
+        item.appendChild(name);
+        return item;
     }
 }

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,10 @@ import com.tp1.e_cebanu.tp1.models.Role;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.List;
+
+import static com.tp1.e_cebanu.tp1.activities.MainActivity.CURRENT_TAG;
+import static com.tp1.e_cebanu.tp1.models.AppService.getReasonsService;
+import static com.tp1.e_cebanu.tp1.util.UIUtils.refreshFragment;
 
 public class ReasonsFragment extends Fragment {
     //list view
@@ -65,7 +70,7 @@ public class ReasonsFragment extends Fragment {
         // retrieve list
         ListView listView = (ListView) v.findViewById(R.id.list);
         //donnée
-        reasons = AppService.getReasonsService().findAll();
+        reasons = getReasonsService().findAll();
 
         countLines = reasons.size();
         TextView text_count_lines = (TextView) v.findViewById(R.id.text_count_lines);
@@ -208,26 +213,28 @@ public class ReasonsFragment extends Fragment {
         if (valide) {
             if (id == 0) {
                 //création nouveau objet
-                Toast.makeText(context, String.valueOf(name), Toast.LENGTH_SHORT).show();
-                // Victor: TODO implement here add local by "id"
                 Reason reason = AppService.getReasonObject();
                 reason.setName(name);
-
+                getReasonsService().create(reason);
+                Toast.makeText(context, getResources().getString(R.string.success_created), Toast.LENGTH_SHORT).show();
+                refreshFragment(new ReasonsFragment(), getActivity(), "reasons");
             } else {
-                // Victor: TODO implement here update local by "id"
                 Reason reason = AppService.getReasonObject();
                 reason.setId(id);
                 reason.setName(name);
-
-                Toast.makeText(context, String.valueOf(name), Toast.LENGTH_SHORT).show();
+                getReasonsService().update(reason);
+                Toast.makeText(context, getResources().getString(R.string.success_updated), Toast.LENGTH_SHORT).show();
+                refreshFragment(new ReasonsFragment(), getActivity(), "reasons");
             }
         }
     }
 
     public void delete(int id) {
-        // Victor: TODO implement here delete Reason by "id"
-        Toast.makeText(context, "Delete reason - " + String.valueOf(id), Toast.LENGTH_LONG).show();
-
+        if (id != 0){
+            AppService.getReasonsService().delete(AppService.getReasonsService().findById(id));
+            Toast.makeText(context, "Delete reason - " + String.valueOf(id), Toast.LENGTH_LONG).show();
+            refreshFragment(new ReasonsFragment(), getActivity(), "reasons");
+        }
     }
 
     /*ADAPTER list*/
