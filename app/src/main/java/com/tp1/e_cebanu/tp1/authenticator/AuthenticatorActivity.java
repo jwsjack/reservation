@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.tp1.e_cebanu.tp1.R;
 import com.tp1.e_cebanu.tp1.activities.MainActivity;
 import com.tp1.e_cebanu.tp1.models.AppService;
+import com.tp1.e_cebanu.tp1.models.MyApplication;
 import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.util.TextWatcherAdapter;
 
@@ -60,7 +61,7 @@ public class AuthenticatorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // pour different types de emulateur on charge les views different
-        if (isTablet(this)) {
+        if (isTablet(MyApplication.getAppContext())) {
             setContentView(R.layout.authenticator_activity_tablet);
         } else {
             setContentView(R.layout.authenticator_activity);
