@@ -1,6 +1,8 @@
 package com.tp1.e_cebanu.tp1.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
@@ -13,16 +15,25 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.tp1.e_cebanu.tp1.R;
+import com.tp1.e_cebanu.tp1.models.Local;
+import com.tp1.e_cebanu.tp1.models.MyApplication;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.Date;
+import java.util.List;
+
+import static com.tp1.e_cebanu.tp1.models.AppService.getLocalsService;
+import static com.tp1.e_cebanu.tp1.models.AppService.getRolesService;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -41,6 +52,12 @@ public class ReservationsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private Context context;
+    private List<Local> locals;
+    private String[] localsNames;
+    // boutons
+    private Button btAdd, btUpdate, btDelete;
 
     private boolean undo = false;
     private CaldroidFragment caldroidFragment;
@@ -105,9 +122,10 @@ public class ReservationsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View dialogView = inflater.inflate(R.layout.fragment_reservations, container, false);
+        View dialogView = inflater.inflate(R.layout.fragment_reservation_list, container, false);
+        context = dialogView.getContext();
 
-        // --------------------- CALDROID -------------------------
+        // --------------------- CALDROID - ADD RESERVATION -------------------------
         final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
 
         // Setup caldroid fragment
@@ -162,6 +180,80 @@ public class ReservationsFragment extends Fragment {
             public void onSelectDate(Date date, View view) {
                 Toast.makeText(getContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();
+                // Une fois cliqué, affichez une boîte de dialogue d'alerte
+                final AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(context);
+                // Obtenez l'inflateur de mise en page
+                LayoutInflater inflater = (LayoutInflater) MyApplication.getSystemService();
+                // Remplissez et définissez la mise en page de la boîte de dialogue
+                dialogBuilder.setTitle(getResources().getString(R.string.localData));
+                dialogBuilder.setCancelable(true);
+                dialogBuilder.setIcon(R.drawable.ic_action_users);
+                //dialog form
+                final View dialogView = inflater.inflate(R.layout.fragment_reservation, null);
+                final EditText txtId = (EditText) dialogView.findViewById(R.id.etId);
+                txtId.setText("");
+                final EditText txtName = (EditText) dialogView.findViewById(R.id.etNom);
+                txtName.setText("");
+                final EditText txtLogin = (EditText) dialogView.findViewById(R.id.etLogin);
+                txtLogin.setText("");
+                final EditText txtPassword = (EditText) dialogView.findViewById(R.id.etPassword);
+                txtPassword.setText("");
+                //spinner role
+                final Spinner dynamicSpinner = (Spinner) dialogView.findViewById(R.id.etRole);
+
+                locals = getLocalsService().findAll();
+                localsNames = new String[locals.size()];
+                for (int i = 0; i < locals.size(); i++) {
+                    localsNames[i] = String.valueOf(locals.get(i).getNombre());
+                }
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                        android.R.layout.simple_spinner_item, localsNames);
+                dynamicSpinner.setAdapter(adapter);
+
+                btUpdate = (Button) dialogView.findViewById(R.id.update);
+                btUpdate.setText(R.string.add);
+                btDelete = (Button) dialogView.findViewById(R.id.delete);
+                btDelete.setVisibility(View.GONE);
+
+                //buttons
+                dialogBuilder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+                dialogBuilder.setView(dialogView);
+                dialogBuilder.create();
+
+                // pour fermer le dialog
+                final AlertDialog ad = dialogBuilder.show();
+
+                btUpdate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        String nom = txtName.getText().toString();
+//                        String login = txtLogin.getText().toString();
+//                        String password = txtPassword.getText().toString();
+//                        int role = dynamicSpinner.getSelectedItemPosition();
+//                        //validation
+//                        Boolean valide = false;
+//                        valide = UIUtils.checkFieldValueString(nom, "Name");
+//                        if (valide) {
+//                            valide = UIUtils.checkFieldValueString(login, "Login");
+//                        }
+//                        if (valide) {
+//                            valide = UIUtils.checkFieldValueString(password, "Password");
+//                        }
+//                        if (role > roles.size()-1) {
+//                            valide = false;
+//                        }
+//                        if (valide) {
+//                            update(0, nom, login, password, role);
+//                            ad.dismiss();
+//                        }
+                    }
+                });
             }
 
             @Override
@@ -315,10 +407,14 @@ public class ReservationsFragment extends Fragment {
 
 
 
-        // ---------------------- CALDROID ------------------------
+        // ---------------------- CALDROID - ADD RESERVATION ------------------------
 
 
         // ---------------------- RESERVATIONS LIST ----------------
+        // Victor: TODO calendar on this page with colors for already reserved days
+
+
+
 
         return dialogView;
     }
