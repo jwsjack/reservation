@@ -82,7 +82,7 @@ public class ReservationXmlImpl implements ReservationDao {
                         course.setNodeValue(reservation.getCourse());
 
                         Node date = element.getElementsByTagName("date").item(0).getFirstChild();
-                        date.setNodeValue(reservation.getDate().toString());
+                        date.setNodeValue(String.valueOf(reservation.getDate().getTimeInMillis()));
                     }
                 }
             }
@@ -131,9 +131,10 @@ public class ReservationXmlImpl implements ReservationDao {
         List<Reservation> reservations = findAll();
         List<Reservation> results = new ArrayList<>();
         for (Reservation reservation: reservations) {
-            if (((int) reservation.getDate().get(Calendar.YEAR)) == date.get(Calendar.YEAR)
-                    && ((int) reservation.getDate().get(Calendar.MONTH)) == date.get(Calendar.MONTH)
-                    && ((int) reservation.getDate().get(Calendar.DAY_OF_MONTH)) == date.get(Calendar.DAY_OF_MONTH)) {
+            if (reservation.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR)
+                    && reservation.getDate().get(Calendar.MONTH) == date.get(Calendar.MONTH)
+                    && reservation.getDate().get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)
+                    ) {
                 results.add(reservation);
             }
         }

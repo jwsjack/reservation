@@ -104,16 +104,10 @@ public class Reservation {
             User user = AppService.getUsersService().findById(userId);
             Local local = AppService.getLocalsService().findById(localId);
             Reason reason = AppService.getReasonsService().findById(reasonId);
+            long timeInMillis = Integer.parseInt(eElement.getElementsByTagName("date").item(0).getTextContent());
 
-            DateFormat df = DateFormat.getDateInstance();
-            Date date = null;
             Calendar calendar = Calendar.getInstance();
-            try {
-                date = df.parse(eElement.getElementsByTagName("date").item(0).getTextContent());
-            } catch (ParseException e) {
-                date = new Date();
-            }
-            calendar.setTime(date);
+            calendar.setTimeInMillis(timeInMillis);
             reservation.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
             reservation.setLocal(local);
             reservation.setUser(user);
@@ -141,7 +135,7 @@ public class Reservation {
         reason.setTextContent(String.valueOf(getReason().getId()));
         course.setTextContent(getCourse());
         additionalReason.setTextContent(getAdditionalReason());
-        date.setTextContent(getDate().toString());
+        date.setTextContent(String.valueOf(getDate().getTimeInMillis()));
 
         item.appendChild(id);
         item.appendChild(user);
