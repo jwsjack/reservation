@@ -74,4 +74,7 @@
     <string name="lbName">Nom</string>
     <string name="roles_prompt">Choisissez un rôle</string>
     <string name="userData">Info d\'tilisateur</string>
+    <string name="show_dialog">Ajouter une réservation</string>
+    <string name="undo">Annuler</string>
+    <string name="customize">Personnaliser</string>
 </resources>

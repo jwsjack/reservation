@@ -83,7 +83,7 @@ La réservation peut-être :
 La consultation peut-être effectuée comme suit (voir aussi les différentes captures)  :\n
 - en choisissant un local, nous allons obtenir toutes les réservations effectuées pour le local en question sur une
 période d’une semaine ou d’un mois.\n
-- en choisissant un affichage du calendrier sur une semaine, nous allons obtenir toutes les réservations effectuées<br/>
+- en choisissant un affichage du calendrier sur une semaine, nous allons obtenir toutes les réservations effectuées<br />
 pour tous les locaux sur une semaine.\n
 - en choisissant un affichage du calendrier sur un mois, nous allons obtenir toutes les réservations effectuées
 pour tous les locaux pour un mois.\n
@@ -128,7 +128,6 @@ aussi la modifier ou l’annuler.\n
     <string name="defaultDeleteProhibited">Deleting of default values is prohibited. Try to add new values and then delete!</string>
 
 
-
     <!--lists-->
     <string name="lbCountLines">Number items:</string>
 
@@ -161,7 +160,7 @@ aussi la modifier ou l’annuler.\n
 
     <!--CALDROID-->
     <string name="customize">Customize</string>
-    <string name="show_dialog">Show Dialog</string>
+    <string name="show_dialog">Add reservation</string>
     <string name="undo">Undo</string>
 
 </resources>

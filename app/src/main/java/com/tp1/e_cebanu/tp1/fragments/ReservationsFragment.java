@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.tp1.e_cebanu.tp1.R;
+import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.Date;
 
@@ -64,7 +65,7 @@ public class ReservationsFragment extends Fragment {
         Date greenDate = cal.getTime();
 
         if (caldroidFragment != null) {
-            ColorDrawable blue = new ColorDrawable(getResources().getColor(R.color.colorInfo));
+            ColorDrawable blue = new ColorDrawable(UIUtils.getColor(R.color.colorInfo));
             ColorDrawable green = new ColorDrawable(Color.GREEN);
             caldroidFragment.setBackgroundDrawableForDate(blue, blueDate);
             caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
@@ -209,8 +210,8 @@ public class ReservationsFragment extends Fragment {
                     caldroidFragment.clearSelectedDates();
                     caldroidFragment.setMinDate(null);
                     caldroidFragment.setMaxDate(null);
-                    caldroidFragment.setShowNavigationArrows(true);
-                    caldroidFragment.setEnableSwipe(true);
+                    //caldroidFragment.setShowNavigationArrows(true);
+                    //caldroidFragment.setEnableSwipe(true);
                     caldroidFragment.refreshView();
                     undo = false;
                     return;
@@ -254,8 +255,8 @@ public class ReservationsFragment extends Fragment {
                 caldroidFragment.setMaxDate(maxDate);
                 caldroidFragment.setDisableDates(disabledDates);
                 caldroidFragment.setSelectedDates(fromDate, toDate);
-                caldroidFragment.setShowNavigationArrows(false);
-                caldroidFragment.setEnableSwipe(false);
+                //caldroidFragment.setShowNavigationArrows(false);
+                //caldroidFragment.setEnableSwipe(false);
 
                 caldroidFragment.refreshView();
 
@@ -315,6 +316,10 @@ public class ReservationsFragment extends Fragment {
 
 
         // ---------------------- CALDROID ------------------------
+
+
+        // ---------------------- RESERVATIONS LIST ----------------
+
         return dialogView;
     }
 
