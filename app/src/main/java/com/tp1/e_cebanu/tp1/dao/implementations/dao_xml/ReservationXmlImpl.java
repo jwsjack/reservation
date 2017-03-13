@@ -127,11 +127,13 @@ public class ReservationXmlImpl implements ReservationDao {
     }
 
     @Override
-    public List<Reservation> findByDate(Date date) {
+    public List<Reservation> findByDate(Calendar date) {
         List<Reservation> reservations = findAll();
         List<Reservation> results = new ArrayList<>();
         for (Reservation reservation: reservations) {
-            if (((int) reservation.getDate().get(Calendar.YEAR)) == 2017) {
+            if (((int) reservation.getDate().get(Calendar.YEAR)) == date.get(Calendar.YEAR)
+                    && ((int) reservation.getDate().get(Calendar.MONTH)) == date.get(Calendar.MONTH)
+                    && ((int) reservation.getDate().get(Calendar.DAY_OF_MONTH)) == date.get(Calendar.DAY_OF_MONTH)) {
                 results.add(reservation);
             }
         }
