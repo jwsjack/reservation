@@ -164,6 +164,11 @@ public class ReservationsFragment extends Fragment {
             args.putBoolean(CaldroidFragment.ENABLE_SWIPE, true);
             args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true);
 
+
+
+            args.putInt( CaldroidFragment.START_DAY_OF_WEEK, CaldroidFragment.SUNDAY );
+
+
             // Uncomment this to customize startDayOfWeek
             // args.putInt(CaldroidFragment.START_DAY_OF_WEEK,
             // CaldroidFragment.TUESDAY); // Tuesday
@@ -175,6 +180,7 @@ public class ReservationsFragment extends Fragment {
 //            args.putInt(CaldroidFragment.THEME_RESOURCE, com.caldroid.R.style.CaldroidDefaultDark);
 
             caldroidFragment.setArguments(args);
+            getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.container_caldroid , caldroidFragment ).commit();
         }
 
         setCustomResourceForDates();
