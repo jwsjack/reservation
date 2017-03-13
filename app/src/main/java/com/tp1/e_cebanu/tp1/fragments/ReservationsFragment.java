@@ -3,12 +3,16 @@ package com.tp1.e_cebanu.tp1.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import android.icu.util.Output;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +29,7 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.tp1.e_cebanu.tp1.R;
+import com.tp1.e_cebanu.tp1.activities.MainActivity;
 import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
@@ -88,6 +93,12 @@ public class ReservationsFragment extends Fragment {
             caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
             caldroidFragment.setTextColorForDate(R.color.colorWhite, blueDate);
             caldroidFragment.setTextColorForDate(R.color.colorWhite, greenDate);
+//            Calendar cal = Calendar.getInstance();
+//
+//            // Min date is last 7 days
+//            cal.add(Calendar.DATE, -7);
+//            Date minDate = cal.getTime();
+//            caldroidFragment.setMinDate();
         }
     }
 
@@ -173,7 +184,7 @@ public class ReservationsFragment extends Fragment {
 //        t.replace(R.id.calendar1, caldroidFragment);
 //        t.commit();
 
-        // Setup listener
+        // Ajouter Reservation
         final CaldroidListener listener = new CaldroidListener() {
 
             @Override
@@ -185,30 +196,51 @@ public class ReservationsFragment extends Fragment {
                 // Obtenez l'inflateur de mise en page
                 LayoutInflater inflater = (LayoutInflater) MyApplication.getSystemService();
                 // Remplissez et définissez la mise en page de la boîte de dialogue
-                dialogBuilder.setTitle(getResources().getString(R.string.localData));
+                dialogBuilder.setTitle(getResources().getString(R.string.reservationData));
                 dialogBuilder.setCancelable(true);
-                dialogBuilder.setIcon(R.drawable.ic_action_users);
+                dialogBuilder.setIcon(R.drawable.ic_action_reservation_add);
                 //dialog form
                 final View dialogView = inflater.inflate(R.layout.fragment_reservation, null);
-                final EditText txtId = (EditText) dialogView.findViewById(R.id.etId);
-                txtId.setText("");
-                final EditText txtName = (EditText) dialogView.findViewById(R.id.etNom);
-                txtName.setText("");
-                final EditText txtLogin = (EditText) dialogView.findViewById(R.id.etLogin);
-                txtLogin.setText("");
-                final EditText txtPassword = (EditText) dialogView.findViewById(R.id.etPassword);
-                txtPassword.setText("");
-                //spinner role
-                final Spinner dynamicSpinner = (Spinner) dialogView.findViewById(R.id.etRole);
-
+                //spinner local
+                final Spinner dynamicSpinnerLocal = (Spinner) dialogView.findViewById(R.id.etLocal);
                 locals = getLocalsService().findAll();
                 localsNames = new String[locals.size()];
                 for (int i = 0; i < locals.size(); i++) {
-                    localsNames[i] = String.valueOf(locals.get(i).getNombre());
+                    localsNames[i] = String.valueOf(locals.get(i).getNombre()) + " - " + String.valueOf(locals.get(i).getTypeNom());
                 }
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
                         android.R.layout.simple_spinner_item, localsNames);
-                dynamicSpinner.setAdapter(adapter);
+                dynamicSpinnerLocal.setAdapter(adapter);
+                //afficher la date
+                // Show selected date
+                final TextView txtDate = (TextView) dialogView.findViewById(R.id.txtDate);
+                txtDate.setText(formatter.format(date));
+                final TextView txtDateTymeStamp = (TextView) dialogView.findViewById(R.id.txtDateTymeStamp);
+                txtDateTymeStamp.setText(String.valueOf(date.getTime()));
+
+
+
+
+
+
+
+
+//                final EditText txtId = (EditText) dialogView.findViewById(R.id.etId);
+//                txtId.setText("");
+//                final EditText txtName = (EditText) dialogView.findViewById(R.id.etNom);
+//                txtName.setText("");
+//
+//
+//
+//
+//
+//
+//
+//                final EditText txtLogin = (EditText) dialogView.findViewById(R.id.etLogin);
+//                txtLogin.setText("");
+//                final EditText txtPassword = (EditText) dialogView.findViewById(R.id.etPassword);
+//                txtPassword.setText("");
+
 
                 btUpdate = (Button) dialogView.findViewById(R.id.update);
                 btUpdate.setText(R.string.add);
@@ -229,7 +261,7 @@ public class ReservationsFragment extends Fragment {
                 // pour fermer le dialog
                 final AlertDialog ad = dialogBuilder.show();
 
-                btUpdate.setOnClickListener(new View.OnClickListener() {
+/*                btUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 //                        String nom = txtName.getText().toString();
@@ -253,7 +285,7 @@ public class ReservationsFragment extends Fragment {
 //                            ad.dismiss();
 //                        }
                     }
-                });
+                });*/
             }
 
             @Override

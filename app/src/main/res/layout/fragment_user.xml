@@ -102,7 +102,6 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/text_view_password"
             android:layout_below="@+id/text_view_password"
-            android:entries="@array/locations_types"
             android:padding="7dp"
             android:prompt="@string/roles_prompt" />
 

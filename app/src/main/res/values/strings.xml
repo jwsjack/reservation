@@ -45,7 +45,7 @@
     <string name="activity_title_home">Home</string>
     <string name="activity_title_authenticator">Authentication</string>
     <string name="activity_title_users">Manage users</string>
-    <string name="activity_title_reservation_add">Add new reservation</string>
+    <string name="activity_title_reservation_add">Add/Edit reservation</string>
     <string name="activity_title_reservations">Manage reservations</string>
     <string name="activity_title_reasons">Manage reasons</string>
     <string name="activity_title_locals">Manage locals</string>
@@ -102,12 +102,16 @@ aussi la modifier ou l’annuler.\n
 
 
     <!--Reservations-->
+    <string name="reservationData">Info reservation</string>
+    <string name="lbDateReservation">Date reservation</string>
+    <string name="setDate">Select date</string>
 
     <!--Locals-->
     <string name="lbLocal">Local number</string>
     <string name="lbType">Type</string>
     <string name="lbCapacity">Capacity</string>
     <string name="lbDescription">Description</string>
+    <string name="locals_prompt">Choose a local/place</string>
     <string name="action_save_local">Save local</string>
     <string name="localData">Info local</string>
     <string name="capacity">Capacity</string>

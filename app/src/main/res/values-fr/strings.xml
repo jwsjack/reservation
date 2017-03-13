@@ -21,6 +21,7 @@
     <string name="sale_reunion">Salle de réunion</string>
     <string name="classroom">Salle de cours</string>
     <string name="localData">Info du locale</string>
+    <string name="reservationData">Info de réservation</string>
     <string name="lbCountLines">Nombre d\'items:</string>
     <string name="local_prompt">Choisissez un lieu</string>
     <string name="filling_message">La valeur est vide du champ:</string>
@@ -77,4 +78,8 @@
     <string name="show_dialog">Ajouter une réservation</string>
     <string name="undo">Annuler</string>
     <string name="customize">Personnaliser</string>
+    <string name="locals_prompt">Choisissez un local / un lieu</string>
+    <string name="lbDateReservation">réservation</string>
+    <string name="setDate">Choisissez la date</string>
+    <string name="activity_title_reservation_add">Ajouter/Modifier une réservation</string>
 </resources>
