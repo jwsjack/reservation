@@ -58,14 +58,13 @@ public class ReasonXmlImpl implements ReasonDao {
         try {
             Document doc = xmlParser.getNodeListFromResources();
             NodeList nodeList = doc.getElementsByTagName("item");
-            Node newUser = reason.reasonToXmlMapper(doc);
             for (int temp = 0; temp < nodeList.getLength(); temp++) {
                 Node node = nodeList.item(temp);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == reason.getId()) {
-                        //Victor: TODO implement here. error can't replace node by element - different types
-                        doc.replaceChild(node, (Node) newUser);
+                        Node name = element.getElementsByTagName("name").item(0).getFirstChild();
+                        name.setNodeValue(reason.getName());
                     }
                 }
             }

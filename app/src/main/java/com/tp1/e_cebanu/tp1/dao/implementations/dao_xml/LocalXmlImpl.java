@@ -60,18 +60,23 @@ public class LocalXmlImpl implements LocalDao {
         try {
             Document doc = xmlParser.getNodeListFromResources();
             NodeList nodeList = doc.getElementsByTagName("item");
-            Node newNode = local.localToXmlMapper(doc);
             for (int temp = 0; temp < nodeList.getLength(); temp++) {
                 Node node = nodeList.item(temp);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == local.getId()) {
-                        //Victor: TODO implement here. error can't replace node by element - different types
-                        doc.replaceChild(node, newNode);
-//                        element.getElementsByTagName("name").item(0).setTextContent(user.getNom());
-//                        element.getElementsByTagName("login").item(0).setTextContent(user.getLogin());
-//                        element.getElementsByTagName("password").item(0).setTextContent(user.getPassword());
-//                        element.getElementsByTagName("role").item(0).setTextContent(String.valueOf(user.getRole()));
+
+                        Node name = element.getElementsByTagName("nombre").item(0).getFirstChild();
+                        name.setNodeValue(String.valueOf(local.getNombre()));
+
+                        Node type = element.getElementsByTagName("type").item(0).getFirstChild();
+                        type.setNodeValue(String.valueOf(local.getType()));
+
+                        Node capacite = element.getElementsByTagName("capacite").item(0).getFirstChild();
+                        capacite.setNodeValue(String.valueOf(local.getCapacite()));
+
+                        Node description = element.getElementsByTagName("description").item(0).getFirstChild();
+                        description.setNodeValue(String.valueOf(local.getDescription()));
                     }
                 }
             }

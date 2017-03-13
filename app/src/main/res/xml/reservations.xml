@@ -1,3 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <reservations>
+    <id></id>
+    <user></user>
+    <local></local>
+    <reason></reason>
+    <additional></additional>
+    <course></course>
+    <date></date>
+
 </reservations>

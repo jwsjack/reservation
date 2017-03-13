@@ -57,6 +57,43 @@ public class ReservationXmlImpl implements ReservationDao {
 
     @Override
     public void update(Reservation reservation) {
+        try {
+            Document doc = xmlParser.getNodeListFromResources();
+            NodeList nodeList = doc.getElementsByTagName("item");
+            for (int temp = 0; temp < nodeList.getLength(); temp++) {
+                Node node = nodeList.item(temp);
+                if (node.getNodeType() == Node.ELEMENT_NODE) {
+                    Element element = (Element) node;
+                    if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == reservation.getId()) {
+
+                        Node user = element.getElementsByTagName("user").item(0).getFirstChild();
+                        user.setNodeValue(String.valueOf(reservation.getUser().getId()));
+
+                        Node local = element.getElementsByTagName("local").item(0).getFirstChild();
+                        local.setNodeValue(String.valueOf(reservation.getLocal().getId()));
+
+                        Node reason = element.getElementsByTagName("reason").item(0).getFirstChild();
+                        reason.setNodeValue(String.valueOf(reservation.getReason().getId()));
+
+                        Node additionalReason = element.getElementsByTagName("additional").item(0).getFirstChild();
+                        additionalReason.setNodeValue(reservation.getAdditionalReason());
+
+                        Node course = element.getElementsByTagName("course").item(0).getFirstChild();
+                        course.setNodeValue(reservation.getCourse());
+
+                        Node date = element.getElementsByTagName("date").item(0).getFirstChild();
+                        date.setNodeValue(reservation.getDate().toString());
+                    }
+                }
+            }
+            xmlParser.saveDocument(doc);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
 
     }
 
