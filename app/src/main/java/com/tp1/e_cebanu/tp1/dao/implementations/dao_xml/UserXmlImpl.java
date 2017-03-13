@@ -56,17 +56,22 @@ public class UserXmlImpl implements UserDao {
         try {
             Document doc = xmlParser.getNodeListFromResources();
             NodeList nodeList = doc.getElementsByTagName("item");
-            Node newUser = user.userToXmlMapper(doc);
             for (int temp = 0; temp < nodeList.getLength(); temp++) {
                 Node node = nodeList.item(temp);
                 if (node.getNodeType() == Node.ELEMENT_NODE) {
                     Element element = (Element) node;
                     if (Integer.parseInt(element.getElementsByTagName("id").item(0).getTextContent()) == user.getId()) {
-                        doc.replaceChild(node, newUser);
-//                        element.getElementsByTagName("name").item(0).setTextContent(user.getNom());
-//                        element.getElementsByTagName("login").item(0).setTextContent(user.getLogin());
-//                        element.getElementsByTagName("password").item(0).setTextContent(user.getPassword());
-//                        element.getElementsByTagName("role").item(0).setTextContent(String.valueOf(user.getRole()));
+                        Node name = element.getElementsByTagName("name").item(0).getFirstChild();
+                        name.setNodeValue(user.getNom());
+
+                        Node login = element.getElementsByTagName("login").item(0).getFirstChild();
+                        login.setNodeValue(user.getLogin());
+
+                        Node password = element.getElementsByTagName("password").item(0).getFirstChild();
+                        password.setNodeValue(user.getPassword());
+
+                        Node role = element.getElementsByTagName("role").item(0).getFirstChild();
+                        role.setNodeValue(String.valueOf(user.getRole()));
                     }
                 }
             }
