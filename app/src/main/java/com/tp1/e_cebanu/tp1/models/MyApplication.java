@@ -50,5 +50,9 @@ public class MyApplication extends Application {
         return MyApplication.systemService;
     }
 
+//    public static getFragmentSupManager() {
+//        return m
+//    }
+
 
 }

@@ -159,4 +159,9 @@ aussi la modifier ou l’annuler.\n
     <string name="success_updated">Successfully updated</string>
     <string name="success_deleted">Successfully deleted</string>
 
+    <!--CALDROID-->
+    <string name="customize">Customize</string>
+    <string name="show_dialog">Show Dialog</string>
+    <string name="undo">Undo</string>
+
 </resources>
