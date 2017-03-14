@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +39,10 @@ import java.util.List;
 
 import static com.tp1.e_cebanu.tp1.models.AppService.getLocalsService;
 import static com.tp1.e_cebanu.tp1.models.AppService.getReasonsService;
+import static com.tp1.e_cebanu.tp1.models.AppService.getReservationObject;
+import static com.tp1.e_cebanu.tp1.models.AppService.getReservationService;
 import static com.tp1.e_cebanu.tp1.models.AppService.getUsersService;
+import static com.tp1.e_cebanu.tp1.util.UIUtils.refreshFragment;
 
 public class ReservationsFragment extends Fragment {
 
@@ -272,29 +276,42 @@ public class ReservationsFragment extends Fragment {
                 btUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        //Victor: TODO here add logic
                         Toast.makeText(getContext(), "RESERVATION ADD",
                                 Toast.LENGTH_SHORT).show();
-//                        String nom = txtName.getText().toString();
-//                        String login = txtLogin.getText().toString();
-//                        String password = txtPassword.getText().toString();
-//                        int role = dynamicSpinner.getSelectedItemPosition();
+                        int reason = dynamicSpinnerReason.getSelectedItemPosition();
+                        int user = dynamicSpinnerUser.getSelectedItemPosition();
+                        int local = dynamicSpinnerLocal.getSelectedItemPosition();
+
+                        int hourFrom = dynamicSpinnerHoursFrom.getSelectedItemPosition();
+                        int hourTo = dynamicSpinnerHoursTo.getSelectedItemPosition();
+
+                        int minutesFrom = dynamicSpinnerMinutesFrom.getSelectedItemPosition();
+                        int minutesTo = dynamicSpinnerMinutesTo.getSelectedItemPosition();
+
+                        Calendar dateFrom = Calendar.getInstance();
+                        Calendar dateTo = Calendar.getInstance();
+                        dateFrom.setTimeInMillis(Long.parseLong(txtDateTymeStamp.getText().toString()));
+                        dateTo.setTimeInMillis(Long.parseLong(txtDateTymeStamp.getText().toString()));
+
+                        dateFrom.set(Calendar.HOUR, hourFrom);
+                        dateFrom.set(Calendar.MINUTE, minutesFrom);
+
+                        dateTo.set(Calendar.HOUR, hourTo);
+                        dateTo.set(Calendar.MINUTE, minutesTo);
+
+
+                        String otherReason = txtOtherReason.getText().toString();
+                        String course = txtCours.getText().toString();
 //                        //validation
-//                        Boolean valide = false;
-//                        valide = UIUtils.checkFieldValueString(nom, "Name");
-//                        if (valide) {
-//                            valide = UIUtils.checkFieldValueString(login, "Login");
-//                        }
-//                        if (valide) {
-//                            valide = UIUtils.checkFieldValueString(password, "Password");
-//                        }
-//                        if (role > roles.size()-1) {
-//                            valide = false;
-//                        }
-//                        if (valide) {
-//                            update(0, nom, login, password, role);
-//                            ad.dismiss();
-//                        }
+                        Boolean valide = false;
+                        valide = UIUtils.checkFieldValueString(otherReason, "Other Reason");
+                        if (valide) {
+                            valide = UIUtils.checkFieldValueString(course, "Course");
+                        }
+                        if (valide) {
+                            update(0, local, user, reason, otherReason, course, dateFrom, dateTo);
+                            ad.dismiss();
+                        }
                     }
                 });
             }
@@ -468,4 +485,27 @@ public class ReservationsFragment extends Fragment {
 
         return dialogView;
     }
+
+    private void update(int id, int local, int user, int reason, String otherReason, String course, Calendar dateFrom, Calendar dateTo) {
+
+        Reservation reservation = getReservationObject();
+        reservation.setCourse(course);
+        reservation.setAdditionalReason(otherReason);
+        reservation.setLocal(getLocalsService().findById(local));
+        reservation.setUser(getUsersService().findById(user));
+        reservation.setReason(getReasonsService().findById(reason));
+        reservation.setDateFrom(dateFrom);
+        reservation.setDateTo(dateTo);
+        if (id != 0) {
+            reservation.setId(id);
+            getReservationService().update(reservation);
+            Toast.makeText(context, getResources().getString(R.string.success_created), Toast.LENGTH_SHORT).show();
+            refreshFragment(new UsersFragment(), getActivity(), "users");
+        } else {
+            getReservationService().create(reservation);
+            Toast.makeText(context, getResources().getString(R.string.success_updated), Toast.LENGTH_SHORT).show();
+            refreshFragment(new ReservationsFragment(), getActivity(), "reservations");
+        }
+    }
+
 }

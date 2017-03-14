@@ -146,7 +146,12 @@ public class Reservation {
         Element course = doc.createElement("course");
         Element additionalReason = doc.createElement("additional");
 
-        id.setTextContent(String.valueOf(getId()));
+        if (getId() == 0) {
+            //generate ID
+            id.setTextContent(String.valueOf(hashCode()));
+        } else {
+            id.setTextContent(String.valueOf(getId()));
+        }
         user.setTextContent(String.valueOf(getUser().getId()));
         local.setTextContent(String.valueOf(getLocal().getId()));
         reason.setTextContent(String.valueOf(getReason().getId()));
