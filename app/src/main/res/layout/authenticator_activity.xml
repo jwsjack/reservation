@@ -20,6 +20,13 @@
             android:paddingRight="15dp"
             android:paddingTop="5dp">
 
+            <ImageView
+                android:id="@+id/reserved_img"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:src="@drawable/reserved_logo"
+                android:layout_weight="0.26" />
+
             <TextView
                 style="@style/ShadowText"
                 android:layout_width="wrap_content"
