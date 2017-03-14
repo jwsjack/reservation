@@ -3,17 +3,12 @@ package com.tp1.e_cebanu.tp1.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 
-import android.icu.util.Output;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,30 +24,30 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.tp1.e_cebanu.tp1.R;
-import com.tp1.e_cebanu.tp1.activities.MainActivity;
 import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
+import com.tp1.e_cebanu.tp1.models.Reason;
+import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.Date;
 import java.util.List;
 
 import static com.tp1.e_cebanu.tp1.models.AppService.getLocalsService;
-import static com.tp1.e_cebanu.tp1.models.AppService.getRolesService;
+import static com.tp1.e_cebanu.tp1.models.AppService.getReasonsService;
+import static com.tp1.e_cebanu.tp1.models.AppService.getUsersService;
 
 public class ReservationsFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private Context context;
     private List<Local> locals;
+    private List<User> users;
+    private List<Reason> reasons;
     private String[] localsNames;
+    private String[] usersNames;
+    private String[] reasonsNames;
+    private Integer[] hours = new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23};
+    private Integer[] minutes = new Integer[]{00, 30};
     // boutons
     private Button btAdd, btUpdate, btDelete;
 
@@ -100,20 +95,12 @@ public class ReservationsFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static ReservationsFragment newInstance(String param1, String param2) {
         ReservationsFragment fragment = new ReservationsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -150,7 +137,7 @@ public class ReservationsFragment extends Fragment {
             args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
             args.putBoolean(CaldroidFragment.ENABLE_SWIPE, true);
             args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true);
-            args.putInt( CaldroidFragment.START_DAY_OF_WEEK, CaldroidFragment.SUNDAY );
+            args.putInt(CaldroidFragment.START_DAY_OF_WEEK, CaldroidFragment.SUNDAY);
 
 
             // Uncomment this to customize startDayOfWeek
@@ -164,15 +151,10 @@ public class ReservationsFragment extends Fragment {
 //            args.putInt(CaldroidFragment.THEME_RESOURCE, com.caldroid.R.style.CaldroidDefaultDark);
 
             caldroidFragment.setArguments(args);
-            getActivity().getSupportFragmentManager().beginTransaction().replace( R.id.container_caldroid , caldroidFragment ).commit();
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.container_caldroid, caldroidFragment).commit();
         }
 
         setCustomResourceForDates();
-
-        // Attach to the activity
-//        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
-//        t.replace(R.id.calendar1, caldroidFragment);
-//        t.commit();
 
         // Ajouter Reservation
         final CaldroidListener listener = new CaldroidListener() {
@@ -198,39 +180,69 @@ public class ReservationsFragment extends Fragment {
                 for (int i = 0; i < locals.size(); i++) {
                     localsNames[i] = String.valueOf(locals.get(i).getNombre()) + " - " + String.valueOf(locals.get(i).getTypeNom());
                 }
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),
+                ArrayAdapter<String> adapterLocals = new ArrayAdapter<String>(getContext(),
                         android.R.layout.simple_spinner_item, localsNames);
-                dynamicSpinnerLocal.setAdapter(adapter);
+                dynamicSpinnerLocal.setAdapter(adapterLocals);
                 //afficher la date
                 // Show selected date
                 final TextView txtDate = (TextView) dialogView.findViewById(R.id.txtDate);
                 txtDate.setText(formatter.format(date));
                 final TextView txtDateTymeStamp = (TextView) dialogView.findViewById(R.id.txtDateTymeStamp);
                 txtDateTymeStamp.setText(String.valueOf(date.getTime()));
+                //spinner pour l'heures et minutes from
+                final Spinner dynamicSpinnerHoursFrom = (Spinner) dialogView.findViewById(R.id.etHourFrom);
+                ArrayAdapter<Integer> adapterHoursFrom = new ArrayAdapter<Integer>(getContext(),
+                        android.R.layout.simple_spinner_item, hours);
+                dynamicSpinnerHoursFrom.setAdapter(adapterHoursFrom);
+                dynamicSpinnerHoursFrom.setSelection(8);
+                final Spinner dynamicSpinnerMinutesFrom = (Spinner) dialogView.findViewById(R.id.etMinutesFrom);
+                ArrayAdapter<Integer> adapterMinutesFrom = new ArrayAdapter<Integer>(getContext(),
+                        android.R.layout.simple_spinner_item, minutes);
+                dynamicSpinnerMinutesFrom.setAdapter(adapterMinutesFrom);
+                dynamicSpinnerMinutesFrom.setSelection(0);
+                //spinner pour l'heures et minutes to
+                final Spinner dynamicSpinnerHoursTo = (Spinner) dialogView.findViewById(R.id.etHourTo);
+                ArrayAdapter<Integer> adapterHoursTo = new ArrayAdapter<Integer>(getContext(),
+                        android.R.layout.simple_spinner_item, hours);
+                dynamicSpinnerHoursTo.setAdapter(adapterHoursTo);
+                dynamicSpinnerHoursTo.setSelection(9);
+                final Spinner dynamicSpinnerMinutesTo = (Spinner) dialogView.findViewById(R.id.etMinutesTo);
+                ArrayAdapter<Integer> adapterMinutesTo = new ArrayAdapter<Integer>(getContext(),
+                        android.R.layout.simple_spinner_item, minutes);
+                dynamicSpinnerMinutesTo.setAdapter(adapterMinutesTo);
+                dynamicSpinnerMinutesTo.setSelection(1);
 
+                //spinner users
+                final Spinner dynamicSpinnerUser = (Spinner) dialogView.findViewById(R.id.etUser);
+                users = getUsersService().findAll();
+                usersNames = new String[users.size()];
+                int spinnerPositionUser = 0;
+                for (int i = 0; i < users.size(); i++) {
+                    usersNames[i] = String.valueOf(users.get(i).getNom());
+                }
+                ArrayAdapter<String> adapterUsers = new ArrayAdapter<String>(getContext(),
+                        android.R.layout.simple_spinner_item, usersNames);
+                dynamicSpinnerUser.setAdapter(adapterUsers);
+                dynamicSpinnerUser.setSelection(spinnerPositionUser);
 
+                //spinner reasons
+                final Spinner dynamicSpinnerReason = (Spinner) dialogView.findViewById(R.id.etReason);
+                reasons = getReasonsService().findAll();
+                reasonsNames = new String[reasons.size()];
+                int spinnerPositionReason = 0;
+                for (int i = 0; i < reasons.size(); i++) {
+                    reasonsNames[i] = String.valueOf(reasons.get(i).getName());
+                }
+                ArrayAdapter<String> adapterReasons = new ArrayAdapter<String>(getContext(),
+                        android.R.layout.simple_spinner_item, reasonsNames);
+                dynamicSpinnerReason.setAdapter(adapterReasons);
+                dynamicSpinnerReason.setSelection(spinnerPositionReason);
 
-
-
-
-
-
-//                final EditText txtId = (EditText) dialogView.findViewById(R.id.etId);
-//                txtId.setText("");
-//                final EditText txtName = (EditText) dialogView.findViewById(R.id.etNom);
-//                txtName.setText("");
-//
-//
-//
-//
-//
-//
-//
-//                final EditText txtLogin = (EditText) dialogView.findViewById(R.id.etLogin);
-//                txtLogin.setText("");
-//                final EditText txtPassword = (EditText) dialogView.findViewById(R.id.etPassword);
-//                txtPassword.setText("");
-
+                // autre champs
+                final EditText txtOtherReason = (EditText) dialogView.findViewById(R.id.etOtherReason);
+                txtOtherReason.setText("");
+                final EditText txtCours = (EditText) dialogView.findViewById(R.id.etCours);
+                txtCours.setText("");
 
                 btUpdate = (Button) dialogView.findViewById(R.id.update);
                 btUpdate.setText(R.string.add);
@@ -251,9 +263,12 @@ public class ReservationsFragment extends Fragment {
                 // pour fermer le dialog
                 final AlertDialog ad = dialogBuilder.show();
 
-/*                btUpdate.setOnClickListener(new View.OnClickListener() {
+                btUpdate.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //Victor: TODO here add logic
+                        Toast.makeText(getContext(), "RESERVATION ADD",
+                                Toast.LENGTH_SHORT).show();
 //                        String nom = txtName.getText().toString();
 //                        String login = txtLogin.getText().toString();
 //                        String password = txtPassword.getText().toString();
@@ -275,30 +290,30 @@ public class ReservationsFragment extends Fragment {
 //                            ad.dismiss();
 //                        }
                     }
-                });*/
+                });
             }
 
             @Override
             public void onChangeMonth(int month, int year) {
-                String text = "month: " + month + " year: " + year;
-                Toast.makeText(getContext(), text,
-                        Toast.LENGTH_SHORT).show();
+//                String text = "month: " + month + " year: " + year;
+//                Toast.makeText(getContext(), text,
+//                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onLongClickDate(Date date, View view) {
-                Toast.makeText(getContext(),
-                        "Long click " + formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(),
+//                        "Long click " + formatter.format(date),
+//                        Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onCaldroidViewCreated() {
-                if (caldroidFragment.getLeftArrowButton() != null) {
-                    Toast.makeText(getContext(),
-                            "Caldroid view is created", Toast.LENGTH_SHORT)
-                            .show();
-                }
+//                if (caldroidFragment.getLeftArrowButton() != null) {
+//                    Toast.makeText(getContext(),
+//                            "Caldroid view is created", Toast.LENGTH_SHORT)
+//                            .show();
+//                }
             }
 
         };
@@ -308,7 +323,7 @@ public class ReservationsFragment extends Fragment {
 
         final TextView textView = (TextView) dialogView.findViewById(R.id.textview);
 
-        final Button customizeButton = (Button) dialogView.findViewById(R.id.customize_button);
+        /**final Button customizeButton = (Button) dialogView.findViewById(R.id.customize_button);
 
         // Customize the calendar
         customizeButton.setOnClickListener(new View.OnClickListener() {
@@ -391,9 +406,9 @@ public class ReservationsFragment extends Fragment {
 
                 textView.setText(text);
             }
-        });
+        });*/
 
-        Button showDialogButton = (Button) dialogView.findViewById(R.id.show_dialog_button);
+        Button showDialogButton = (Button) dialogView.findViewById(R.id.add_reservation);
 
         final Bundle state = savedInstanceState;
         showDialogButton.setOnClickListener(new View.OnClickListener() {
@@ -439,14 +454,10 @@ public class ReservationsFragment extends Fragment {
         });
 
 
-
         // ---------------------- CALDROID - ADD RESERVATION ------------------------
 
 
         // ---------------------- RESERVATIONS LIST ----------------
-        // Victor: TODO calendar on this page with colors for already reserved days
-
-
 
 
         return dialogView;

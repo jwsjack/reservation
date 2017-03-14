@@ -82,4 +82,10 @@
     <string name="lbDateReservation">réservation</string>
     <string name="setDate">Choisissez la date</string>
     <string name="activity_title_reservation_add">Ajouter/Modifier une réservation</string>
+    <string name="hourFrom">de</string>
+    <string name="hourTo">à</string>
+    <string name="lbHours">Heures</string>
+    <string name="lbFor">Pour</string>
+    <string name="lbOtherReason">Autre raison</string>
+    <string name="lbCours">Cours</string>
 </resources>

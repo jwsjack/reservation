@@ -105,6 +105,12 @@ aussi la modifier ou l’annuler.\n
     <string name="reservationData">Info reservation</string>
     <string name="lbDateReservation">Date reservation</string>
     <string name="setDate">Select date</string>
+    <string name="lbHours">Hours</string>
+    <string name="hourFrom">form</string>
+    <string name="hourTo">to</string>
+    <string name="lbFor">For</string>
+    <string name="lbOtherReason">Other reason</string>
+    <string name="lbCours">Cours</string>
 
     <!--Locals-->
     <string name="lbLocal">Local number</string>
