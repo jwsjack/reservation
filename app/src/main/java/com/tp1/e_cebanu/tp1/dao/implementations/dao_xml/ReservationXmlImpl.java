@@ -81,8 +81,11 @@ public class ReservationXmlImpl implements ReservationDao {
                         Node course = element.getElementsByTagName("course").item(0).getFirstChild();
                         course.setNodeValue(reservation.getCourse());
 
-                        Node date = element.getElementsByTagName("date").item(0).getFirstChild();
-                        date.setNodeValue(String.valueOf(reservation.getDate().getTimeInMillis()));
+                        Node dateFrom = element.getElementsByTagName("date_from").item(0).getFirstChild();
+                        dateFrom.setNodeValue(String.valueOf(reservation.getDateFrom().getTimeInMillis()));
+
+                        Node dateTo = element.getElementsByTagName("date_to").item(0).getFirstChild();
+                        dateTo.setNodeValue(String.valueOf(reservation.getDateTo().getTimeInMillis()));
                     }
                 }
             }
@@ -131,9 +134,9 @@ public class ReservationXmlImpl implements ReservationDao {
         List<Reservation> reservations = findAll();
         List<Reservation> results = new ArrayList<>();
         for (Reservation reservation: reservations) {
-            if (reservation.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR)
-                    && reservation.getDate().get(Calendar.MONTH) == date.get(Calendar.MONTH)
-                    && reservation.getDate().get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)
+            if (reservation.getDateFrom().get(Calendar.YEAR) == date.get(Calendar.YEAR)
+                    && reservation.getDateFrom().get(Calendar.MONTH) == date.get(Calendar.MONTH)
+                    && reservation.getDateFrom().get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)
                     ) {
                 results.add(reservation);
             }
