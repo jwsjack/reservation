@@ -42,14 +42,6 @@ import java.util.List;
 import static com.tp1.e_cebanu.tp1.models.AppService.getLocalsService;
 import static com.tp1.e_cebanu.tp1.models.AppService.getRolesService;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ReservationsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ReservationsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ReservationsFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -70,7 +62,6 @@ public class ReservationsFragment extends Fragment {
     private CaldroidFragment caldroidFragment;
     private CaldroidFragment dialogCaldroidFragment;
 
-    private OnFragmentInteractionListener mListener;
 
     public ReservationsFragment() {
         // Required empty public constructor
@@ -81,6 +72,7 @@ public class ReservationsFragment extends Fragment {
 
         int firstDay = cal.getActualMinimum(Calendar.DATE);
         int lastDay = cal.getActualMaximum(Calendar.DATE);
+
 
         ColorDrawable gray = new ColorDrawable(Color.GRAY);
         ColorDrawable green = new ColorDrawable(Color.GREEN);
@@ -100,32 +92,6 @@ public class ReservationsFragment extends Fragment {
                 caldroidFragment.setDisableDates(disabled);
             }
         }
-
-
-/*
-        // Min date is last 7 days
-        cal.add(Calendar.DATE, -7);
-        Date blueDate = cal.getTime();
-
-        // Max date is next 7 days
-        cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 7);
-        Date greenDate = cal.getTime();
-
-        if (caldroidFragment != null) {
-            ColorDrawable blue = new ColorDrawable(UIUtils.getColor(R.color.colorInfo));
-            ColorDrawable green = new ColorDrawable(Color.GREEN);
-            caldroidFragment.setBackgroundDrawableForDate(blue, blueDate);
-            caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
-            caldroidFragment.setTextColorForDate(R.color.colorWhite, blueDate);
-            caldroidFragment.setTextColorForDate(R.color.colorWhite, greenDate);
-//            Calendar cal = Calendar.getInstance();
-//
-//            // Min date is last 7 days
-//            cal.add(Calendar.DATE, -7);
-//            Date minDate = cal.getTime();
-//            caldroidFragment.setMinDate();
-        }*/
     }
 
     /**
@@ -189,9 +155,6 @@ public class ReservationsFragment extends Fragment {
             args.putInt(CaldroidFragment.YEAR, cal.get(Calendar.YEAR));
             args.putBoolean(CaldroidFragment.ENABLE_SWIPE, true);
             args.putBoolean(CaldroidFragment.SIX_WEEKS_IN_CALENDAR, true);
-
-
-
             args.putInt( CaldroidFragment.START_DAY_OF_WEEK, CaldroidFragment.SUNDAY );
 
 
@@ -445,6 +408,17 @@ public class ReservationsFragment extends Fragment {
                 // Setup caldroid to use as dialog
                 dialogCaldroidFragment = new CaldroidFragment();
                 dialogCaldroidFragment.setCaldroidListener(listener);
+                Calendar cal = Calendar.getInstance();
+                // Min date is last is current day
+                cal.add(Calendar.DATE, 0);
+                Date blueDate = cal.getTime();
+
+                // Max date is next 30 days
+                cal = Calendar.getInstance();
+                cal.add(Calendar.DATE, 30);
+                Date greenDate = cal.getTime();
+                dialogCaldroidFragment.setMinDate(blueDate);
+                dialogCaldroidFragment.setMaxDate(greenDate);
 
                 // If activity is recovered from rotation
                 final String dialogTag = "CALDROID_DIALOG_FRAGMENT";
@@ -481,44 +455,5 @@ public class ReservationsFragment extends Fragment {
 
 
         return dialogView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
