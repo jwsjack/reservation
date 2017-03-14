@@ -63,24 +63,27 @@ public class ReservationsFragment extends Fragment {
     private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
 
-        // Min date is last is current day
-        cal.add(Calendar.DATE, 0);
-        Date blueDate = cal.getTime();
+        int firstDay = cal.getActualMinimum(Calendar.DATE);
+        int lastDay = cal.getActualMaximum(Calendar.DATE);
 
-        // Max date is next 30 days
-        cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 30);
-        Date greenDate = cal.getTime();
 
-        if (caldroidFragment != null) {
-            ColorDrawable blue = new ColorDrawable(UIUtils.getColor(R.color.colorInfo));
-            ColorDrawable green = new ColorDrawable(Color.GREEN);
-            caldroidFragment.setBackgroundDrawableForDate(blue, blueDate);
-            caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
-            caldroidFragment.setTextColorForDate(R.color.colorWhite, blueDate);
-            caldroidFragment.setTextColorForDate(R.color.colorWhite, greenDate);
-            caldroidFragment.setMinDate(null);
-            caldroidFragment.setMaxDate(null);
+        ColorDrawable gray = new ColorDrawable(Color.GRAY);
+        ColorDrawable green = new ColorDrawable(Color.GREEN);
+        ArrayList<Date> disabled = new ArrayList<>();
+
+        for (int i = firstDay; i <= lastDay; i++) {
+            if (caldroidFragment != null) {
+                cal.set(Calendar.DAY_OF_MONTH, i);
+                List<Reservation> reservations = AppService.getReservationService().findByDate(cal);
+                Date date = cal.getTime();
+                ColorDrawable color = reservations.isEmpty() ? green : gray;
+                caldroidFragment.setBackgroundDrawableForDate(color, date);
+                caldroidFragment.setTextColorForDate(R.color.colorWhite, date);
+                if (!reservations.isEmpty()) {
+                    disabled.add(date);
+                }
+                caldroidFragment.setDisableDates(disabled);
+            }
         }
     }
 
