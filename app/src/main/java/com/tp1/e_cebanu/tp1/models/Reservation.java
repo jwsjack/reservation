@@ -31,9 +31,11 @@ public class Reservation {
     private Local local;
     private Reason reason;
     private String additionalReason, course;
-    private Calendar date;
-    public static final String FILENAME = "reservations.xml";
 
+    private Calendar dateFrom;
+
+    private Calendar dateTo;
+    public static final String FILENAME = "reservations.xml";
     public Reservation() {}
 
     public int getId() {
@@ -84,13 +86,20 @@ public class Reservation {
         this.course = course;
     }
 
-
-    public Calendar getDate() {
-        return date;
+    public Calendar getDateFrom() {
+        return dateFrom;
     }
 
-    public void setDate(Calendar date) {
-        this.date = date;
+    public void setDateFrom(Calendar dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public Calendar getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(Calendar dateTo) {
+        this.dateTo = dateTo;
     }
 
     public Reservation xmlToReservationMapper(Node node) {
@@ -99,22 +108,29 @@ public class Reservation {
             Element eElement = (Element) node;
             int userId = Integer.parseInt(eElement.getElementsByTagName("user").item(0).getTextContent());
             int localId = Integer.parseInt(eElement.getElementsByTagName("local").item(0).getTextContent());
-            int reasonId = Integer.parseInt(eElement.getElementsByTagName("local").item(0).getTextContent());
+            int reasonId = Integer.parseInt(eElement.getElementsByTagName("reason").item(0).getTextContent());
 
             User user = AppService.getUsersService().findById(userId);
             Local local = AppService.getLocalsService().findById(localId);
             Reason reason = AppService.getReasonsService().findById(reasonId);
-            long timeInMillis = Integer.parseInt(eElement.getElementsByTagName("date").item(0).getTextContent());
 
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTimeInMillis(timeInMillis);
+            long timeInMillisFrom = Integer.parseInt(eElement.getElementsByTagName("date_from").item(0).getTextContent());
+            long timeInMillisTo = Integer.parseInt(eElement.getElementsByTagName("date_to").item(0).getTextContent());
+
+            Calendar calendarFrom = Calendar.getInstance();
+            calendarFrom.setTimeInMillis(timeInMillisFrom);
+
+            Calendar calendarTo = Calendar.getInstance();
+            calendarTo.setTimeInMillis(timeInMillisTo);
+
             reservation.setId(Integer.parseInt(eElement.getElementsByTagName("id").item(0).getTextContent()));
             reservation.setLocal(local);
             reservation.setUser(user);
             reservation.setReason(reason);
             reservation.setAdditionalReason(eElement.getElementsByTagName("autreRaison").item(0).getTextContent());
             reservation.setCourse(eElement.getElementsByTagName("cours").item(0).getTextContent());
-            reservation.setDate(calendar);
+            reservation.setDateFrom(calendarFrom);
+            reservation.setDateTo(calendarTo);
         }
         return reservation;
     }
@@ -124,7 +140,8 @@ public class Reservation {
         Element id = doc.createElement("id");
         Element user = doc.createElement("user");
         Element local = doc.createElement("local");
-        Element date = doc.createElement("date");
+        Element dateFrom = doc.createElement("date_from");
+        Element dateTo = doc.createElement("date_to");
         Element reason = doc.createElement("reason");
         Element course = doc.createElement("course");
         Element additionalReason = doc.createElement("additional");
@@ -135,7 +152,8 @@ public class Reservation {
         reason.setTextContent(String.valueOf(getReason().getId()));
         course.setTextContent(getCourse());
         additionalReason.setTextContent(getAdditionalReason());
-        date.setTextContent(String.valueOf(getDate().getTimeInMillis()));
+        dateFrom.setTextContent(String.valueOf(getDateFrom().getTimeInMillis()));
+        dateTo.setTextContent(String.valueOf(getDateTo().getTimeInMillis()));
 
         item.appendChild(id);
         item.appendChild(user);
@@ -143,7 +161,8 @@ public class Reservation {
         item.appendChild(reason);
         item.appendChild(course);
         item.appendChild(additionalReason);
-        item.appendChild(date);
+        item.appendChild(dateFrom);
+        item.appendChild(dateTo);
         return item;
     }
 }
