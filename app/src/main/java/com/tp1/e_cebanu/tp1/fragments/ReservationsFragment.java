@@ -30,8 +30,10 @@ import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.tp1.e_cebanu.tp1.R;
 import com.tp1.e_cebanu.tp1.activities.MainActivity;
+import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
+import com.tp1.e_cebanu.tp1.models.Reservation;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.Date;
@@ -77,6 +79,30 @@ public class ReservationsFragment extends Fragment {
     private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
 
+        int firstDay = cal.getActualMinimum(Calendar.DATE);
+        int lastDay = cal.getActualMaximum(Calendar.DATE);
+
+        ColorDrawable gray = new ColorDrawable(Color.GRAY);
+        ColorDrawable green = new ColorDrawable(Color.GREEN);
+        ArrayList<Date> disabled = new ArrayList<>();
+
+        for (int i = firstDay; i <= lastDay; i++) {
+            if (caldroidFragment != null) {
+                cal.set(Calendar.DAY_OF_MONTH, i);
+                List<Reservation> reservations = AppService.getReservationService().findByDate(cal);
+                Date date = cal.getTime();
+                ColorDrawable color = reservations.isEmpty() ? green : gray;
+                caldroidFragment.setBackgroundDrawableForDate(color, date);
+                caldroidFragment.setTextColorForDate(R.color.colorWhite, date);
+                if (!reservations.isEmpty()) {
+                    disabled.add(date);
+                }
+                caldroidFragment.setDisableDates(disabled);
+            }
+        }
+
+
+/*
         // Min date is last 7 days
         cal.add(Calendar.DATE, -7);
         Date blueDate = cal.getTime();
@@ -99,7 +125,7 @@ public class ReservationsFragment extends Fragment {
 //            cal.add(Calendar.DATE, -7);
 //            Date minDate = cal.getTime();
 //            caldroidFragment.setMinDate();
-        }
+        }*/
     }
 
     /**

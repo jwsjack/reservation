@@ -114,8 +114,8 @@ public class Reservation {
             Local local = AppService.getLocalsService().findById(localId);
             Reason reason = AppService.getReasonsService().findById(reasonId);
 
-            long timeInMillisFrom = Integer.parseInt(eElement.getElementsByTagName("date_from").item(0).getTextContent());
-            long timeInMillisTo = Integer.parseInt(eElement.getElementsByTagName("date_to").item(0).getTextContent());
+            long timeInMillisFrom = Long.parseLong(eElement.getElementsByTagName("date_from").item(0).getTextContent());
+            long timeInMillisTo = Long.parseLong(eElement.getElementsByTagName("date_to").item(0).getTextContent());
 
             Calendar calendarFrom = Calendar.getInstance();
             calendarFrom.setTimeInMillis(timeInMillisFrom);
@@ -127,8 +127,8 @@ public class Reservation {
             reservation.setLocal(local);
             reservation.setUser(user);
             reservation.setReason(reason);
-            reservation.setAdditionalReason(eElement.getElementsByTagName("autreRaison").item(0).getTextContent());
-            reservation.setCourse(eElement.getElementsByTagName("cours").item(0).getTextContent());
+            reservation.setAdditionalReason(eElement.getElementsByTagName("additional").item(0).getTextContent());
+            reservation.setCourse(eElement.getElementsByTagName("course").item(0).getTextContent());
             reservation.setDateFrom(calendarFrom);
             reservation.setDateTo(calendarTo);
         }
