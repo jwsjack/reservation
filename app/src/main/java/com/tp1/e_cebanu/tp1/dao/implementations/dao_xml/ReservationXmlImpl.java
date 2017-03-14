@@ -3,6 +3,7 @@ package com.tp1.e_cebanu.tp1.dao.implementations.dao_xml;
 import com.tp1.e_cebanu.tp1.dao.interfaces.ReservationDao;
 import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.Reservation;
+import com.tp1.e_cebanu.tp1.models.User;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -130,7 +131,7 @@ public class ReservationXmlImpl implements ReservationDao {
     }
 
     @Override
-    public List<Reservation> findByDate(Calendar date) {
+    public List<Reservation> findByDate(Calendar date, User user) {
         List<Reservation> reservations = findAll();
         List<Reservation> results = new ArrayList<>();
         for (Reservation reservation: reservations) {
@@ -138,7 +139,9 @@ public class ReservationXmlImpl implements ReservationDao {
                     && reservation.getDateFrom().get(Calendar.MONTH) == date.get(Calendar.MONTH)
                     && reservation.getDateFrom().get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)
                     ) {
-                results.add(reservation);
+                if (user.isSuperAdmin() || user.equals(reservation.getUser())) {
+                    results.add(reservation);
+                }
             }
         }
         return results;

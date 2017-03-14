@@ -1,6 +1,8 @@
 package com.tp1.e_cebanu.tp1.dao.interfaces;
 
 import com.tp1.e_cebanu.tp1.models.Reservation;
+import com.tp1.e_cebanu.tp1.models.User;
+
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -25,7 +27,7 @@ public interface ReservationDao {
     public void update(Reservation reservation);
     public void delete(Reservation reservation);
     public Reservation find(Reservation reservation);
-    public List<Reservation> findByDate(Calendar date);
+    public List<Reservation> findByDate(Calendar date, User user);
     public List<Reservation> findAll()  throws IOException, ParserConfigurationException;
 
 

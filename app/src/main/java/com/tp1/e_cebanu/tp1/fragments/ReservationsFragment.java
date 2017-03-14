@@ -37,6 +37,7 @@ import com.tp1.e_cebanu.tp1.util.UIUtils;
 import java.util.Date;
 import java.util.List;
 
+import static com.tp1.e_cebanu.tp1.models.AppService.getLiu;
 import static com.tp1.e_cebanu.tp1.models.AppService.getLocalsService;
 import static com.tp1.e_cebanu.tp1.models.AppService.getReasonsService;
 import static com.tp1.e_cebanu.tp1.models.AppService.getReservationObject;
@@ -73,21 +74,26 @@ public class ReservationsFragment extends Fragment {
         int firstDay = cal.getActualMinimum(Calendar.DATE);
         int lastDay = cal.getActualMaximum(Calendar.DATE);
 
+        int today = cal.get(Calendar.DAY_OF_MONTH);
+
 
         ColorDrawable gray = new ColorDrawable(Color.GRAY);
+        ColorDrawable magenta = new ColorDrawable(Color.MAGENTA);
         ColorDrawable green = new ColorDrawable(Color.GREEN);
         ArrayList<Date> disabled = new ArrayList<>();
 
         for (int i = firstDay; i <= lastDay; i++) {
             if (caldroidFragment != null) {
                 cal.set(Calendar.DAY_OF_MONTH, i);
-                List<Reservation> reservations = AppService.getReservationService().findByDate(cal);
+                List<Reservation> reservations = AppService.getReservationService().findByDate(cal, getLiu());
                 Date date = cal.getTime();
-                ColorDrawable color = reservations.isEmpty() ? green : gray;
-                caldroidFragment.setBackgroundDrawableForDate(color, date);
-                caldroidFragment.setTextColorForDate(R.color.colorWhite, date);
-                if (!reservations.isEmpty()) {
+                ColorDrawable color = reservations.isEmpty() || getLiu().isSuperAdmin() ? green : magenta;
+                if (!reservations.isEmpty() || i < today) {
                     disabled.add(date);
+                    caldroidFragment.setBackgroundDrawableForDate(gray, date);
+                } else {
+                    caldroidFragment.setBackgroundDrawableForDate(color, date);
+                    caldroidFragment.setTextColorForDate(R.color.colorWhite, date);
                 }
                 caldroidFragment.setDisableDates(disabled);
             }
@@ -224,9 +230,14 @@ public class ReservationsFragment extends Fragment {
 
                 //spinner users
                 final Spinner dynamicSpinnerUser = (Spinner) dialogView.findViewById(R.id.etUser);
-                users = getUsersService().findAll();
-                usersNames = new String[users.size()];
                 int spinnerPositionUser = 0;
+                if (getLiu().isSuperAdmin()) {
+                    users = getUsersService().findAll();
+                } else {
+                    users = new ArrayList<User>();
+                    users.add(getLiu());
+                }
+                usersNames = new String[users.size()];
                 for (int i = 0; i < users.size(); i++) {
                     usersNames[i] = String.valueOf(users.get(i).getNom());
                 }
