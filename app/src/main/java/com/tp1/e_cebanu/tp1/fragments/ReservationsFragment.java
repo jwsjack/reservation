@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.os.Bundle;
@@ -24,9 +25,11 @@ import android.widget.Toast;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 import com.tp1.e_cebanu.tp1.R;
+import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.Local;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
 import com.tp1.e_cebanu.tp1.models.Reason;
+import com.tp1.e_cebanu.tp1.models.Reservation;
 import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
