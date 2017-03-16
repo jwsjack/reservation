@@ -111,6 +111,7 @@ aussi la modifier ou l’annuler.\n
     <string name="lbFor">For</string>
     <string name="lbOtherReason">Other reason</string>
     <string name="lbCours">Cours</string>
+    <string name="legend">Legend</string>
 
     <!--Locals-->
     <string name="lbLocal">Local number</string>

@@ -67,7 +67,6 @@
     <string name="reasonData">Info raison</string>
     <string name="success_created">Création réussie</string>
     <string name="success_updated">Mise à jour réussie</string>
-    <string name="locations_prompt">Choisissez un lieu/local</string>
     <string name="success_deleted">Supprimé avec succès</string>
     <string name="roleAdminDeleteProhibited">La suppression du rôle par défaut est interdite</string>
     <string name="defaultDeleteProhibited">La suppression des valeurs par défaut est interdite. Essayez d\'ajouter de nouvelles valeurs, puis de supprimer.</string>
@@ -88,4 +87,50 @@
     <string name="lbFor">Pour</string>
     <string name="lbOtherReason">Autre raison</string>
     <string name="lbCours">Cours</string>
+    <string name="legend">Legend</string>
+
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>Users</item>
+        <item>Reservations</item>
+        <item>Reasons</item>
+        <item>Locals</item>
+        <item>Roles</item>
+        <item>Settings</item>
+    </string-array>
+
+    <!--GuideActivity-->
+    <string name="guide_instruction">L’utilisateur se connecte d’abord au système de réservation en fournissant son nom d’utilisateur et son mot de
+passe. Il a accès au système dès que son identité a été validée. En fonction de son statut, un utilisateur ordinaire
+peut effectuer des réservations ou gérer ses propres réservations. Un super utilisateur va pouvoir gérer les
+différentes composantes de l’application.\n\n
+        On peut réserver deux types de locaux, une salle de réunion ou une salle de cours  :
+salles de réunion salles de cours\n
+2165 2166 2211 2195 3213 2333 3181 3189 3248 3311
+\n\n
+La réservation peut-être :
+- unique, on réserve par exemple un local pour le lundi 13 février 2017 de 10h à 11h  ;\n
+- répétitive, on réserve par exemple un local pour tous les lundis de 10h à 11h du 9 janvier 2017 au 17 avril 2017.\n\n
+
+La consultation peut-être effectuée comme suit (voir aussi les différentes captures)  :\n
+- en choisissant un local, nous allons obtenir toutes les réservations effectuées pour le local en question sur une
+période d’une semaine ou d’un mois.\n
+- en choisissant un affichage du calendrier sur une semaine, nous allons obtenir toutes les réservations effectuées<br />
+pour tous les locaux sur une semaine.\n
+- en choisissant un affichage du calendrier sur un mois, nous allons obtenir toutes les réservations effectuées
+pour tous les locaux pour un mois.\n
+- en choisissant une réservation quelconque, nous allons obtenir plus d’informations à son sujet. Nous pouvons
+aussi la modifier ou l’annuler.\n
+    </string>
+
+    <!--Type sales-->
+    <string name="locations_prompt">Choisissez un lieu/local</string>
+    <string-array name="codes_locations_types">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="locations_types">
+        <item>@string/sale_reunion</item>
+        <item>@string/classroom</item>
+    </string-array>
 </resources>

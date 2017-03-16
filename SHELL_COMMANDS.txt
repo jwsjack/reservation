@@ -105,3 +105,16 @@ adb root
 adb push C:\\ANDROID_PROJECTS\\TP1_github\\reservation\\app\\src\\main\\res\\xml\. /data/data/com.tp1.e_cebanu.tp1/files/
 
 
+# COPY FILES TO REMISE
+
+USE git bash for this
+
+cp -R C:/ANDROID_PROJECTS/TEST.txt W:/tp1/cebanueu/
+
+
+with overwrite:
+
+cp -rf C:/ANDROID_PROJECTS/TEST.txt W:/tp1/cebanueu/
+
+
+
