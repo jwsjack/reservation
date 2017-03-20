@@ -34,7 +34,16 @@ dependencies {
     compile 'com.android.support:design:24.0.0-beta1'
     compile 'com.android.support:support-v4:24.0.0-beta1'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-    compile 'com.android.support:recyclerview-v7:24.2.1'
     compile 'com.roomorama:caldroid:3.0.1'
     testCompile 'junit:junit:4.12'
+
+
+    //Glide image library v2
+//    compile 'com.android.support:appcompat-v7:24.0.0-beta1'
+//    compile 'com.android.support:design:24.2.0'
+//    compile 'com.android.support:support-v4:24.0.0-beta1'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.android.support:recyclerview-v7:24.2.1'
+//    compile 'com.roomorama:caldroid:3.0.1'
+//    testCompile 'junit:junit:4.12'
 }
