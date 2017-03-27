@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.tp1.e_cebanu.tp1.fragments.MapsFragment;
 import com.tp1.e_cebanu.tp1.fragments.SettingsFragment;
 
 import com.tp1.e_cebanu.tp1.R;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG_HOME = "home";
     private static final String TAG_USERS = "users";
     private static final String TAG_RESERVATIONS = "reservations";
+    private static final String TAG_MAPS = "maps";
     private static final String TAG_REASONS = "reasons";
     private static final String TAG_LOCALS = "locals";
     private static final String TAG_ROLES = "roles";
@@ -237,20 +239,24 @@ public class MainActivity extends AppCompatActivity {
                 ReservationsFragment reservationsFragment = new ReservationsFragment();
                 return reservationsFragment;
             case 3:
+                // maps
+                MapsFragment mapsFragment = new MapsFragment();
+                return mapsFragment;
+            case 4:
                 // reasons
                 ReasonsFragment reasonsFragment = new ReasonsFragment();
                 return reasonsFragment;
 
-            case 4:
+            case 5:
                 // locals
                 LocalsFragment localsFragment = new LocalsFragment();
                 return localsFragment;
-            case 5:
+            case 6:
                 // roles
                 RolesFragment rolesFragment = new RolesFragment();
                 return rolesFragment;
 
-            case 6:
+            case 7:
                 // settings fragment
                 SettingsFragment settingsFragment = new SettingsFragment();
                 return settingsFragment;
@@ -292,20 +298,24 @@ public class MainActivity extends AppCompatActivity {
                         navItemIndex = 2;
                         CURRENT_TAG = TAG_RESERVATIONS;
                         break;
-                    case R.id.nav_reasons:
+                    case R.id.nav_plan_building:
                         navItemIndex = 3;
+                        CURRENT_TAG = TAG_MAPS;
+                        break;
+                    case R.id.nav_reasons:
+                        navItemIndex = 4;
                         CURRENT_TAG = TAG_REASONS;
                         break;
                     case R.id.nav_locals:
-                        navItemIndex = 4;
+                        navItemIndex = 5;
                         CURRENT_TAG = TAG_LOCALS;
                         break;
                     case R.id.nav_roles:
-                        navItemIndex = 5;
+                        navItemIndex = 6;
                         CURRENT_TAG = TAG_ROLES;
                         break;
                     case R.id.nav_settings:
-                        navItemIndex = 6;
+                        navItemIndex = 7;
                         CURRENT_TAG = TAG_SETTINGS;
                         break;
                     //des activités

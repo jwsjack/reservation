@@ -16,6 +16,10 @@
             android:icon="@drawable/ic_action_reservations_list"
             android:title="@string/nav_reservations" />
         <item
+            android:id="@+id/nav_plan_building"
+            android:icon="@drawable/ic_action_map"
+            android:title="@string/nav_maps" />
+        <item
             android:id="@+id/nav_reasons"
             android:icon="@drawable/ic_action_list"
             android:title="@string/nav_reasons" />

@@ -33,6 +33,7 @@
     <string name="activity_title_quide">Guider</string>
     <string name="activity_title_reasons">Gérer les raisons</string>
     <string name="activity_title_reservations">Gérer les réservations</string>
+    <string name="activity_title_maps">Plan de édifice</string>
     <string name="activity_title_roles">Gérer les rôles</string>
     <string name="activity_title_settings">Paramètres</string>
     <string name="activity_title_users">Gérer les utilisateurs</string>
@@ -59,6 +60,7 @@
     <string name="nav_profile">Profil</string>
     <string name="nav_reasons">Les raisons</string>
     <string name="nav_reservations">Les reservations</string>
+    <string name="nav_maps">Plan de édifice</string>
     <string name="nav_roles">Les rôles</string>
     <string name="nav_settings">Paramètres</string>
     <string name="nav_users">Utilisateurs</string>
@@ -71,6 +73,8 @@
     <string name="roleAdminDeleteProhibited">La suppression du rôle par défaut est interdite</string>
     <string name="defaultDeleteProhibited">La suppression des valeurs par défaut est interdite. Essayez d\'ajouter de nouvelles valeurs, puis de supprimer.</string>
     <string name="is_superadmin">Est superadmin</string>
+    <string name="is_active">Activé</string>
+    <string name="inactive">Non activé</string>
     <string name="lbName">Nom</string>
     <string name="roles_prompt">Choisissez un rôle</string>
     <string name="userData">Info d\'tilisateur</string>
@@ -93,6 +97,7 @@
         <item>Home</item>
         <item>Users</item>
         <item>Reservations</item>
+        <item>Plan building</item>
         <item>Reasons</item>
         <item>Locals</item>
         <item>Roles</item>

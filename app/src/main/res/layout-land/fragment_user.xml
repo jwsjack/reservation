@@ -105,12 +105,24 @@
             android:padding="7dp"
             android:prompt="@string/roles_prompt" />
 
+        <CheckBox
+            android:id="@+id/ckActive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:layout_below="@+id/etRole"
+            android:text="@string/is_active"
+            android:textColor="@color/text_shadow" />
+
         <Button
             android:id="@+id/update"
             style="@style/BootstrapButtonInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_role"
+            android:layout_below="@+id/ckActive"
             android:text="@string/update"
             android:visibility="visible" />
 
@@ -120,7 +132,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_below="@+id/text_view_role"
+            android:layout_below="@+id/ckActive"
             android:text="@string/delete"
             android:visibility="visible" />
 

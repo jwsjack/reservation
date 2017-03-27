@@ -5,6 +5,7 @@
         <login>e_cebanu</login>
         <password>qwe123</password>
         <role>1</role>
+        <active>1</active>
     </item>
     <item ItemName="Liliana Cebanu">
         <id>2</id>
@@ -12,6 +13,7 @@
         <login>l_cebanu</login>
         <password>qwe123</password>
         <role>2</role>
+        <active>1</active>
     </item>
     <item ItemName="Greg Monaco">
         <id>3</id>
@@ -19,6 +21,7 @@
         <login>g_monaco</login>
         <password>qwe123</password>
         <role>2</role>
+        <active>1</active>
     </item>
     <item ItemName="Michael Locksberry">
         <id>4</id>
@@ -26,6 +29,7 @@
         <login>m_locksberry</login>
         <password>qwe123</password>
         <role>2</role>
+        <active>1</active>
     </item>
     <item ItemName="Liuda Vasilachi">
         <id>5</id>
@@ -33,5 +37,6 @@
         <login>l_vasilachi</login>
         <password>qwe123</password>
         <role>2</role>
+        <active>0</active>
     </item>
 </users>

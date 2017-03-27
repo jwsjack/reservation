@@ -72,6 +72,9 @@ public class UserXmlImpl implements UserDao {
 
                         Node role = element.getElementsByTagName("role").item(0).getFirstChild();
                         role.setNodeValue(String.valueOf(user.getRole()));
+
+                        Node active = element.getElementsByTagName("active").item(0).getFirstChild();
+                        active.setNodeValue(String.valueOf(user.getActive()));
                     }
                 }
             }

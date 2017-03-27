@@ -65,6 +65,8 @@ Try the checkout...
 
 cd C:\Users\jack\android-sdks\platform-tools>
 
+HOME: C:\Users\jack\android-sdks\platform-tools>
+
 2. type
 
 adb shell
@@ -75,7 +77,7 @@ su
 
 4. go to data storage folder
 
-cd cd /data/data/com.tp1.e_cebanu.tp1/files
+cd /data/data/com.tp1.e_cebanu.tp1/files
 
 5. verify your list of files
 

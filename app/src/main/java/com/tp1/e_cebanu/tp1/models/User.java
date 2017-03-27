@@ -27,22 +27,24 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class User {
     private String nom, login, password;
-    private int id, role;
+    private int id, role, active;
+
     public static final String FILENAME = "users.xml";
 
     // Constructeur
-    public User(int id, String nom, String login, String password, int role) {
+    public User(int id, String nom, String login, String password, int role, int active) {
         this.id = id;
         this.nom = nom;
         this.login = login;
         this.password = password;
         this.role = role;
+        this.active = active;
     }
 
 
     // Constructeur pour obtenir un objet qui se compare (equals)
-    public User(String nom, String login, String password, int role) {
-        this(0, nom, login, password, role);
+    public User(String nom, String login, String password, int role, int active) {
+        this(0, nom, login, password, role, active);
     }
 
     public User(String login) {
@@ -94,6 +96,14 @@ public class User {
         this.role = role;
     }
 
+    public int getActive() {
+        return active;
+    }
+
+    public void setActive(int active) {
+        this.active = active;
+    }
+
     public boolean isSuperAdmin() {
         return this.getRole() == 1;
     }
@@ -139,6 +149,7 @@ public class User {
             jsonObject.put("login", getLogin());
             jsonObject.put("password", getPassword());
             jsonObject.put("role", getRole());
+            jsonObject.put("active", getActive());
 
             return jsonObject.toString();
         } catch (JSONException e) {
@@ -155,7 +166,8 @@ public class User {
             String login = obj.getString("login");
             String password = obj.getString("password");
             int role = obj.getInt("role");
-            return new User(id, name, login, password, role);
+            int active = obj.getInt("active");
+            return new User(id, name, login, password, role, active);
         } catch (Throwable t) {
             Log.e("My App", "Could not parse malformed JSON: \"" + json + "\"");
             return new User();
@@ -178,6 +190,7 @@ public class User {
             user.setLogin(eElement.getElementsByTagName("login").item(0).getTextContent());
             user.setPassword(eElement.getElementsByTagName("password").item(0).getTextContent());
             user.setRole(Integer.parseInt(eElement.getElementsByTagName("role").item(0).getTextContent()));
+            user.setActive(Integer.parseInt(eElement.getElementsByTagName("active").item(0).getTextContent()));
         }
         return user;
     }
@@ -195,6 +208,7 @@ public class User {
         Element login = doc.createElement("login");
         Element password = doc.createElement("password");
         Element role = doc.createElement("role");
+        Element active = doc.createElement("active");
         item.setAttribute("ItemName", getNom());
         if (getId() == 0) {
             //generate ID
@@ -206,11 +220,13 @@ public class User {
         login.setTextContent(getLogin());
         password.setTextContent(getPassword());
         role.setTextContent(String.valueOf(getRole()));
+        active.setTextContent(String.valueOf(getActive()));
         item.appendChild(id);
         item.appendChild(name);
         item.appendChild(login);
         item.appendChild(password);
         item.appendChild(role);
+        item.appendChild(active);
         return item;
     }
 

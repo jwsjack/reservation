@@ -3,16 +3,17 @@ package com.tp1.e_cebanu.tp1.fragments;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.net.Uri;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -24,22 +25,20 @@ import android.widget.Toast;
 import com.tp1.e_cebanu.tp1.R;
 import com.tp1.e_cebanu.tp1.models.AppService;
 import com.tp1.e_cebanu.tp1.models.MyApplication;
-import com.tp1.e_cebanu.tp1.models.Reason;
 import com.tp1.e_cebanu.tp1.models.Role;
 import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.util.UIUtils;
 
 import java.util.List;
 
-import static android.R.attr.type;
-import static com.tp1.e_cebanu.tp1.R.id.txtId;
-import static com.tp1.e_cebanu.tp1.R.id.txtLogin;
-import static com.tp1.e_cebanu.tp1.R.id.txtType;
+import static com.tp1.e_cebanu.tp1.R.drawable.superadmin;
+import static com.tp1.e_cebanu.tp1.R.id.txtActive;
 import static com.tp1.e_cebanu.tp1.R.string.role;
-import static com.tp1.e_cebanu.tp1.models.AppService.getReasonsService;
+import static com.tp1.e_cebanu.tp1.models.AppService.getLiu;
 import static com.tp1.e_cebanu.tp1.models.AppService.getRolesService;
 import static com.tp1.e_cebanu.tp1.models.AppService.getUserObject;
 import static com.tp1.e_cebanu.tp1.models.AppService.getUsersService;
+import static com.tp1.e_cebanu.tp1.util.UIUtils.getColor;
 import static com.tp1.e_cebanu.tp1.util.UIUtils.refreshFragment;
 
 public class UsersFragment extends Fragment {
@@ -52,6 +51,7 @@ public class UsersFragment extends Fragment {
     private int countLines = 0;
     // boutons
     private Button btAdd, btUpdate, btDelete;
+    private CheckBox ckActive;
     private Context context;
 
     MyCustomAdapter dataAdapter = null;
@@ -137,6 +137,13 @@ public class UsersFragment extends Fragment {
                         android.R.layout.simple_spinner_item, rolesNames);
                 dynamicSpinner.setAdapter(adapter);
                 dynamicSpinner.setSelection(spinnerPosition);
+                //active
+                ckActive = (CheckBox) dialogView.findViewById(R.id.ckActive);
+                if (user.getActive() == 1) {
+                    ckActive.setChecked(true);
+                }
+                ckActive.setEnabled(getLiu().isSuperAdmin() ? true : false);
+                ckActive.setVisibility(getLiu().isSuperAdmin() ? View.VISIBLE : View.INVISIBLE);
 
                 btUpdate = (Button) dialogView.findViewById(R.id.update);
                 btDelete = (Button) dialogView.findViewById(R.id.delete);
@@ -162,6 +169,7 @@ public class UsersFragment extends Fragment {
                         String login = txtLogin.getText().toString();
                         String password = txtPassword.getText().toString();
                         int role = dynamicSpinner.getSelectedItemPosition();
+                        int active = ckActive.isChecked() ? 1 : 0;
                         //validation
                         Boolean valide = false;
                         valide = UIUtils.checkFieldValueString(nom, "Name");
@@ -171,11 +179,11 @@ public class UsersFragment extends Fragment {
                         if (valide) {
                             valide = UIUtils.checkFieldValueString(password, "Password");
                         }
-                        if (role > roles.size()-1) {
+                        if (role > roles.size() - 1) {
                             valide = false;
                         }
                         if (valide) {
-                            update(user.getId(), nom, login, password, role);
+                            update(user.getId(), nom, login, password, role, active);
                             ad.dismiss();
                         }
                     }
@@ -232,6 +240,8 @@ public class UsersFragment extends Fragment {
                 android.R.layout.simple_spinner_item, rolesNames);
         dynamicSpinner.setAdapter(adapter);
 
+        final CheckBox ckActive = (CheckBox) dialogView.findViewById(R.id.ckActive);
+
         btUpdate = (Button) dialogView.findViewById(R.id.update);
         btUpdate.setText(R.string.add);
         btDelete = (Button) dialogView.findViewById(R.id.delete);
@@ -258,6 +268,8 @@ public class UsersFragment extends Fragment {
                 String login = txtLogin.getText().toString();
                 String password = txtPassword.getText().toString();
                 int role = dynamicSpinner.getSelectedItemPosition();
+                int active = ckActive.isChecked() ? 1 : 0;
+
                 //validation
                 Boolean valide = false;
                 valide = UIUtils.checkFieldValueString(nom, "Name");
@@ -267,18 +279,18 @@ public class UsersFragment extends Fragment {
                 if (valide) {
                     valide = UIUtils.checkFieldValueString(password, "Password");
                 }
-                if (role > roles.size()-1) {
+                if (role > roles.size() - 1) {
                     valide = false;
                 }
                 if (valide) {
-                    update(0, nom, login, password, role);
+                    update(0, nom, login, password, role, active);
                     ad.dismiss();
                 }
             }
         });
     }
 
-    public void update(int id, String nom, String login, String password ,int role) {
+    public void update(int id, String nom, String login, String password, int role, int active) {
         //validation
         Boolean valide = false;
         valide = UIUtils.checkFieldValueString(nom, "Name");
@@ -298,6 +310,7 @@ public class UsersFragment extends Fragment {
                 user.setLogin(login);
                 user.setPassword(password);
                 user.setRole(roleId);
+                user.setActive(active);
                 getUsersService().create(user);
                 Toast.makeText(context, getResources().getString(R.string.success_created), Toast.LENGTH_SHORT).show();
                 refreshFragment(new UsersFragment(), getActivity(), "users");
@@ -308,6 +321,7 @@ public class UsersFragment extends Fragment {
                 user.setLogin(login);
                 user.setPassword(password);
                 user.setRole(roleId);
+                user.setActive(active);
                 getUsersService().update(user);
                 Toast.makeText(context, getResources().getString(R.string.success_updated), Toast.LENGTH_SHORT).show();
                 refreshFragment(new UsersFragment(), getActivity(), "users");
@@ -316,7 +330,7 @@ public class UsersFragment extends Fragment {
     }
 
     public void delete(int id) {
-        if (id != 0){
+        if (id != 0) {
             if (id >= 1 && id <= 5) {
                 Toast.makeText(context, getResources().getString(R.string.defaultDeleteProhibited), Toast.LENGTH_LONG).show();
                 refreshFragment(new UsersFragment(), getActivity(), "users");
@@ -347,7 +361,7 @@ public class UsersFragment extends Fragment {
             ImageView imageView = (ImageView) rowView.findViewById(R.id.img);
             // pour les utilisateurs qui ne correspond pas à une index dans le tableau d'images, sélectionnez dernière
             if (usersList.get(position).getRole() == 1) {
-                imageView.setImageResource(R.drawable.superadmin);
+                imageView.setImageResource(superadmin);
             } else {
                 imageView.setVisibility(View.GONE);
             }
@@ -356,9 +370,27 @@ public class UsersFragment extends Fragment {
             TextView txtNom = (TextView) rowView.findViewById(R.id.txtNom);
             txtNom.setText(String.valueOf(usersList.get(position).getNom()));
             TextView txtLogin = (TextView) rowView.findViewById(R.id.txtLogin);
-            txtLogin.setText(MyApplication.getAppResources().getString(R.string.login).toLowerCase() + " ( " + String.valueOf(usersList.get(position).getLogin())+ " ) ");
+            txtLogin.setText(MyApplication.getAppResources().getString(R.string.login).toLowerCase() + " ( " + String.valueOf(usersList.get(position).getLogin()) + " ) ");
             TextView txtRole = (TextView) rowView.findViewById(R.id.txtRole);
+            String roleCustom = MyApplication.getAppResources().getString(role).toLowerCase() + " ( "
+                    + (usersList.get(position).isSuperAdmin() ? "<b>" : "")
+                    + String.valueOf(getRolesService().findById(usersList.get(position).getRole()).getName())
+                    + (usersList.get(position).isSuperAdmin() ? "</b>" : "") + " ) ";
             txtRole.setText(MyApplication.getAppResources().getString(role).toLowerCase() + " ( " + String.valueOf(getRolesService().findById(usersList.get(position).getRole()).getName()) + " ) ");
+            txtRole.setText(UIUtils.fromHtml(roleCustom));
+
+            TextView txtActive = (TextView) rowView.findViewById(R.id.txtActive);
+            if (usersList.get(position).getActive() == 1) {
+                txtActive.setText(R.string.is_active);
+                txtActive.setVisibility(View.INVISIBLE);
+            } else {
+                txtNom.setTextColor(getColor(R.color.text_light));
+                txtLogin.setTextColor(getColor(R.color.text_light));
+                txtRole.setTextColor(getColor(R.color.text_light));
+                txtActive.setText(R.string.inactive);
+                txtActive.setVisibility(View.VISIBLE);
+            }
+
             return rowView;
         }
     }

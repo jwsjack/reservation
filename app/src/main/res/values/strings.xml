@@ -21,6 +21,7 @@
     <string name="nav_home">Home</string>
     <string name="nav_users">Users</string>
     <string name="nav_reservations">Reservations</string>
+    <string name="nav_maps">Building plan</string>
     <string name="nav_reasons">Reasons</string>
     <string name="nav_locals">Locals</string>
     <string name="nav_roles">Roles</string>
@@ -35,6 +36,7 @@
         <item>Home</item>
         <item>Users</item>
         <item>Reservations</item>
+        <item>Plan building</item>
         <item>Reasons</item>
         <item>Locals</item>
         <item>Roles</item>
@@ -47,6 +49,7 @@
     <string name="activity_title_users">Manage users</string>
     <string name="activity_title_reservation_add">Add/Edit reservation</string>
     <string name="activity_title_reservations">Manage reservations</string>
+    <string name="activity_title_maps">Plan building</string>
     <string name="activity_title_reasons">Manage reasons</string>
     <string name="activity_title_locals">Manage locals</string>
     <string name="activity_title_roles">Manage roles</string>
@@ -99,6 +102,8 @@ aussi la modifier ou l’annuler.\n
     <string name="userData">Info user</string>
     <string name="lbName">Name</string>
     <string name="roles_prompt">Choose a role</string>
+    <string name="is_active">Active</string>
+    <string name="inactive">Inactive</string>
 
 
     <!--Reservations-->
@@ -112,6 +117,8 @@ aussi la modifier ou l’annuler.\n
     <string name="lbOtherReason">Other reason</string>
     <string name="lbCours">Cours</string>
     <string name="legend">Legend</string>
+
+
 
     <!--Locals-->
     <string name="lbLocal">Local number</string>

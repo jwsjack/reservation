@@ -7,8 +7,8 @@
         <reason>2</reason>
         <additional>N'importe quelle raison</additional>
         <course>IFT-1155</course>
-        <datecreated>1489323600</datecreated>
-        <datefrom>1489397400</datefrom>
-        <dateto>1489408200</dateto>
+        <date_created>1489323600</date_created>
+        <date_from>1489417200000</date_from>
+        <date_to>1489420800000</date_to>
     </item>
 </reservations>
