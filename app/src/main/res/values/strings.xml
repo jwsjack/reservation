@@ -1,12 +1,184 @@
 <resources>
+
+    <!--Basic-->
     <string name="app_name">Booking system</string>
     <string name="developper">Developed by Eugeniu Cebanu</string>
+    <string name="refresh_action">Refresh</string>
+    <string name="logout_action">Logout</string>
+    <string name="messageWelcome">Welcome to the new reservation system for Android!</string>
+    <string name="active">Active</string>
+
+    <!--MENU-->
+
+    <!-- Navigation menu -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="openDrawer">Open drawer</string>
+    <string name="closeDrawer">Close drawer</string>
+    <string name="local_prompt">Choose a location</string>
+
+    <!-- Navigation Drawer menu labels -->
+    <string name="nav_home">Home</string>
+    <string name="nav_users">Users</string>
+    <string name="nav_reservations">Reservations</string>
+    <string name="nav_maps">Building plan</string>
+    <string name="nav_reasons">Reasons</string>
+    <string name="nav_locals">Locals</string>
+    <string name="nav_roles">Roles</string>
+    <string name="nav_profile">Profile</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_guide">Guide</string>
+    <string name="nav_logout">Logout</string>
 
 
-    !-- AuthenticatorActivity -->
+    <!-- Toolbar titles when navigation menu item is selected -->
+    <string-array name="nav_item_activity_titles">
+        <item>Home</item>
+        <item>Users</item>
+        <item>Reservations</item>
+        <item>Plan building</item>
+        <item>Reasons</item>
+        <item>Locals</item>
+        <item>Roles</item>
+        <item>Settings</item>
+    </string-array>
+
+    <string name="action_logout">Logout</string>
+    <string name="activity_title_home">Home</string>
+    <string name="activity_title_authenticator">Authentication</string>
+    <string name="activity_title_users">Manage users</string>
+    <string name="activity_title_reservation_add">Add/Edit reservation</string>
+    <string name="activity_title_reservations">Manage reservations</string>
+    <string name="activity_title_maps">Plan building</string>
+    <string name="activity_title_reasons">Manage reasons</string>
+    <string name="activity_title_locals">Manage locals</string>
+    <string name="activity_title_roles">Manage roles</string>
+    <string name="activity_title_profile">Profile settings</string>
+    <string name="activity_title_quide">Guide</string>
+    <string name="activity_title_settings">Settings</string>
+
+    <!--ACTIVITIES-->
+
+    <!-- AuthenticatorActivity -->
     <string name="label_email_address">Email Address</string>
+    <string name="label_login">Login</string>
     <string name="label_password">Password</string>
     <string name="label_sign_in">Sign In</string>
+    <string name="label_exit">Exit</string>
     <string name="message_signing_in">Signing in…</string>
     <string name="requestNewAccount">Request new account</string>
+    <string name="messageValidationAuthentification">You should set login and password.</string>
+    <string name="messageWrongAuthentification">Your login/password combo was incorrect, please try again.</string>
+
+    <!--GuideActivity-->
+    <string name="guide_instruction">L’utilisateur se connecte d’abord au système de réservation en fournissant son nom d’utilisateur et son mot de
+passe. Il a accès au système dès que son identité a été validée. En fonction de son statut, un utilisateur ordinaire
+peut effectuer des réservations ou gérer ses propres réservations. Un super utilisateur va pouvoir gérer les
+différentes composantes de l’application.\n\n
+        On peut réserver deux types de locaux, une salle de réunion ou une salle de cours  :
+salles de réunion salles de cours\n
+2165 2166 2211 2195 3213 2333 3181 3189 3248 3311
+\n\n
+La réservation peut-être :
+- unique, on réserve par exemple un local pour le lundi 13 février 2017 de 10h à 11h  ;\n
+- répétitive, on réserve par exemple un local pour tous les lundis de 10h à 11h du 9 janvier 2017 au 17 avril 2017.\n\n
+
+La consultation peut-être effectuée comme suit (voir aussi les différentes captures)  :\n
+- en choisissant un local, nous allons obtenir toutes les réservations effectuées pour le local en question sur une
+période d’une semaine ou d’un mois.\n
+- en choisissant un affichage du calendrier sur une semaine, nous allons obtenir toutes les réservations effectuées<br />
+pour tous les locaux sur une semaine.\n
+- en choisissant un affichage du calendrier sur un mois, nous allons obtenir toutes les réservations effectuées
+pour tous les locaux pour un mois.\n
+- en choisissant une réservation quelconque, nous allons obtenir plus d’informations à son sujet. Nous pouvons
+aussi la modifier ou l’annuler.\n
+    </string>
+
+    <!--ProfileActivity-->
+
+    <!--FRAGMENTS-->
+
+    <!--Users-->
+    <string name="userData">Info user</string>
+    <string name="lbName">Name</string>
+    <string name="roles_prompt">Choose a role</string>
+    <string name="is_active">Active</string>
+    <string name="inactive">Inactive</string>
+
+
+    <!--Reservations-->
+    <string name="reservationData">Info reservation</string>
+    <string name="lbDateReservation">Date reservation</string>
+    <string name="setDate">Select date</string>
+    <string name="lbHours">Hours</string>
+    <string name="hourFrom">form</string>
+    <string name="hourTo">to</string>
+    <string name="lbFor">For</string>
+    <string name="lbOtherReason">Other reason</string>
+    <string name="lbCours">Cours</string>
+    <string name="legend">Legend</string>
+
+
+
+    <!--Locals-->
+    <string name="lbLocal">Local number</string>
+    <string name="lbType">Type</string>
+    <string name="lbCapacity">Capacity</string>
+    <string name="lbDescription">Description</string>
+    <string name="locals_prompt">Choose a local/place</string>
+    <string name="action_save_local">Save local</string>
+    <string name="localData">Info local</string>
+    <string name="capacity">Capacity</string>
+    <string name="sale_reunion">Meeting room</string>
+    <string name="classroom">Classroom</string>
+
+    <!--Roles-->
+    <string name="lbRole">Role title</string>
+    <string name="role">Role</string>
+    <string name="login">Login</string>
+    <string name="roleData">Info role</string>
+    <string name="roleAdminDeleteProhibited">Deleting of default role is prohibited</string>
+    <string name="is_superadmin">Is superadmin</string>
+
+    <!--Reasons-->
+    <string name="lbReason">Reason title</string>
+    <string name="reasonData">Info reason</string>
+    <string name="defaultDeleteProhibited">Deleting of default values is prohibited. Try to add new values and then delete!</string>
+
+
+    <!--lists-->
+    <string name="lbCountLines">Number items:</string>
+
+    <!--Type sales-->
+    <string name="locations_prompt">Choose a location</string>
+    <string-array name="codes_locations_types">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+    <string-array name="locations_types">
+        <item>@string/sale_reunion</item>
+        <item>@string/classroom</item>
+    </string-array>
+
+    <!--BOUTONS-->
+
+    <!-- les bouttons -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add">Add</string>
+    <string name="update">Update</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+
+    <!--Messages-->
+    <string name="filling_message">The value is empty of the field : </string>
+    <string name="success_created">Successfully created</string>
+    <string name="success_updated">Successfully updated</string>
+    <string name="success_deleted">Successfully deleted</string>
+
+    <!--CALDROID-->
+    <string name="customize">Customize</string>
+    <string name="show_dialog">Add reservation</string>
+    <string name="undo">Undo</string>
+
 </resources>

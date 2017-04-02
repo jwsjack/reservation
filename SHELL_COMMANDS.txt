@@ -26,14 +26,14 @@ On Windows 10
 CONNECTION THROW TERMINAL AS
 
 
-1. GO to « android-sdks/platformtools »
+1. GO to ï¿½ android-sdks/platformtools ï¿½
 
 cd C:\Users\jack\android-sdks\platform-tools>
 
 
 2. Remote connect to device: 
 
-adb  –s  emulator-5554 shell
+adb  ï¿½s  emulator-5554 shell
 
 
 3. Connect with telnet
@@ -56,3 +56,67 @@ Uncheck the option "Use command line client".
 Close the panel.
 Try the checkout...
 ... and then it worked. I think it was a default parameter in the configuration out there
+# Need to figure out how to use bashrc
+
+
+4. Access internal files
+
+1. GO to ï¿½ android-sdks/platformtools ï¿½
+
+cd C:\Users\jack\android-sdks\platform-tools>
+
+HOME: C:\Users\jack\android-sdks\platform-tools>
+
+2. type
+
+adb shell
+
+3. Switch to root
+
+su
+
+4. go to data storage folder
+
+cd /data/data/com.tp1.e_cebanu.tp1/files
+
+5. verify your list of files
+
+ls -la
+
+
+6. Open files folder
+
+cd files
+
+7. list files inside "files" folder
+
+ls -la
+
+8. open desired file
+
+cat users.xml
+
+
+
+# COPY DOCUMENTS /FILES
+
+Switch to platform-tools
+
+adb root
+
+adb push C:\\ANDROID_PROJECTS\\TP1_github\\reservation\\app\\src\\main\\res\\xml\. /data/data/com.tp1.e_cebanu.tp1/files/
+
+
+# COPY FILES TO REMISE
+
+USE git bash for this
+
+cp -R C:/ANDROID_PROJECTS/TEST.txt W:/tp1/cebanueu/
+
+
+with overwrite:
+
+cp -rf C:/ANDROID_PROJECTS/TEST.txt W:/tp1/cebanueu/
+
+
+

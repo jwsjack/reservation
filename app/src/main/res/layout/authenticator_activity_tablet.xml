@@ -4,18 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/main_background"
-    android:orientation="vertical" >
-
-    <!-- Content below header and above footer -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TABLET" />
+    android:orientation="vertical">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,7 +18,7 @@
             android:paddingBottom="10dp"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
-            android:paddingTop="5dp" >
+            android:paddingTop="5dp">
 
             <TextView
                 style="@style/ShadowText"
@@ -33,16 +27,16 @@
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
-                android:text="@string/label_email_address"
+                android:text="@string/label_login"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/text" />
 
             <AutoCompleteTextView
-                android:id="@+id/et_email"
+                android:id="@+id/et_login"
                 style="@style/SignInEditText"
                 android:completionThreshold="1"
                 android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
+                android:inputType="text"
                 android:nextFocusDown="@+id/et_password" />
 
             <TextView
@@ -65,30 +59,55 @@
                 android:password="true" />
 
             <CheckBox
-                android:text="@string/requestNewAccount"
+                android:id="@+id/requestNewAccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text"
                 android:paddingBottom="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:paddingTop="5dp"
-                android:id="@+id/requestNewAccount" />
+                android:text="@string/requestNewAccount"
+                android:textColor="@color/text" />
 
-            <Button
-                android:id="@+id/b_signin"
-                style="@style/ShadowText"
+            <RelativeLayout
+                android:id="@+id/listButtons"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
-                android:background="@drawable/button_background_states"
-                android:gravity="center"
-                android:onClick="handleLogin"
-                android:padding="10dp"
-                android:text="@string/label_sign_in"
-                android:textColor="@color/text"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/b_signin"
+                    style="@style/ShadowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_info_background_states"
+                    android:gravity="center"
+                    android:onClick="handleLogin"
+                    android:padding="10dp"
+                    android:text="@string/label_sign_in"
+                    android:textColor="@color/text"
+                    android:textSize="20sp"
+                    android:layout_alignParentStart="true"
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/b_exit"
+                    style="@style/ShadowText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/button_danger_background_states"
+                    android:gravity="center"
+                    android:onClick="exitApp"
+                    android:padding="10dp"
+                    android:text="@string/label_exit"
+                    android:textColor="@color/text"
+                    android:textSize="20sp"
+                    android:layout_alignParentRight="true"
+                    android:textStyle="bold" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 

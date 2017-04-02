@@ -1,0 +1,327 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/etId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:minLines="2"
+            android:visibility="gone"></EditText>
+        <!--LOCAL-->
+        <TextView
+            android:id="@+id/text_view_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/etId"
+            android:layout_alignBottom="@+id/etId"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/txtDate"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbLocal"
+            android:textStyle="bold"
+            android:layout_alignEnd="@+id/update" />
+
+        <Spinner
+            android:id="@+id/etLocal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etId"
+            android:layout_toEndOf="@+id/text_view_local"
+            android:padding="7dp"
+            android:prompt="@string/locals_prompt">
+
+            <requestFocus />
+        </Spinner>
+
+        <!--DATE RESERVATION-->
+        <TextView
+            android:id="@+id/text_view_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etLogin"
+            android:layout_alignParentStart="@+id/text_view_local"
+            android:layout_below="@+id/etLocal"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbDateReservation"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etLocal"
+            android:layout_toEndOf="@+id/text_view_date"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/setDate"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txtDateTymeStamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_date"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:text=""
+            android:textStyle="bold"
+            android:visibility="gone" />
+        <!--HOURS/MINUTES-->
+        <LinearLayout
+            android:id="@+id/block_hours_from"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtDateTymeStamp"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                android:id="@+id/text_view_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_below="@+id/txtDateTymeStamp"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/lbHours"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/text_view_hour_from"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/txtDateTymeStamp"
+                android:layout_toEndOf="@+id/text_view_hour"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/hourFrom"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/etHourFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/text_view_hour_to"
+                android:layout_below="@+id/txtDateTymeStamp"
+                android:layout_toEndOf="@+id/text_view_hour_from"
+                android:padding="5dp"></Spinner>
+
+            <Spinner
+                android:id="@+id/etMinutesFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/etHourTo"
+                android:layout_below="@+id/txtDate"
+                android:layout_toEndOf="@+id/etHourFrom"
+                android:padding="5dp"></Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/block_hours_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/block_hours_from"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/text_view_hour_to"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/text_view_hour"
+                android:layout_toStartOf="@+id/etHourFrom"
+                android:layout_weight="0.31"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/hourTo"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/etHourTo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/update"
+                android:layout_below="@+id/etHourFrom"
+                android:layout_toEndOf="@+id/text_view_hour_to"
+                android:padding="5dp" />
+
+            <Spinner
+                android:id="@+id/etMinutesTo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/update"
+                android:layout_below="@+id/etMinutesFrom"
+                android:layout_toEndOf="@+id/etHourTo"
+                android:padding="5dp"></Spinner>
+
+        </LinearLayout>
+        <!--USERS-->
+        <LinearLayout
+            android:id="@+id/block_users"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/block_hours_to"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/text_user"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:layout_weight="0.31"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/lbFor"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/etUser"
+                android:layout_width="295dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/text_user"
+                android:padding="5dp" />
+
+        </LinearLayout>
+
+        <!--REASONS-->
+        <LinearLayout
+            android:id="@+id/block_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/block_users"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/text_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="45dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp"
+                android:text="@string/lbReason"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/etReason"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/text_reason"
+                android:padding="5dp" />
+        </LinearLayout>
+
+        <!--AUTRE REASONS-->
+        <LinearLayout
+            android:id="@+id/block_other_reason"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/block_reason"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/text_view_other_reason"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/etPassword"
+                android:layout_below="@+id/text_view_date"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/lbOtherReason"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etOtherReason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/etNom"
+                android:layout_toRightOf="@+id/text_view_other_reason"
+                android:maxLines="2"
+                android:minLines="2"
+                android:padding="5dp"></EditText>
+
+        </LinearLayout>
+        <!--COURS-->
+        <LinearLayout
+            android:id="@+id/block_cours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/block_other_reason"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:weightSum="1">
+
+
+            <TextView
+                android:id="@+id/text_view_cours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp"
+                android:text="@string/lbCours"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etCours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/text_view_cours"
+                android:maxLines="2"
+                android:minLines="2"
+                android:padding="5dp"></EditText>
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/update"
+            style="@style/BootstrapButtonInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/block_cours"
+            android:text="@string/update"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/delete"
+            style="@style/BootstrapButtonDanger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/block_cours"
+            android:text="@string/delete"
+            android:visibility="visible" />
+
+
+    </RelativeLayout>
+</ScrollView>

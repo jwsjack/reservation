@@ -1,0 +1,140 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/etId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            android:minLines="2"
+            android:visibility="gone"></EditText>
+
+        <TextView
+            android:id="@+id/text_view_nom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etLogin"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbName"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etNom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etId"
+            android:layout_toRightOf="@+id/text_view_nom"
+            android:maxLines="2"
+            android:minLines="2"
+            android:padding="5dp">
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/text_view_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/etPassword"
+            android:layout_below="@+id/text_view_nom"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/login"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etNom"
+            android:layout_toRightOf="@+id/text_view_login"
+            android:maxLines="2"
+            android:minLines="2"
+            android:padding="5dp"></EditText>
+
+        <TextView
+            android:id="@+id/text_view_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/etPassword"
+            android:layout_below="@+id/text_view_login"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/label_password"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etLogin"
+            android:layout_toRightOf="@+id/text_view_password"
+            android:maxLines="2"
+            android:minLines="2"
+            android:padding="5dp"></EditText>
+
+
+        <TextView
+            android:id="@+id/text_view_role"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="7dp"
+            android:text="@string/role"
+            android:textStyle="bold"
+            android:layout_alignBottom="@+id/etRole"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@+id/etRole" />
+
+        <Spinner
+            android:id="@+id/etRole"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/text_view_password"
+            android:layout_below="@+id/text_view_password"
+            android:padding="7dp"
+            android:prompt="@string/roles_prompt" />
+
+        <CheckBox
+            android:id="@+id/ckActive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:layout_below="@+id/etRole"
+            android:text="@string/is_active"
+            android:textColor="@color/text_shadow" />
+
+        <Button
+            android:id="@+id/update"
+            style="@style/BootstrapButtonInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ckActive"
+            android:text="@string/update"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/delete"
+            style="@style/BootstrapButtonDanger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ckActive"
+            android:text="@string/delete"
+            android:visibility="visible" />
+
+    </RelativeLayout>
+</ScrollView>

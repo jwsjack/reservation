@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reasons>
+    <item>
+        <id>1</id>
+        <name>Assemblee departementale</name>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Séminaire</name>
+    </item>
+</reasons>

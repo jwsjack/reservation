@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--<string-array name="colors">-->
+        <!--<item>red</item>-->
+        <!--<item>orange</item>-->
+        <!--<item>yellow</item>-->
+        <!--<item>green</item>-->
+        <!--<item>blue</item>-->
+        <!--<item>violet</item>-->
+    <!--</string-array>-->
+    <!---->
+    <!--<string-array name="planets">-->
+        <!--<item>Mercury</item>-->
+        <!--<item>Venus</item>-->
+        <!--<item>Earth</item>-->
+        <!--<item>Mars</item>-->
+        <!--<item>Jupiter</item>-->
+        <!--<item>Saturn</item>-->
+        <!--<item>Uranus</item>-->
+        <!--<item>Neptune</item>-->
+        <!--<item>Pluto</item>-->
+    <!--</string-array>-->
+
+
+    <attr name="typesSalles" format="enum">
+        <enum name="none" value="0"/>
+        <enum name="sale_reunion" value="1"/>
+        <enum name="sale_cours" value="2"/>
+    </attr>
+</resources>

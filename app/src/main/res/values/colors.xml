@@ -53,4 +53,31 @@
     <color name="dark_grey">#1f1f1f</color>
     <color name="navigation_drawer_item_separator">#c2c2c2</color>
 
+
+
+    <!--button styles-->
+    <!--info-->
+    <color name="button_info_background_enabled">#5bc0de</color>
+    <color name="button_info_background_pressed">#5bc0de</color>
+    <color name="button_info_background_disabled">#7b7b7b</color>
+    <!--primary-->
+    <color name="button_primary_background_enabled">#337ab7</color>
+    <color name="button_primary_background_pressed">#337ab7</color>
+    <color name="button_primary_background_disabled">#7b7b7b</color>
+    <!--success-->
+    <color name="button_success_background_enabled">#5cb85c</color>
+    <color name="button_success_background_pressed">#5cb85c</color>
+    <color name="button_success_background_disabled">#7b7b7b</color>
+    <!--warning-->
+    <color name="button_warning_background_enabled">#f0ad4e</color>
+    <color name="button_warning_background_pressed">#f0ad4e</color>
+    <color name="button_warning_background_disabled">#7b7b7b</color>
+    <!--danger-->
+    <color name="button_danger_background_enabled">#d9534f</color>
+    <color name="button_danger_background_pressed">#d9534f</color>
+    <color name="button_danger_background_disabled">#7b7b7b</color>
+    <!--default-->
+    <color name="button_default_background_enabled">#ecf6f8</color>
+    <color name="button_default_background_pressed">#ecf6f8</color>
+    <color name="button_default_background_disabled">#7b7b7b</color>
 </resources>

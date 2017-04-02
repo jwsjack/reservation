@@ -1,0 +1,57 @@
+<profiles>
+    <item>
+        <id>1</id>
+        <name>Eugeniu Cebanu</name>
+        <login>e_cebanu</login>
+        <password>qwe123</password>
+        <email>e_cebanu@reservation.com</email>
+        <telephone>(514) 456-7890</telephone>
+        <address>555B Baker Street, England</address>
+        <keepconnected>1</keepconnected>
+        <user>1</user>
+    </item>
+    <item>
+        <id>2</id>
+        <name>Liliana Cebanu</name>
+        <login>l_cebanu</login>
+        <password>qwe123</password>
+        <email>l_cebanu@reservation.com</email>
+        <telephone>(514) 333-1114</telephone>
+        <address>555B Baker Street, England</address>
+        <keepconnected>1</keepconnected>
+        <user>2</user>
+    </item>
+    <item>
+        <id>3</id>
+        <name>Greg Monaco</name>
+        <login>g_monaco</login>
+        <password>qwe123</password>
+        <email>g_monaco@reservation.com</email>
+        <telephone>(514) 999-2356</telephone>
+        <address>555B Baker Street, England</address>
+        <keepconnected>0</keepconnected>
+        <user>3</user>
+    </item>
+    <item>
+        <id>4</id>
+        <name>Michael Locksberry</name>
+        <login>m_locksberry</login>
+        <password>qwe123</password>
+        <email>m_locksberry@reservation.com</email>
+        <telephone>(514) 145-6363</telephone>
+        <address>555B Baker Street, England</address>
+        <keepconnected>0</keepconnected>
+        <user>4</user>
+    </item>
+    <item>
+        <id>5</id>
+        <name>Liuda Vasilachi</name>
+        <login>l_vasilachi</login>
+        <password>qwe123</password>
+        <email>l_vasilachi@reservation.com</email>
+        <telephone>(514) 020-0001</telephone>
+        <address>555B Baker Street, England</address>
+        <keepconnected>0</keepconnected>
+        <user>5</user>
+    </item>
+</profiles>

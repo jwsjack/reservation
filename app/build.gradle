@@ -2,13 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.3"
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "com.tp1.e_cebanu.tp1"
         minSdkVersion 23
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -24,6 +25,25 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:24.2.1'
+
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Glide image library
+    compile 'com.android.support:appcompat-v7:24.0.0-beta1'
+    compile 'com.android.support:design:24.0.0-beta1'
+    compile 'com.android.support:support-v4:24.0.0-beta1'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    compile 'com.roomorama:caldroid:3.0.1'
     testCompile 'junit:junit:4.12'
+
+
+    //Glide image library v2
+//    compile 'com.android.support:appcompat-v7:24.0.0-beta1'
+//    compile 'com.android.support:design:24.2.0'
+//    compile 'com.android.support:support-v4:24.0.0-beta1'
+//    compile 'com.github.bumptech.glide:glide:3.7.0'
+//    compile 'com.android.support:recyclerview-v7:24.2.1'
+//    compile 'com.roomorama:caldroid:3.0.1'
+//    testCompile 'junit:junit:4.12'
 }

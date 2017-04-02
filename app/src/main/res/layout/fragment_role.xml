@@ -1,0 +1,82 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+        <EditText
+            android:id="@+id/etId"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img"
+            android:maxLines="2"
+            android:minLines="2"
+            android:visibility="gone"></EditText>
+
+        <TextView
+            android:id="@+id/text_view_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etId"
+            android:gravity="center_vertical"
+            android:padding="5dp"
+            android:text="@string/lbRole"
+            android:textStyle="bold"
+            android:layout_above="@+id/ckSuperadmin" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/etId"
+            android:layout_toEndOf="@+id/text_view_name"
+            android:maxLines="2"
+            android:minLines="2">
+
+            <requestFocus />
+        </EditText>
+
+        <CheckBox
+            android:id="@+id/ckSuperadmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:layout_below="@+id/etName"
+            android:text="@string/is_superadmin"
+            android:textColor="@color/text_shadow" />
+
+
+        <Button
+            android:id="@+id/update"
+            style="@style/BootstrapButtonInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ckSuperadmin"
+            android:text="@string/update"
+            android:visibility="visible" />
+
+        <Button
+            android:id="@+id/delete"
+            style="@style/BootstrapButtonDanger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/update"
+            android:layout_alignBottom="@+id/update"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ckSuperadmin"
+            android:text="@string/delete"
+            android:visibility="visible" />
+    </RelativeLayout>
+</ScrollView>

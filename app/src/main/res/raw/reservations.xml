@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<reservations>
+    <item>
+        <id>1</id>
+        <user>2</user>
+        <local>2</local>
+        <reason>2</reason>
+        <additional>N'importe quelle raison</additional>
+        <course>IFT-1155</course>
+        <date_created>1489323600</date_created>
+        <date_from>1489417200000</date_from>
+        <date_to>1489420800000</date_to>
+    </item>
+</reservations>

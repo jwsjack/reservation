@@ -1,6 +1,7 @@
 package com.tp1.e_cebanu.tp1.authenticator;
 
-import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,57 +14,64 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tp1.e_cebanu.tp1.R;
+import com.tp1.e_cebanu.tp1.activities.MainActivity;
+import com.tp1.e_cebanu.tp1.models.AppService;
+import com.tp1.e_cebanu.tp1.models.MyApplication;
+import com.tp1.e_cebanu.tp1.models.User;
 import com.tp1.e_cebanu.tp1.util.TextWatcherAdapter;
-import static com.tp1.e_cebanu.tp1.util.UIUtils.showProgress;
 
 import static android.view.KeyEvent.ACTION_DOWN;
 import static android.view.KeyEvent.KEYCODE_ENTER;
 import static android.view.inputmethod.EditorInfo.IME_ACTION_DONE;
 import static com.tp1.e_cebanu.tp1.util.UIUtils.isTablet;
 
-
-/**
- * Created by jack on 26.02.2017.
- */
+/*
+* Java# version 1.8
+*
+* @name       TP_1
+* @package    TP #1 / IFT 1155 A - Programmation mobile à plateforme libre
+* @author     EUGENIU CEBANU / matricule: 20025851
+* @author     jwsjack3@gmail.com
+* @version    1
+* @date       2017-02-20
+* @description Contrôleur d'autentification - authentification par login et mot de passe
+*/
 
 public class AuthenticatorActivity extends AppCompatActivity {
 
-    protected AutoCompleteTextView emailText;
+    protected AutoCompleteTextView loginText;
     protected EditText passwordText;
     protected CheckBox ckRequestNewAccount;
-    protected Button signInButton;
+    protected Button signInButton, exitButton;
     private final TextWatcher watcher = validationTextWatcher();
 
-    private String email;
+    private String login;
     private String password;
+    public static final String MON_CLE_LOGIN = "loginAutentification";
+    public static final String CLE_ACCES = "12345";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //l'authentification
-        if (isTablet(this)) {
+        // pour different types de emulateur on charge les views different
+        if (isTablet(MyApplication.getAppContext())) {
             setContentView(R.layout.authenticator_activity_tablet);
         } else {
             setContentView(R.layout.authenticator_activity);
         }
-        /*Bundle extras = getIntent().getExtras();
-        if (extras == null) {
-            return;
-        }
-        String value1 = extras.getString("Value1");
-
-
-        Toast.makeText(this, value1,
-                Toast.LENGTH_LONG).show();*/
-
-        emailText = (AutoCompleteTextView) findViewById(R.id.et_email);
+        //l'authentification
+        loginText = (AutoCompleteTextView) findViewById(R.id.et_login);
         passwordText = (EditText) findViewById(R.id.et_password);
         ckRequestNewAccount = (CheckBox) findViewById(R.id.requestNewAccount);
         signInButton = (Button) findViewById(R.id.b_signin);
+        exitButton = (Button) findViewById(R.id.b_exit);
 
         // écouteur d'événement sur bouton
         passwordText.setOnKeyListener(new View.OnKeyListener() {
@@ -91,6 +99,12 @@ public class AuthenticatorActivity extends AppCompatActivity {
             }
         });
 
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                exitApp();
+            }
+        });
+
         // écouteur d'événement sur bouton
         ckRequestNewAccount.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -100,8 +114,12 @@ public class AuthenticatorActivity extends AppCompatActivity {
             }
         });
 
-        emailText.addTextChangedListener(watcher);
+        // écouteur d'événement sur bouton
+
+        loginText.addTextChangedListener(watcher);
         passwordText.addTextChangedListener(watcher);
+        ckRequestNewAccount.setVisibility(View.INVISIBLE); // temporairement jusqu'à sera mis en œuvre
+        updateUIWithValidation();
 
     }
 
@@ -128,28 +146,60 @@ public class AuthenticatorActivity extends AppCompatActivity {
         };
     }
 
+    public void exitApp() {
+        finishAffinity();
+    }
+
     /**
-     * Tariter onClick événement sur le bouton Soumettre. Envoie le nom d'utilisateur / mot de passe à
+     * Traiter onClick événement sur le bouton Soumettre. Envoie le nom d'utilisateur / mot de passe à
      * la système pour l'authentification.
      *
      * @param view
      */
     public void handleLogin(final View view) {
 
-        email = emailText.getText().toString();
+        login = loginText.getText().toString();
         password = passwordText.getText().toString();
 
-        //showProgress();
+        if (login != null && password != null ) {
+            User liu = AppService.authenticate(login,password);
+            if (liu.getId() != 0) {
 
-        /*Toast.makeText(this, "SALUT!!!!",
-                Toast.LENGTH_LONG).show();*/
+                // sauvegarde les valeurs dans  SharedPreferences
+                SharedPreferences.Editor editor = this.getSharedPreferences(MON_CLE_LOGIN, MODE_PRIVATE).edit();
+                editor.putString("login", login.trim());
+                editor.putString("pass", password.trim());
+                editor.putString("liu",liu.toJSON()); // l'objet utilisateur authentifié
+                editor.commit();
+
+                //passe à la page d'accueil
+                Toast.makeText(this, getResources().getString(R.string.messageWelcome),
+                        Toast.LENGTH_LONG).show();
+
+                // ici on transmettre les valeurs supplémentaires pour l'activite Main
+                // placer ici les valeurs si on veut passér les extras dans l'activité demande
+                Intent i = new Intent(this, MainActivity.class);
+//                i.putExtra("Value1", "This value 1 for MainActivity");
+//                i.putExtra("Value2", "This value 1 for MainActivity");
+                startActivity(i);
+
+            } else {
+                String mess = getResources().getString(R.string.messageWrongAuthentification);
+                Toast.makeText(this, mess,
+                        Toast.LENGTH_LONG).show();
+            }
+        } else {
+            String mess = getResources().getString(R.string.messageValidationAuthentification);
+            Toast.makeText(this, mess,
+                    Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
      * Vérifier si les champs email et password sont remplis
      */
     private void updateUIWithValidation() {
-        final boolean populated = populated(emailText) && populated(passwordText);
+        final boolean populated = populated(loginText) && populated(passwordText);
         signInButton.setEnabled(populated);
     }
 
